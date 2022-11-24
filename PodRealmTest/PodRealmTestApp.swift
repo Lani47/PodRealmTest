@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+
 @main
 struct PodRealmTestApp: App {
+    
+//    @UIApplicationDelegateAdaptor(MyAppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
 }
+
+
