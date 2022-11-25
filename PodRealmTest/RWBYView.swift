@@ -67,7 +67,11 @@ struct RWBYView: View {
                 //データの登録
                 let drug = DrugDB()
                 drug.id = UUID().uuidString
-                drug.name = drugname
+                if drugname == ""{
+                    drug.name = "メイショウフメイ"
+                } else {
+                    drug.name = drugname
+                }
                 drug.drugcalc = drugcalc
                 drug.stockpile = stockpile
                 drug.drugColorRed = drugColors.rgbValues.red

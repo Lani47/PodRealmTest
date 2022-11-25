@@ -26,11 +26,11 @@ struct DrugListView: View {
     
     var body: some View {
         VStack{
-            EditButton()
-                .padding(.top)
+            //            EditButton()
+            //                .padding(.top)
             HStack{
-                TextField("タイトルの入力", text: $title)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                //                TextField("タイトルの入力", text: $title)
+                //                    .textFieldStyle(RoundedBorderTextFieldStyle())
                 //                Button("決定", action: create)
                 //                    .padding(.leading)
                 //                    .padding(.trailing)
@@ -39,11 +39,15 @@ struct DrugListView: View {
             List {
                 ForEach(groups) { item in
                     HStack {
+                        Ellipse()
+                            .fill(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
+                            .frame(width: 54, height: 54)
                         Text(item.name)
-                        Spacer()
+                            .multilineTextAlignment(.center)
+//                        Spacer()
                         // orderの番号が分かりやすいように表示
-                        Text("order:\(item.order)")
-                        //                        Text("order:")
+//                        Text("order:\(item.order)")
+                        Image(systemName: "trash")
                     }
                 }
                 .onDelete { offsets in
