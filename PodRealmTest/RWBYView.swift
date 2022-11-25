@@ -20,8 +20,8 @@ struct RWBYView: View {
     
     // 表示フラグ
     @State private var isShowingView: Bool = false
-    
     @State private var isShowingView2: Bool = false
+    
     var body: some View {
         VStack{
             // 登録画面
