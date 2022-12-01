@@ -18,6 +18,7 @@
 		7F54E3ED291DECB700FAE487 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F54E3EC291DECB700FAE487 /* ColorView.swift */; };
 		7F6B0CC2292713C00020EA57 /* SceneDelemodoki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0CC1292713C00020EA57 /* SceneDelemodoki.swift */; };
 		7F6B0CC4292715B30020EA57 /* MySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0CC3292715B30020EA57 /* MySceneDelegate.swift */; };
+		7F729C9B293067190001EA8E /*  TimeUIListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F729C9A293067190001EA8E /*  TimeUIListView.swift */; };
 		7F9034D4292483CA00185DEB /* DrugListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9034D3292483CA00185DEB /* DrugListView.swift */; };
 		7FB44C9729231F9400F05EF4 /* CocoaMemoryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C9629231F9400F05EF4 /* CocoaMemoryClass.swift */; };
 		7FB44C992923329C00F05EF4 /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C982923329C00F05EF4 /* TopMenuView.swift */; };
@@ -41,6 +42,7 @@
 		7F54E3EC291DECB700FAE487 /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		7F6B0CC1292713C00020EA57 /* SceneDelemodoki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelemodoki.swift; sourceTree = "<group>"; };
 		7F6B0CC3292715B30020EA57 /* MySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySceneDelegate.swift; sourceTree = "<group>"; };
+		7F729C9A293067190001EA8E /*  TimeUIListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " TimeUIListView.swift"; sourceTree = "<group>"; };
 		7F9034D3292483CA00185DEB /* DrugListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugListView.swift; sourceTree = "<group>"; };
 		7FB44C9629231F9400F05EF4 /* CocoaMemoryClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CocoaMemoryClass.swift; path = "../New Group/CocoaMemoryClass.swift"; sourceTree = "<group>"; };
 		7FB44C982923329C00F05EF4 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
@@ -95,10 +97,11 @@
 			children = (
 				7F54E3D4291DDD6E00FAE487 /* PodRealmTestApp.swift */,
 				7F54E3D6291DDD6E00FAE487 /* ContentView.swift */,
+				7FB44C982923329C00F05EF4 /* TopMenuView.swift */,
 				7F54E3E2291DDE3500FAE487 /* RWBYView.swift */,
 				7F54E3EC291DECB700FAE487 /* ColorView.swift */,
+				7F729C9A293067190001EA8E /*  TimeUIListView.swift */,
 				7F9034D3292483CA00185DEB /* DrugListView.swift */,
-				7FB44C982923329C00F05EF4 /* TopMenuView.swift */,
 				7FB44C9F292338CA00F05EF4 /* DataBase */,
 				7F54E3E4291DDE4400FAE487 /* RWBYTest.swift */,
 				7F54E3E6291DDEA200FAE487 /* NotificationRequestManager.swift */,
@@ -264,6 +267,7 @@
 				7F6B0CC2292713C00020EA57 /* SceneDelemodoki.swift in Sources */,
 				7FB44C992923329C00F05EF4 /* TopMenuView.swift in Sources */,
 				7F54E3E9291DDF4900FAE487 /* EntryNotificationView.swift in Sources */,
+				7F729C9B293067190001EA8E /*  TimeUIListView.swift in Sources */,
 				7FB44C9E292338C400F05EF4 /* CocoaMemoryItem.swift in Sources */,
 				7F54E3D7291DDD6E00FAE487 /* ContentView.swift in Sources */,
 				7FB44CA129233A5400F05EF4 /* DrugStore.swift in Sources */,

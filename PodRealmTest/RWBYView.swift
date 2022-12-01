@@ -28,6 +28,9 @@ struct RWBYView: View {
             Text("登録画面")
                 .font(.largeTitle)
                 .padding(.bottom, 10.0)
+                .onTapGesture {
+                    
+                }
             
             
             Text("名前")

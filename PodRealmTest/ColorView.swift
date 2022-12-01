@@ -108,14 +108,14 @@ struct ColorView: View {
                             }
         }
         Group {
-            Ellipse()
-            .fill(Color(red: 0.63, green: 0.85, blue: 0.88))
-            .offset(x: 31.50, y: -507)
-            .frame(width: 59, height: 54)
+//            Ellipse()
+//            .fill(Color(red: 0.63, green: 0.85, blue: 0.88))
+//            .offset(x: 31.50, y: -507)
+//            .frame(width: 59, height: 54)
 
             Text("色を選択してください")
                 .font(.largeTitle)
-                .frame(width: 303, height: 46, alignment: .topLeading)
+                .frame(width: 303, height: 46)
             .offset(x: 5.50, y: -250)
         }
         }

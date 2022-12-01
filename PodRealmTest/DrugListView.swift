@@ -12,6 +12,8 @@ import RealmSwift
 struct DrugListView: View {
     @EnvironmentObject private var store: DrugStore
     
+    @State private var move = ""
+    
     //    let realm = try Realm()
     //    @StateObject private var store = DrugStore(realm: realm)
     
@@ -28,6 +30,9 @@ struct DrugListView: View {
     let height = UIScreen.main.bounds.height
     
     
+    
+    
+    
     var body: some View {
         VStack{
             //            EditButton()
@@ -40,7 +45,7 @@ struct DrugListView: View {
                 //                    .padding(.trailing)
             }
             
-            List {
+            ScrollViewReader { reader in List {
                 ForEach(groups) { item in
 //                    HStack {
 //                        Ellipse()
@@ -61,33 +66,40 @@ struct DrugListView: View {
                             Ellipse()
                                 .fill(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                 .frame(width: 54, height: 54)
-                            Text(item.name)
+                            Text("order:\(item.order)")
                                 .multilineTextAlignment(.center).font(.title2)
     //                        Spacer()
-                            // orderの番号が分かりやすいように表示
+
     //                        Text("order:\(item.order)")
                             Image(systemName: "trash")
                                 .onTapGesture {
                                     self.showingAlert = true
                                 }
                                 .alert("警告", isPresented: $showingAlert){
-                                            Button("削除", role: .destructive){
+                                            Button("order:\(item.order)", role: .destructive){
                                                 // データ削除処理
-                                                deleteindex(index: item.order)
+                                                print("order:\(item.id)")
+                                                    
+                                                
+                                                
+                                                
+                                                
                                             }
                                         } message: {
                                             Text("データが削除されますが、よろしいですか？")
                                         }
+                                        
                         }
                     }
                 }
                 .onDelete { offsets in
-                    delete(offsets: offsets)
+//                    delete(offsets: offsets)
+                    print(offsets)
                 }
                 //                    .onMove { source, destination in
                 //                      move(sourceIndexSet: source, destination: destination)
                 //                    }
-            }
+            }}
         }
         
     }
@@ -135,25 +147,25 @@ extension DrugListView {
     }
     
     private func deleteindex(index: Int) {
-        // 削除する行のIDを取得
-        let deleteId = groups[index].id
-        // 削除する行の行番号を取得
-        let deleteOrder = groups[index].order
-        let allcount = groups.count
-        if deleteOrder == allcount {
-        } else {
-            // 削除する行の行番号より大きい行番号を全て -1 する
-            for i in (deleteOrder + 1)..<groups.count {
-                store.update(id: groups[i].id, order: groups[i].order - 1)
-            }
-        }
-        //        // 行を削除する
-        store.delete(id: deleteId)
-        
-        //
-        //        store.test()
-        
-        //        print("id:\(deleteId)name:\(groups[index].name)")
+//        // 削除する行のIDを取得
+//        let deleteId = groups[index].id
+//        // 削除する行の行番号を取得
+//        let deleteOrder = groups[index].order
+//        let allcount = groups.count
+//        if deleteOrder == allcount {
+//        } else {
+//            // 削除する行の行番号より大きい行番号を全て -1 する
+//            for i in (deleteOrder + 1)..<groups.count {
+//                store.update(id: groups[i].id, order: groups[i].order - 1)
+//            }
+//        }
+//        //        // 行を削除する
+//        store.delete(id: deleteId)
+//
+//        //
+//        //        store.test()
+//
+//        //        print("id:\(deleteId)name:\(groups[index].name)")
         print("index:\(index)")
     }
     
