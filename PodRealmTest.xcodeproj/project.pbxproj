@@ -44,6 +44,7 @@
 		7F6B0CC3292715B30020EA57 /* MySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySceneDelegate.swift; sourceTree = "<group>"; };
 		7F729C9A293067190001EA8E /*  TimeUIListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " TimeUIListView.swift"; sourceTree = "<group>"; };
 		7F9034D3292483CA00185DEB /* DrugListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugListView.swift; sourceTree = "<group>"; };
+		7F9E273A29385124001617D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7FB44C9629231F9400F05EF4 /* CocoaMemoryClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CocoaMemoryClass.swift; path = "../New Group/CocoaMemoryClass.swift"; sourceTree = "<group>"; };
 		7FB44C982923329C00F05EF4 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
 		7FB44C9A2923365700F05EF4 /* SystemColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemColor.swift; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		7F54E3D3291DDD6E00FAE487 /* PodRealmTest */ = {
 			isa = PBXGroup;
 			children = (
+				7F9E273A29385124001617D6 /* Info.plist */,
 				7F54E3D4291DDD6E00FAE487 /* PodRealmTestApp.swift */,
 				7F54E3D6291DDD6E00FAE487 /* ContentView.swift */,
 				7FB44C982923329C00F05EF4 /* TopMenuView.swift */,
@@ -411,6 +413,7 @@
 				DEVELOPMENT_TEAM = 3U2Y7VW488;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PodRealmTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -441,6 +444,7 @@
 				DEVELOPMENT_TEAM = 3U2Y7VW488;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PodRealmTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

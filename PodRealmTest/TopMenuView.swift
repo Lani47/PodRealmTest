@@ -25,10 +25,12 @@ struct TopMenuView: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(red: 0.631, green: 0.851, blue: 0.879))
                         .frame(width: widht * 0.65, height: height * 0.1)
+            
                     Text("薬登録")
                         .multilineTextAlignment(.center).font(.title2)
                     
-                }.onTapGesture {
+                }
+                .onTapGesture {
                     print("TopMenuView:薬登録に移動")
                 }
                 
