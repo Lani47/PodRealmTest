@@ -19,10 +19,15 @@ struct RWBYView: View {
     
     
     // 表示フラグ
-    @State private var isShowingView: Bool = false
-    @State private var isShowingView2: Bool = false
+    @State private var isColorView: Bool = false
+    @State private var isDrugView: Bool = false
+    
+    let realm = try! Realm()
     
     var body: some View {
+        
+    
+        
         VStack{
             // 登録画面
             Text("登録画面")
@@ -57,9 +62,9 @@ struct RWBYView: View {
                     .fill($drugColors.wrappedValue)
                     .frame(width: 63, height: 61)
                     .onTapGesture {
-                        isShowingView.toggle()
+                        isColorView.toggle()
                     }
-                    .sheet(isPresented: $isShowingView) {
+                    .sheet(isPresented: $isColorView) {
                         ColorView( drugColors: $drugColors)
                     }
                 
@@ -111,20 +116,17 @@ struct RWBYView: View {
                 })
                 //薬一覧画面を表示
                 Button(action: {
-                    isShowingView2.toggle()
+                    isDrugView.toggle()
                     
                 }, label: {
                     Text("薬一覧β")
                 })
-                .sheet(isPresented: $isShowingView2) {
+                .sheet(isPresented: $isDrugView) {
                     let realm = try! Realm()
-                    
-//                    DrugListView( items: store.items)
-//                        .environmentObject(DrugStore(realm: <#Realm#>))
-                    
+
                     DrugListView()
                         .environmentObject(DrugStore(realm: realm))
-                        
+
                 }
                 //データをロードする
                 Button(action: {
@@ -147,6 +149,7 @@ struct RWBYView: View {
             
             
         }
+        
     }
 }
 

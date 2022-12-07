@@ -10,8 +10,11 @@ import SwiftUI
 struct TopMenuView: View {
     let widht = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
-    @State private var showingAlert = false
+   
     var body: some View {
+        
+        NavigationView{
+        
         VStack{
             HStack{
                 Image(decorative: "medical_medicine")
@@ -25,14 +28,14 @@ struct TopMenuView: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(red: 0.631, green: 0.851, blue: 0.879))
                         .frame(width: widht * 0.65, height: height * 0.1)
-            
+                    NavigationLink(destination: RWBYView()) {
                     Text("薬登録")
                         .multilineTextAlignment(.center).font(.title2)
-                    
+                    }
                 }
-                .onTapGesture {
-                    print("TopMenuView:薬登録に移動")
-                }
+//                .onTapGesture {
+//                    print("TopMenuView:薬登録に移動")
+//                }
                 
             }
             HStack{
@@ -47,17 +50,20 @@ struct TopMenuView: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(red: 0.665, green: 0.879, blue: 0.631))
                         .frame(width: widht * 0.65, height: height * 0.1)
+                    NavigationLink(destination: TimeUIListView()) {
                     Text("カレンダー")
                         .multilineTextAlignment(.center).font(.title2)
+                    }
                     
-                }                        .onTapGesture {
-                   print("TopMenuView:カレンダーに移動")
                 }
-                
+//                .onTapGesture {
+//                   print("TopMenuView:カレンダーに移動")
+//                }
+//
             }
             
         }
-        
+        }
         
     }
 }

@@ -77,7 +77,9 @@ struct ColorView: View {
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.85, green: 0.85, blue: 0.85)
+                print("hoge")
                 dismiss()
+                
                             }
 
             Ellipse()
@@ -90,7 +92,7 @@ struct ColorView: View {
                             }
 
             Ellipse()
-            .fill(Color(red: 0.89, green: 0.65, blue: 1, opacity: 0.74))
+            .fill(Color(red: 0.89, green: 0.65, blue: 1))
             .offset(x: -60, y: -151)
             .frame(width: 50, height: 50)
             .onTapGesture {
