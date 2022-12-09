@@ -23,7 +23,6 @@
 		7F729C9B293067190001EA8E /* TimeUIListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F729C9A293067190001EA8E /* TimeUIListView.swift */; };
 		7F9034D4292483CA00185DEB /* DrugListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9034D3292483CA00185DEB /* DrugListView.swift */; };
 		7FA1A73529398E2C008E058A /* alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA1A73429398E2C008E058A /* alert.swift */; };
-		7FA3D2DC29403AB800E29CEC /* DrugChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3D2DB29403AB800E29CEC /* DrugChooseView.swift */; };
 		7FA3D2DF29403E9F00E29CEC /* RimaindStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3D2DE29403E9F00E29CEC /* RimaindStore.swift */; };
 		7FB44C9729231F9400F05EF4 /* CocoaMemoryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C9629231F9400F05EF4 /* CocoaMemoryClass.swift */; };
 		7FB44C992923329C00F05EF4 /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C982923329C00F05EF4 /* TopMenuView.swift */; };
@@ -53,7 +52,6 @@
 		7F9034D3292483CA00185DEB /* DrugListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugListView.swift; sourceTree = "<group>"; };
 		7F9E273A29385124001617D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7FA1A73429398E2C008E058A /* alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alert.swift; sourceTree = "<group>"; };
-		7FA3D2DB29403AB800E29CEC /* DrugChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugChooseView.swift; sourceTree = "<group>"; };
 		7FA3D2DE29403E9F00E29CEC /* RimaindStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimaindStore.swift; sourceTree = "<group>"; };
 		7FB44C9629231F9400F05EF4 /* CocoaMemoryClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CocoaMemoryClass.swift; path = "../New Group/CocoaMemoryClass.swift"; sourceTree = "<group>"; };
 		7FB44C982923329C00F05EF4 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				7FB44C982923329C00F05EF4 /* TopMenuView.swift */,
 				7F54E3E2291DDE3500FAE487 /* RWBYView.swift */,
 				7F375A46293EE45F00EEAD0C /* RemaindSetView.swift */,
-				7FA3D2DB29403AB800E29CEC /* DrugChooseView.swift */,
 				7F54E3EC291DECB700FAE487 /* ColorView.swift */,
 				7F729C9A293067190001EA8E /* TimeUIListView.swift */,
 				7F9034D3292483CA00185DEB /* DrugListView.swift */,
@@ -145,6 +142,13 @@
 			path = Rimaind;
 			sourceTree = "<group>";
 		};
+		7FA3D2E0294054C200E29CEC /* Choice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Choice;
+			sourceTree = "<group>";
+		};
 		7FB44C9C2923366500F05EF4 /* Extension_or_Derigate */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +162,7 @@
 		7FB44C9F292338CA00F05EF4 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				7FA3D2E0294054C200E29CEC /* Choice */,
 				7FB44C9629231F9400F05EF4 /* CocoaMemoryClass.swift */,
 				7FB44C9D292338C400F05EF4 /* CocoaMemoryItem.swift */,
 				7FB44CA029233A5400F05EF4 /* DrugStore.swift */,
@@ -306,7 +311,6 @@
 				7F54E3E7291DDEA200FAE487 /* NotificationRequestManager.swift in Sources */,
 				7FB44C9729231F9400F05EF4 /* CocoaMemoryClass.swift in Sources */,
 				7F54E3D5291DDD6E00FAE487 /* PodRealmTestApp.swift in Sources */,
-				7FA3D2DC29403AB800E29CEC /* DrugChooseView.swift in Sources */,
 				7F54E3E3291DDE3500FAE487 /* RWBYView.swift in Sources */,
 				7F6B0CC4292715B30020EA57 /* MySceneDelegate.swift in Sources */,
 			);

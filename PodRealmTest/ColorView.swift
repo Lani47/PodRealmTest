@@ -18,7 +18,7 @@ struct ColorView: View {
         Group {
             Ellipse()
             .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-            .offset(x: -121, y: -209)
+            .offset(x: -121, y: -210)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.99, green: 0.46, blue: 0.58)
@@ -28,7 +28,7 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 1, green: 0.75, blue: 0.45))
-            .offset(x: -60, y: -209)
+            .offset(x: -60, y: -210)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 1, green: 0.75, blue: 0.45)
@@ -46,7 +46,7 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 0.66, green: 0.88, blue: 0.63))
-            .offset(x: 61, y: -209)
+            .offset(x: 61, y: -210)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.66, green: 0.88, blue: 0.63)
@@ -55,7 +55,7 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 0.55, green: 0.88, blue: 0.86))
-            .offset(x: 122, y: -209)
+            .offset(x: 122, y: -210)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.55, green: 0.88, blue: 0.86)
@@ -64,7 +64,7 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 1, green: 0, blue: 0.42))
-            .offset(x: 122, y: -151)
+            .offset(x: 122, y: -150)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 1, green: 0, blue: 0.42)
@@ -73,7 +73,7 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 0.85, green: 0.85, blue: 0.85))
-            .offset(x: 61, y: -151)
+            .offset(x: 61, y: -150)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.85, green: 0.85, blue: 0.85)
@@ -84,7 +84,7 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 0.04, green: 0.04, blue: 0.04))
-            .offset(x: 0, y: -151)
+            .offset(x: 0, y: -150)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.04, green: 0.04, blue: 0.04)
@@ -93,7 +93,7 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 0.89, green: 0.65, blue: 1))
-            .offset(x: -60, y: -151)
+            .offset(x: -60, y: -150)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.89, green: 0.65, blue: 1, opacity: 0.74)
@@ -102,13 +102,59 @@ struct ColorView: View {
 
             Ellipse()
             .fill(Color(red: 0.52, green: 0.63, blue: 1))
-            .offset(x: -121, y: -151)
+            .offset(x: -121, y: -150)
             .frame(width: 50, height: 50)
             .onTapGesture {
                 drugColors = Color(red: 0.52, green: 0.63, blue: 1)
                 dismiss()
                             }
+
         }
+            
+            Group{
+                Ellipse()
+                    .fill(Color(red: 0.44, green: 0.15, blue: 0.34))
+                .offset(x: -121, y: -90)
+                .frame(width: 50, height: 50)
+                .onTapGesture {
+                    drugColors = Color(red: 0.44, green: 0.15, blue: 0.34)
+                    dismiss()
+                                }
+                Ellipse()
+                    .fill(Color(red: 0.88, green: 1, blue: 0.47))
+                .offset(x: -60, y: -90)
+                .frame(width: 50, height: 50)
+                .onTapGesture {
+                    drugColors = Color(red: 0.88, green: 1, blue: 0.47)
+                    dismiss()
+                                }
+                Ellipse()
+                    .fill(Color(red: 0.88, green: 0.46, blue: 0.55))
+                .offset(x: 0, y: -90)
+                .frame(width: 50, height: 50)
+                .onTapGesture {
+                    drugColors = Color(red: 0.88, green: 0.46, blue: 0.55)
+                    dismiss()
+                                }
+                Ellipse()
+                    .fill(Color(red: 0.30, green: 0.97, blue: 0.33))
+                .offset(x: 60, y: -90)
+                .frame(width: 50, height: 50)
+                .onTapGesture {
+                    drugColors = Color(red: 0.30, green: 0.97, blue: 0.33)
+                    dismiss()
+                                }
+                Ellipse()
+                    .fill(Color(red: 0.13, green: 0.79, blue: 0.78))
+                .offset(x: 120, y: -90)
+                .frame(width: 50, height: 50)
+                .onTapGesture {
+                    drugColors = Color(red: 0.13, green: 0.79, blue: 0.78)
+                    dismiss()
+                                }
+            }
+            
+            
         Group {
 //            Ellipse()
 //            .fill(Color(red: 0.63, green: 0.85, blue: 0.88))

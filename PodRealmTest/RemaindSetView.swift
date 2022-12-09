@@ -19,13 +19,13 @@ struct RemaindSetView: View {
     @EnvironmentObject private var store: DrugStore
     
     @State private var move = ""
-
+    
     @State var title = ""
     
     @ObservedResults(DrugDB.self) var groups
     
     @State private var itemset: DrugItem?
-
+    
     
     
     @State private var showingAlerttest = false
@@ -44,6 +44,10 @@ struct RemaindSetView: View {
                     .font(.largeTitle)
             }
             
+            // MARK: - ここに飲む予定の薬を表示させたい。
+            
+            
+            
             
             ZStack{
                 
@@ -59,17 +63,17 @@ struct RemaindSetView: View {
                             
                         } else {
                             print("TopMenuView:薬登録に移動")
-                        
+                            
                         }
                         
-                        print("TopMenuView:薬登録に移動")
+                        
                     }
                 
                 
                 
             }
             
-
+            
             
             HStack{
                 Text("起床時")
@@ -78,17 +82,17 @@ struct RemaindSetView: View {
                     .font(.largeTitle)
             }
             
-
+            
             ZStack{
-
+                
                 Ellipse()
                     .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-
+                
                     .frame(width: 50, height: 50)
-
+                
                 Text("+")
-
-
+                
+                
             }
             HStack{
                 Text("起床時")
@@ -97,15 +101,15 @@ struct RemaindSetView: View {
                     .font(.largeTitle)
             }
             ZStack{
-
+                
                 Ellipse()
                     .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-
+                
                     .frame(width: 50, height: 50)
-
+                
                 Text("+")
-
-
+                
+                
             }
         }
     }

@@ -21,7 +21,7 @@ class RimaindDrugDB: Object,ObjectKeyIdentifiable {
     
     override class func primaryKey() -> String? {
         "id"
-      }
+    }
 }
 struct RimaindDrugItem: Identifiable {
     let id: String

@@ -14,10 +14,13 @@ struct TimeUIListView: View {
     
     @State var drugState = "◎";
     
+    // 表示フラグ
+    @State private var morningRimaindView: Bool = false
+    
     var body: some View {
         ScrollViewReader { reader in
-        VStack{
-            
+            VStack{
+                // MARK: - 曜日のリスト
                 List {
                     ZStack{
                         RoundedRectangle(cornerRadius: 0)
@@ -43,6 +46,12 @@ struct TimeUIListView: View {
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                morningRimaindView.toggle()
+                                            }
+                                            .sheet(isPresented: $morningRimaindView) {
+                                                RemaindSetView()
+                                            }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
@@ -469,131 +478,131 @@ struct TimeUIListView: View {
                     }.id(6)
                     
                 }
-            
-            HStack{
-                ZStack {
-                Ellipse()
-                .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-                
-                .frame(width: widht * 0.1, height: height * 0.06)
-
-                Text("月")
-                        .font(.title)
-                        .onTapGesture {
-                            print("月曜日")
-                            withAnimation (.default) {
-                                reader.scrollTo(0)
+                // MARK: - 指定の曜日にワープするボタン
+                HStack{
+                    ZStack {
+                        Ellipse()
+                            .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
+                        
+                            .frame(width: widht * 0.1, height: height * 0.06)
+                        
+                        Text("月")
+                            .font(.title)
+                            .onTapGesture {
+                                print("月曜日")
+                                withAnimation (.default) {
+                                    reader.scrollTo(0)
+                                }
                             }
-                        }
-                
-                }
-                .frame(width: widht * 0.1, height: height * 0.06)
-                ZStack {
-                Ellipse()
-                        .fill(Color(red: 0.997, green: 0.745, blue: 0.451))
-                
-                .frame(width: widht * 0.1, height: height * 0.06)
-
-                Text("火")
-                        .font(.title)
-                        .onTapGesture {
-                            print("火曜日")
-                            withAnimation (.default) {
-                                reader.scrollTo(1)
+                        
+                    }
+                    .frame(width: widht * 0.1, height: height * 0.06)
+                    ZStack {
+                        Ellipse()
+                            .fill(Color(red: 0.997, green: 0.745, blue: 0.451))
+                        
+                            .frame(width: widht * 0.1, height: height * 0.06)
+                        
+                        Text("火")
+                            .font(.title)
+                            .onTapGesture {
+                                print("火曜日")
+                                withAnimation (.default) {
+                                    reader.scrollTo(1)
+                                }
                             }
-                        }
-                
-                }
-                .frame(width: widht * 0.1, height: height * 0.06)
-                ZStack {
-                Ellipse()
-                        .fill(Color(red: 0.901, green: 0.918, blue: 0.206))
-                
-                .frame(width: widht * 0.1, height: height * 0.06)
-
-                Text("水")
-                        .font(.title)
-                        .onTapGesture {
-                            print("水曜日")
-                            withAnimation (.default) {
-                                reader.scrollTo(2)
+                        
+                    }
+                    .frame(width: widht * 0.1, height: height * 0.06)
+                    ZStack {
+                        Ellipse()
+                            .fill(Color(red: 0.901, green: 0.918, blue: 0.206))
+                        
+                            .frame(width: widht * 0.1, height: height * 0.06)
+                        
+                        Text("水")
+                            .font(.title)
+                            .onTapGesture {
+                                print("水曜日")
+                                withAnimation (.default) {
+                                    reader.scrollTo(2)
+                                }
                             }
-                        }
-                
-                }
-                .frame(width: widht * 0.1, height: height * 0.06)
-                ZStack {
-                Ellipse()
-                        .fill(Color(red: 0.665, green: 0.879, blue: 0.631))
-                
-                .frame(width: widht * 0.1, height: height * 0.06)
-
-                Text("木")
-                        .font(.title)
-                        .onTapGesture {
-                            print("水曜日")
-                            withAnimation (.default) {
-                                reader.scrollTo(3)
+                        
+                    }
+                    .frame(width: widht * 0.1, height: height * 0.06)
+                    ZStack {
+                        Ellipse()
+                            .fill(Color(red: 0.665, green: 0.879, blue: 0.631))
+                        
+                            .frame(width: widht * 0.1, height: height * 0.06)
+                        
+                        Text("木")
+                            .font(.title)
+                            .onTapGesture {
+                                print("水曜日")
+                                withAnimation (.default) {
+                                    reader.scrollTo(3)
+                                }
                             }
-                        }
-                
-                }
-                .frame(width: widht * 0.1, height: height * 0.06)
-                ZStack {
-                Ellipse()
-                        .fill(Color(red: 0.631, green: 0.851, blue: 0.879))
-                
-                .frame(width: widht * 0.1, height: height * 0.06)
-
-                Text("金")
-                        .font(.title)
-                        .onTapGesture {
-                            print("金曜日")
-                            withAnimation (.default) {
-                                reader.scrollTo(4)
+                        
+                    }
+                    .frame(width: widht * 0.1, height: height * 0.06)
+                    ZStack {
+                        Ellipse()
+                            .fill(Color(red: 0.631, green: 0.851, blue: 0.879))
+                        
+                            .frame(width: widht * 0.1, height: height * 0.06)
+                        
+                        Text("金")
+                            .font(.title)
+                            .onTapGesture {
+                                print("金曜日")
+                                withAnimation (.default) {
+                                    reader.scrollTo(4)
+                                }
                             }
-                        }
-                
-                }
-                .frame(width: widht * 0.1, height: height * 0.06)
-                ZStack {
-                Ellipse()
-                        .fill(Color(red: 0.521, green: 0.627, blue: 0.999))
-                
-                .frame(width: widht * 0.1, height: height * 0.06)
-
-                Text("土")
-                        .font(.title)
-                        .onTapGesture {
-                            print("土曜日")
-                            withAnimation (.default) {
-                                reader.scrollTo(5)
+                        
+                    }
+                    .frame(width: widht * 0.1, height: height * 0.06)
+                    ZStack {
+                        Ellipse()
+                            .fill(Color(red: 0.521, green: 0.627, blue: 0.999))
+                        
+                            .frame(width: widht * 0.1, height: height * 0.06)
+                        
+                        Text("土")
+                            .font(.title)
+                            .onTapGesture {
+                                print("土曜日")
+                                withAnimation (.default) {
+                                    reader.scrollTo(5)
+                                }
                             }
-                        }
-                
-                }
-                .frame(width: widht * 0.1, height: height * 0.06)
-                ZStack {
-                Ellipse()
-                        .fill(Color(red: 0.916, green: 0.737, blue: 1.0))
-                
-                .frame(width: widht * 0.1, height: height * 0.06)
-
-                Text("日")
-                        .font(.title)
-                        .onTapGesture {
-                            print("日曜日")
-                            withAnimation (.default) {
-                                reader.scrollTo(6)
+                        
+                    }
+                    .frame(width: widht * 0.1, height: height * 0.06)
+                    ZStack {
+                        Ellipse()
+                            .fill(Color(red: 0.916, green: 0.737, blue: 1.0))
+                        
+                            .frame(width: widht * 0.1, height: height * 0.06)
+                        
+                        Text("日")
+                            .font(.title)
+                            .onTapGesture {
+                                print("日曜日")
+                                withAnimation (.default) {
+                                    reader.scrollTo(6)
+                                }
                             }
-                        }
-                
+                        
+                    }
+                    .frame(width: widht * 0.1, height: height * 0.06)
+                    
+                    
                 }
-                .frame(width: widht * 0.1, height: height * 0.06)
-                
-                
             }
-        }
         }
         
         
@@ -613,3 +622,5 @@ struct TimeUIListView_Previews: PreviewProvider {
         TimeUIListView()
     }
 }
+
+
