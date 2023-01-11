@@ -9,15 +9,15 @@ import RealmSwift
 
 final class RimaindStore: ObservableObject {
     
-    private var itemResults: Results<RimaindDrugDB>
+    private var itemResults: Results<RimindDrugDB>
     
     init(realm: Realm) {
-        itemResults = realm.objects(RimaindDrugDB.self)
+        itemResults = realm.objects(RimindDrugDB.self)
             .sorted(byKeyPath: "id") // idの数値で並び替え stringが数値...?
     }
     
-    var items: [RimaindDrugItem] {
-        itemResults.map(RimaindDrugItem.init)
+    var items: [RimindDrugItem] {
+        itemResults.map(RimindDrugItem.init)
     }
     
 }
@@ -25,13 +25,13 @@ final class RimaindStore: ObservableObject {
 
 extension RimaindStore {
     // データの追加
-    func create(name: String, drugcalc: Int,stockpile:Int,drugColorRed:Double,drugColorGreen:Double,drugColorBlue:Double) {
+    func create(name: String, drugcalc: Int,stockpile:Int,drugColorRed:Double,drugColorGreen:Double,drugColorBlue:Double,rimimdDay:String,rimindTime:String) {
         objectWillChange.send()
-        
+
         do {
             let realm = try Realm()
-            
-            let Drug = RimaindDrugDB()
+
+            let Drug = RimindDrugDB()
             Drug.id = UUID().uuidString
             Drug.name = name
             Drug.drugcalc = drugcalc
@@ -39,12 +39,19 @@ extension RimaindStore {
             Drug.drugColorRed = drugColorRed
             Drug.drugColorGreen = drugColorGreen
             Drug.drugColorBrue = drugColorBlue
+            Drug.rimindDay = rimimdDay
+            Drug.rimindTime = rimindTime
+
+            let drugTable = realm.objects(RimindDrugDB.self)
+            Drug.order = drugTable.count
+
             try realm.write {
                 realm.add(Drug)
             }
         } catch let error {
             print(error.localizedDescription)
         }
+        
     }
     
     // データの削除
@@ -72,7 +79,7 @@ extension RimaindStore {
         do {
             let realm = try Realm()
             try realm.write {
-                realm.create(RimaindDrugDB.self,
+                realm.create(RimindDrugDB.self,
                              value: ["id": id,
                                      "order": order],
                              update: .modified)

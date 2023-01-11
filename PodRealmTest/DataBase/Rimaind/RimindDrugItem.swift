@@ -6,9 +6,10 @@
 //
 
 import RealmSwift
+import SwiftUI
 
 // テーブル
-class RimaindDrugDB: Object,ObjectKeyIdentifiable {
+class RimindDrugDB: Object,ObjectKeyIdentifiable {
     @Persisted var id = ""
     
     @Persisted var name = ""  // カラム
@@ -18,12 +19,14 @@ class RimaindDrugDB: Object,ObjectKeyIdentifiable {
     @Persisted var drugColorGreen = 0.5
     @Persisted var drugColorBrue = 0.5
     @Persisted var order = 0
+    @Persisted var rimindDay = ""
+    @Persisted var rimindTime = ""
     
     override class func primaryKey() -> String? {
         "id"
     }
 }
-struct RimaindDrugItem: Identifiable {
+struct RimindDrugItem: Identifiable {
     let id: String
     let name: String
     let drugcalc: Int
@@ -32,10 +35,12 @@ struct RimaindDrugItem: Identifiable {
     var drugColorGreen: Double
     var drugColorBlue: Double
     let order: Int
+    var rimindDay: String
+    var rimindTime: String
 }
 
-extension RimaindDrugItem {
-    init(Drug: RimaindDrugDB){
+extension RimindDrugItem {
+    init(Drug: RimindDrugDB){
         id = Drug.id
         name = Drug.name
         drugcalc = Drug.drugcalc
@@ -44,5 +49,7 @@ extension RimaindDrugItem {
         drugColorGreen = Drug.drugColorGreen
         drugColorBlue = Drug.drugColorBrue
         order = Drug.order
+        rimindDay = Drug.rimindDay
+        rimindTime = Drug.rimindTime
     }
 }

@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct TimeUIListView: View {
     
     let widht = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
+    
     @State var drugState = "◎";
+    
+    let realm = try! Realm()
+    
     
     // 表示フラグ
     @State private var morningRimaindView: Bool = false
@@ -50,7 +55,7 @@ struct TimeUIListView: View {
                                                 morningRimaindView.toggle()
                                             }
                                             .sheet(isPresented: $morningRimaindView) {
-                                                RemaindSetView()
+                                                RemaindSetView().environmentObject(RimaindStore(realm: realm))
                                             }
                                     }
                                     .padding(.leading, 10.0)

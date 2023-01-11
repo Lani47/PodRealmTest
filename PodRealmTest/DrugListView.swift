@@ -11,8 +11,18 @@ import RealmSwift
 
 struct DrugListView: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     
     @EnvironmentObject private var store: DrugStore
+    
+    @Binding var drugDay: String
+    
+    @Binding var drugTime: String
+    
+    @ObservedResults(DrugDB.self) var groups
+    
+    @State private var itemset: DrugItem?
     
     @State private var move = ""
     
@@ -24,11 +34,17 @@ struct DrugListView: View {
     @State var title = ""
     //    var items: [DrugItem]
     
-    @ObservedResults(DrugDB.self) var groups
-    
-    @State private var itemset: DrugItem?
+    @EnvironmentObject private var rimaindStore: RimaindStore
 
+    @ObservedResults(RimindDrugDB.self) var rimaindGroups
+
+    @State private var Rimainditemset: RimindDrugItem?
     
+//    @EnvironmentObject private var rimaindTestStore: RimindTestStore
+//
+//    @ObservedResults(RimindTestDB.self) var rimaindTestGroups
+//
+//    @State private var RimaindTestitemset: RimindTestItem?
     
     @State private var showingAlerttest = false
     
@@ -83,6 +99,12 @@ struct DrugListView: View {
                         RoundedRectangle(cornerRadius: 20)
                         .fill(Color(red: 0.85, green: 0.85, blue: 0.85))
                         .frame(width: widht * 0.80, height: height * 0.1)
+                        .onTapGesture {
+                            create(index: item.order)
+                            dismiss()
+//                            deleteindex(index: item.order)
+                        }
+                        
                         HStack{
                             Ellipse()
                                 .fill(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -95,6 +117,7 @@ struct DrugListView: View {
                                 .multilineTextAlignment(.center)
                                 .font(.title2)
                                 .padding(.leading, 10.0)
+                                .frame(width: 150, height: 54)
 
 
                             Button(action: {
@@ -102,18 +125,20 @@ struct DrugListView: View {
                             }, label: {
                                 Image(systemName: "trash")
                             })
-                            .alert("警告", isPresented: self.$showingAlert){
-                                
-                                                                    Button("削除", role: .destructive){
-                                                                         // 正常に取れない
-                                                                        print("order:\(item.order)")
-                                                                     }
-
-                            } message:{
-                                                                    Text("データが削除されますが、よろしいですか？")
-                                                                }
+                            //　通知シリーズ１
+//                            .alert("警告", isPresented: self.$showingAlert){
+//
+//                                                                    Button("削除", role: .destructive){
+//                                                                         // 正常に取れない
+//                                                                        print("order:\(item.order)")
+//                                                                     }
+//
+//                            } message:{
+//                                                                    Text("データが削除されますが、よろしいですか？")
+//                                                                }
                             
                             
+                            //　通知シリーズ２
     //                        Text("order:\(item.order)")
 //                            Image(systemName: "trash")
 //                                .onTapGesture {
@@ -138,7 +163,11 @@ struct DrugListView: View {
 
                                         
                         }
+                        
+                        
+                        
                     }
+                    
                     }
                 }
 //                .onDelete { offsets in
@@ -166,9 +195,13 @@ struct DrugListView: View {
 
 extension DrugListView {
     
-    private func create() {
+    private func create(index: Int) {
         //    store.create(title: self.title, order: items.count)
         //    self.title = ""
+        
+        rimaindStore.create(name: groups[index].name, drugcalc: groups[index].drugcalc, stockpile: groups[index].stockpile, drugColorRed: groups[index].drugColorRed, drugColorGreen: groups[index].drugColorGreen, drugColorBlue: groups[index].drugColorBrue, rimimdDay: drugDay, rimindTime: drugTime)
+        
+        //        print("name:\(groups[index].name)drugcalc:\(groups[index].drugcalc)drugDay:\(drugDay)drugTime:\(drugTime)")
     }
     
     private func delete(offsets: IndexSet) {

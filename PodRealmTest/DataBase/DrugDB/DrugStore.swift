@@ -26,25 +26,26 @@ final class DrugStore: ObservableObject {
 extension DrugStore {
     // データの追加
     func create(name: String, drugcalc: Int,stockpile:Int,drugColorRed:Double,drugColorGreen:Double,drugColorBlue:Double) {
-        objectWillChange.send()
-        
-        do {
-            let realm = try Realm()
-            
-            let Drug = DrugDB()
-            Drug.id = UUID().uuidString
-            Drug.name = name
-            Drug.drugcalc = drugcalc
-            Drug.stockpile = stockpile
-            Drug.drugColorRed = drugColorRed
-            Drug.drugColorGreen = drugColorGreen
-            Drug.drugColorBrue = drugColorBlue
-            try realm.write {
-                realm.add(Drug)
-            }
-        } catch let error {
-            print(error.localizedDescription)
-        }
+//        objectWillChange.send()
+//
+//        do {
+//            let realm = try Realm()
+//
+//            let Drug = DrugDB()
+//            Drug.id = UUID().uuidString
+//            Drug.name = name
+//            Drug.drugcalc = drugcalc
+//            Drug.stockpile = stockpile
+//            Drug.drugColorRed = drugColorRed
+//            Drug.drugColorGreen = drugColorGreen
+//            Drug.drugColorBrue = drugColorBlue
+//            try realm.write {
+//                realm.add(Drug)
+//            }
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+        print("test")
     }
     
     // データの削除
