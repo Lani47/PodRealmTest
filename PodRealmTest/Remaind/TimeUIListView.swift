@@ -15,6 +15,7 @@ struct TimeUIListView: View {
     
     
     @State var drugState = "◎";
+//    @State var drugday = "月曜日"
     
     let realm = try! Realm()
     
@@ -22,11 +23,13 @@ struct TimeUIListView: View {
     // 表示フラグ
     @State private var morningRimaindView: Bool = false
     
+    @State private var sundayRimaindView: Bool = false
+    
     var body: some View {
         ScrollViewReader { reader in
             VStack{
                 // MARK: - 曜日のリスト
-                List {
+            List {
                     ZStack{
                         RoundedRectangle(cornerRadius: 0)
                             .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
@@ -55,7 +58,7 @@ struct TimeUIListView: View {
                                                 morningRimaindView.toggle()
                                             }
                                             .sheet(isPresented: $morningRimaindView) {
-                                                RemaindSetView().environmentObject(RimaindStore(realm: realm))
+                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
                                             }
                                     }
                                     .padding(.leading, 10.0)
@@ -66,6 +69,13 @@ struct TimeUIListView: View {
                                         Text(drugState)
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                        //設定呼び出し
+                                            .onTapGesture {
+                                                sundayRimaindView.toggle()
+                                            }
+                                            .sheet(isPresented: $sundayRimaindView) {
+                                                RimindSetSundayView().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{
@@ -89,9 +99,7 @@ struct TimeUIListView: View {
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
                                     
-                                    
-                                    
-                                    
+                                
                                 }
                             }
                             
@@ -121,6 +129,13 @@ struct TimeUIListView: View {
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                        //設定呼び出し
+                                            .onTapGesture {
+                                                morningRimaindView.toggle()
+                                            }
+                                            .sheet(isPresented: $morningRimaindView) {
+                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
@@ -130,6 +145,14 @@ struct TimeUIListView: View {
                                         Text(drugState)
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                        
+                                        //設定呼び出し
+                                            .onTapGesture {
+                                                morningRimaindView.toggle()
+                                            }
+                                            .sheet(isPresented: $morningRimaindView) {
+                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{

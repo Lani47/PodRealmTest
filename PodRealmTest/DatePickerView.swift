@@ -11,7 +11,14 @@ struct DatePickerView: View {
     @State var date:Date = Date()
     var body: some View {
         VStack {
-            DatePicker("時刻", selection: $date,displayedComponents: .hourAndMinute)
+            HStack{
+                Text("時刻:").font(.largeTitle)
+                    
+                DatePicker("", selection: $date,displayedComponents: .hourAndMinute)
+                    .frame(width: 100.0)
+                    
+            }
+            
                 
         }
     }

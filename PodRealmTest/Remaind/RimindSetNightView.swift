@@ -1,14 +1,16 @@
 //
-//  RemaindSetView.swift
+//  RimindSetNightView.swift
 //  PodRealmTest
 //
-//  Created by cmStudent on 2022/12/06.
+//  Created by cmStudent on 2023/01/11.
 //
+
+import SwiftUI
 
 import SwiftUI
 import RealmSwift
 
-struct RemaindSetView: View {
+struct RimindSetNightView: View {
     
     @State var dateModel = DateFormatterModel()
     
@@ -23,7 +25,7 @@ struct RemaindSetView: View {
     @State private var move = ""
     
     @State var drugDay = "月曜日"
-    @State var drugTime = "朝"
+    @State var drugTime = "夜"
     
     @State private var isDrugView: Bool = false
     @State private var isDatePickerView: Bool = false
@@ -39,8 +41,8 @@ struct RemaindSetView: View {
     @EnvironmentObject private var rimaindStore: RimaindStore
     
     //　フィルター
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "起床時"}) var rimaindGroups1
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食後"}) var rimaindGroups2
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食前"}) var rimaindGroups1
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食後"}) var rimaindGroups2
     
     // RimindTestDB
     //    @ObservedResults(RimindTestDB.self) var rimindGroups
@@ -66,7 +68,7 @@ struct RemaindSetView: View {
         ScrollView{
         VStack{
             HStack{
-                Text("起床時")
+                Text("夜食前")
                     .font(.largeTitle)
                 Text("@@:@@")
                     .font(.largeTitle)
@@ -94,7 +96,7 @@ struct RemaindSetView: View {
                     
                     ForEach(rimaindGroups1) { item in
                         
-                        if item.rimindTime == "起床時"{
+                        if item.rimindTime == "夜食前"{
                             Text(item.name)
                                 .font(.largeTitle)
                                 .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -133,7 +135,7 @@ struct RemaindSetView: View {
                         //                            print("TopMenuView:薬登録に移動")
                         //
                         //                        }
-                        self.drugTime = "起床時"
+                        self.drugTime = "夜食前"
                         self.drugDay = "月曜日"
                         print($drugTime)
                         
@@ -163,7 +165,7 @@ struct RemaindSetView: View {
             
             
             HStack{
-                Text("朝食前")
+                Text("夜食中")
                     .font(.largeTitle)
                 Text("@@:@@")
                     .font(.largeTitle)
@@ -220,7 +222,7 @@ struct RemaindSetView: View {
                 
             }
             HStack{
-                Text("朝食後")
+                Text("夜食後")
                     .font(.largeTitle)
                 Text("@@:@@")
                     .font(.largeTitle)
@@ -233,7 +235,7 @@ struct RemaindSetView: View {
                     
                     ForEach(rimaindGroups2) { item in
                         
-                        if item.rimindTime == "朝食後"{
+                        if item.rimindTime == "夜食後"{
                             Text(item.name)
                                 .font(.largeTitle)
                                 .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -262,7 +264,7 @@ struct RemaindSetView: View {
                 Text("+")
                     .onTapGesture {
                         
-                        self.drugTime = "朝食後"
+                        self.drugTime = "夜食後"
                         self.drugDay = "月曜日"
                         print($drugTime)
                         
@@ -305,14 +307,14 @@ struct RemaindSetView: View {
 
 
 
-struct RemaindSetView_Previews: PreviewProvider {
+struct RimindSetNightView_Previews: PreviewProvider {
     static var previews: some View {
-        RemaindSetView()
+        RimindSetNightView()
     }
 }
 
 
-extension RemaindSetView {
+extension RimindSetNightView {
     
     
     

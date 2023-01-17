@@ -7,9 +7,9 @@
 
 
 import SwiftUI
-//
+////
 //class MyAppDelegate: NSObject, UIApplicationDelegate {
-//    
+//
 //        func application(
 //            _ application: UIApplication,
 //            configurationForConnecting connectingSceneSession: UISceneSession,
@@ -21,3 +21,4 @@ import SwiftUI
 //            return config
 //        }
 //}
+

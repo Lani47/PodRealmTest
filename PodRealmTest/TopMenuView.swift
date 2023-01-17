@@ -10,12 +10,26 @@ import SwiftUI
 struct TopMenuView: View {
     let widht = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
+    
+    @State var viewModel = TopMenuViewModel()
+    
+    
+    
    
     var body: some View {
         
+//        onAppear(perform: {
+////            viewModel.requestIfNeeded()
+//            print("初回起動:TopMenuView")
+//        })
+        
+        
         NavigationView{
         
+            
         VStack{
+            
+            
             HStack{
                 Image(decorative: "medical_medicine")
                     .resizable()

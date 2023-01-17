@@ -58,7 +58,7 @@ class DateFormatterModel: ObservableObject{
     }
     func date_string(date: Date) -> String{
         //現在の日付を取得
-        let date:Date = Date()
+//        let date:Date = Date()
                 
         //日付のフォーマットを指定する。
         let format = DateFormatter()
@@ -75,4 +75,10 @@ class DateFormatterModel: ObservableObject{
         
         
     }
+    func StringToDate(dateValue: String) -> Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.calendar = Calendar(identifier: .gregorian)
+            dateFormatter.dateFormat = "HH:mm"
+            return dateFormatter.date(from: dateValue) ?? Date()
+        }
 }
