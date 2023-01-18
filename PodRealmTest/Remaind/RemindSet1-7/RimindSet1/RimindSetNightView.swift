@@ -58,30 +58,46 @@ struct RimindSetNightView: View {
     
     @State private var itemset: DrugItem?
     
+    // RimindTimeDB
+    @ObservedResults(RimindTimeDB.self) var rimindTime
     
+    @State private var rimindTimeset: RimindTimeItem?
     
-    @State var date:Date = Date()
+    @EnvironmentObject private var rimindTimeStore: RimindTimeStore
+    // MARK: 曜日を設定
+    @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+    @State var date1:Date = Date()
+    
+    @State var date2:Date = Date()
+  
+    
+   
     
     
     
     var body: some View {
         ScrollView{
         VStack{
+            //夜食前ここから
             HStack{
                 Text("夜食前")
                     .font(.largeTitle)
-                Text("@@:@@")
+                DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
+                    .frame(width: widht * 0.3)
                     .font(.largeTitle)
-                    .onTapGesture {
-                        isDrugView.toggle()
-                    }
-                    .sheet(isPresented: $isDatePickerView) {
+                    .onChange(of: date1, perform: {newValue in
                         
+                        let dateset = dateModel.date_string(date: date1)
+                        rimindbanmaeUpdate(time: dateset)
                         
-                        DatePickerView()
-                        
-                        
-                    }
+                        print("$date1が操作された:\(dateset)")
+                    })
+                // MARK: 初期時刻を設定
+                    .onAppear(perform: {
+                        date1 = dateModel.StringToDate(dateValue: rimaindGroups22[0].banmae)
+                        date2 = dateModel.StringToDate(dateValue: rimaindGroups22[0].banato)
+                    
+                    })
                 
                 
                 
@@ -118,7 +134,6 @@ struct RimindSetNightView: View {
             
             
             
-            
             ZStack{
                 
                 Ellipse()
@@ -128,21 +143,12 @@ struct RimindSetNightView: View {
                 
                 Text("+")
                     .onTapGesture {
-                        //                        if groups.count == 0{
-                        //                            print("薬が登録されていません。")
-                        //
-                        //                        } else {
-                        //                            print("TopMenuView:薬登録に移動")
-                        //
-                        //                        }
                         self.drugTime = "夜食前"
                         self.drugDay = "月曜日"
                         print($drugTime)
                         
                         isDrugView.toggle()
-                        
-                        
-                        
+                            
                     }
                     .sheet(isPresented: $isDrugView) {
                         let realm = try! Realm()
@@ -153,79 +159,26 @@ struct RimindSetNightView: View {
                             .environmentObject(DrugStore(realm: realm))
                             .environmentObject(RimaindStore(realm: realm))
                             .environmentObject(RimindTestStore(realm: realm))
-                        
-                        
-                        
                     }
-                
-                
-                
             }
             
+            //夜食前ここまで
+            //夜食後ここから
             
-            
-            HStack{
-                Text("夜食中")
-                    .font(.largeTitle)
-                Text("@@:@@")
-                    .font(.largeTitle)
-            }
-            
-            
-            ZStack{
-                
-                Ellipse()
-                    .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-                
-                    .frame(width: 50, height: 50)
-                
-                Text("+")
-                    .onTapGesture {
-                        //                        do {
-                        //                            let realm = try! Realm()
-                        //
-                        //                            // 条件として、nameが"yamada"かつageが"20"より大きいデータを検索します。
-                        //                                let results = realm.objects(DrugDB.self).filter("name=イージーゴア")
-                        //                            // 検索結果の件数を取得します。
-                        //                                let count = results.count
-                        //                                if (count == 0) {
-                        //                                    // 検索結果が0件の場合
-                        //                                print("検索結果:\(count)件")
-                        //                                } else {
-                        //                                    // 検索データがある場合
-                        //                                    try realm.write{
-                        //                                        print("検索結果:\(count)件あリマス")
-                        ////                                        results.name = "総務部"
-                        //                                      }
-                        //                                }
-                        //                        } catch let error{
-                        //                            print("エラーエラーエラー\(error)")
-                        //                        }
-                        //
-                        //
-                        //                        print("count:\(rimaindGroups.count)")
-                        
-                        //                    let strDate = dateModel.date_string(date: date)
-                        //データの一覧を表示
-                        
-                        let realm = try! Realm()
-                        
-                        let drugTable = realm.objects(RimindDrugDB.self)
-                        print(drugTable)
-                        
-                        
-                        
-                        
-                        
-                    }
-                
-                
-            }
+
             HStack{
                 Text("夜食後")
                     .font(.largeTitle)
-                Text("@@:@@")
+                DatePicker("", selection: $date2,displayedComponents: .hourAndMinute)
+                    .frame(width: widht * 0.3)
                     .font(.largeTitle)
+                    .onChange(of: date2, perform: {newValue in
+                        
+                        let dateset = dateModel.date_string(date: date2)
+                        rimindbanatoUpdate(time: dateset)
+                        
+                        print("$date2が操作された:\(dateset)")
+                    })
             }
             
             if rimaindGroups2.count != 0 {
@@ -286,15 +239,12 @@ struct RimindSetNightView: View {
                 
                 
             }
+            //夜食後ここまで
+
             
             
             
-            //                Form{
-            //                    DatePicker("起床時", selection: $date,displayedComponents: .hourAndMinute)
-            ////                    .background(Color(red: 0.852, green: 0.941, blue: 0.953))
-            ////                    .font(.largeTitle)
-            ////                    .frame(width: 100, height: 36)
-            //                }.frame(width: 350, height: 1 * (100 + 0.1))
+
             
         }
         }
@@ -316,7 +266,44 @@ struct RimindSetNightView_Previews: PreviewProvider {
 
 extension RimindSetNightView {
     
-    
+    private func rimindbanmaeUpdate(time: String){
+        
+        
+        let realm = try! Realm()
+        
+        // MARK: 曜日を変更
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        do{
+            try realm.write{
+                rimaindGroups22[0].banmae = time
+            }
+        }catch {
+            print("Error \(error)")
+        }
+        
+    }
+    private func rimindbanatoUpdate(time: String){
+        
+        // ① realmインスタンスの生成
+        let realm = try! Realm()
+        //        // ② 更新したいデータを検索する
+        
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        
+        
+        // ③ 部署を更新する
+        do{
+            try realm.write{
+                
+                
+                rimaindGroups22[0].banato = time
+                
+            }
+        }catch {
+            print("Error \(error)")
+        }
+        
+    }
     
     
     private func deleteindex(index: Int) {

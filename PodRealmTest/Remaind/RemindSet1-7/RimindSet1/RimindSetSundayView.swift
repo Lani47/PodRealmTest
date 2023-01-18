@@ -43,6 +43,7 @@ struct RimindSetSundayView: View {
     //　フィルター
     @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "昼食前"}) var rimaindGroups1
     @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "昼食後"}) var rimaindGroups2
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "間食"}) var rimaindGroups3
     
     // RimindTestDB
     //    @ObservedResults(RimindTestDB.self) var rimindGroups
@@ -60,28 +61,46 @@ struct RimindSetSundayView: View {
     
     
     
-    @State var date:Date = Date()
+    
+    // RimindTimeDB
+    @ObservedResults(RimindTimeDB.self) var rimindTime
+    
+    @State private var rimindTimeset: RimindTimeItem?
+    
+    @EnvironmentObject private var rimindTimeStore: RimindTimeStore
+    // MARK: 曜日を設定
+    @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+    
+    @State var date1:Date = Date()
+    
+    @State var date2:Date = Date()
+    @State var date3:Date = Date()
     
     
     
     var body: some View {
         ScrollView{
         VStack{
+            //昼食前ここから
             HStack{
                 Text("昼食前")
                     .font(.largeTitle)
-                Text("@@:@@")
+                DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
+                    .frame(width: widht * 0.3)
                     .font(.largeTitle)
-                    .onTapGesture {
-                        isDrugView.toggle()
-                    }
-                    .sheet(isPresented: $isDatePickerView) {
+                    .onChange(of: date1, perform: {newValue in
                         
+                        let dateset = dateModel.date_string(date: date1)
+                        rimindhirumaeUpdate(time: dateset)
                         
-                        DatePickerView()
-                        
-                        
-                    }
+                        print("$date1が操作された:\(dateset)")
+                    })
+                // MARK: 初期時刻を設定
+                    .onAppear(perform: {
+                        date1 = dateModel.StringToDate(dateValue: rimaindGroups22[0].hirumae)
+                        date2 = dateModel.StringToDate(dateValue: rimaindGroups22[0].hiruato)
+                        date3 = dateModel.StringToDate(dateValue: rimaindGroups22[0].oyatu)
+                    })
                 
                 
                 
@@ -115,10 +134,7 @@ struct RimindSetSundayView: View {
                 .frame(height: 1 * (100 + 0.4))
                 
             }
-            
-            
-            
-            
+
             ZStack{
                 
                 Ellipse()
@@ -161,71 +177,21 @@ struct RimindSetSundayView: View {
                 
                 
             }
-            
-            
-            
-            HStack{
-                Text("昼食中")
-                    .font(.largeTitle)
-                Text("@@:@@")
-                    .font(.largeTitle)
-            }
-            
-            
-            ZStack{
-                
-                Ellipse()
-                    .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-                
-                    .frame(width: 50, height: 50)
-                
-                Text("+")
-                    .onTapGesture {
-                        //                        do {
-                        //                            let realm = try! Realm()
-                        //
-                        //                            // 条件として、nameが"yamada"かつageが"20"より大きいデータを検索します。
-                        //                                let results = realm.objects(DrugDB.self).filter("name=イージーゴア")
-                        //                            // 検索結果の件数を取得します。
-                        //                                let count = results.count
-                        //                                if (count == 0) {
-                        //                                    // 検索結果が0件の場合
-                        //                                print("検索結果:\(count)件")
-                        //                                } else {
-                        //                                    // 検索データがある場合
-                        //                                    try realm.write{
-                        //                                        print("検索結果:\(count)件あリマス")
-                        ////                                        results.name = "総務部"
-                        //                                      }
-                        //                                }
-                        //                        } catch let error{
-                        //                            print("エラーエラーエラー\(error)")
-                        //                        }
-                        //
-                        //
-                        //                        print("count:\(rimaindGroups.count)")
-                        
-                        //                    let strDate = dateModel.date_string(date: date)
-                        //データの一覧を表示
-                        
-                        let realm = try! Realm()
-                        
-                        let drugTable = realm.objects(RimindDrugDB.self)
-                        print(drugTable)
-                        
-                        
-                        
-                        
-                        
-                    }
-                
-                
-            }
+            //昼食前ここまで
+            //昼食後ここから
             HStack{
                 Text("昼食後")
                     .font(.largeTitle)
-                Text("@@:@@")
+                DatePicker("", selection: $date2,displayedComponents: .hourAndMinute)
+                    .frame(width: widht * 0.3)
                     .font(.largeTitle)
+                    .onChange(of: date2, perform: {newValue in
+                        
+                        let dateset = dateModel.date_string(date: date2)
+                        rimindhiruatoUpdate(time: dateset)
+                        
+                        print("$date2が操作された:\(dateset)")
+                    })
             }
             
             if rimaindGroups2.count != 0 {
@@ -236,6 +202,73 @@ struct RimindSetSundayView: View {
                     ForEach(rimaindGroups2) { item in
                         
                         if item.rimindTime == "昼食後"{
+                            Text(item.name)
+                                .font(.largeTitle)
+                                .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
+                                .onTapGesture {
+                                    deleteindex(index: item.order)
+                                }
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                }
+                }
+                .frame(height: 1 * (100 + 0.4))
+            }
+
+            ZStack{
+
+                Ellipse()
+                    .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
+
+                    .frame(width: 50, height: 50)
+
+                Text("+")
+                    .onTapGesture {
+                        
+                        self.drugTime = "昼食後"
+                        self.drugDay = "月曜日"
+                        print($drugTime)
+                        
+                        isDrugView.toggle()
+                    }
+                    .sheet(isPresented: $isDrugView) {
+                        let realm = try! Realm()
+                        DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+                            .environmentObject(DrugStore(realm: realm))
+                            .environmentObject(RimaindStore(realm: realm))
+                            .environmentObject(RimindTestStore(realm: realm))
+                    }
+            }
+            //昼食後ここまで
+            //間食ここから
+            HStack{
+                Text("間食")
+                    .font(.largeTitle)
+                DatePicker("", selection: $date3,displayedComponents: .hourAndMinute)
+                    .frame(width: widht * 0.3)
+                    .font(.largeTitle)
+                    .onChange(of: date3, perform: {newValue in
+                        
+                        let dateset = dateModel.date_string(date: date3)
+                        rimindoyatuUpdate(time: dateset)
+                        
+                        print("$date3が操作された:\(dateset)")
+                    })
+            }
+            
+            if rimaindGroups3.count != 0 {
+                ScrollViewReader { reader in List {
+                    
+                    
+                    
+                    ForEach(rimaindGroups3) { item in
+                        
+                        if item.rimindTime == "間食"{
                             Text(item.name)
                                 .font(.largeTitle)
                                 .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -264,7 +297,7 @@ struct RimindSetSundayView: View {
                 Text("+")
                     .onTapGesture {
                         
-                        self.drugTime = "昼食後"
+                        self.drugTime = "間食"
                         self.drugDay = "月曜日"
                         print($drugTime)
                         
@@ -280,21 +313,11 @@ struct RimindSetSundayView: View {
                             .environmentObject(RimaindStore(realm: realm))
                             .environmentObject(RimindTestStore(realm: realm))
                         
-                        
-                        
                     }
                 
                 
             }
-            
-            
-            
-            //                Form{
-            //                    DatePicker("起床時", selection: $date,displayedComponents: .hourAndMinute)
-            ////                    .background(Color(red: 0.852, green: 0.941, blue: 0.953))
-            ////                    .font(.largeTitle)
-            ////                    .frame(width: 100, height: 36)
-            //                }.frame(width: 350, height: 1 * (100 + 0.1))
+            //間食ここまで
             
         }
         }
@@ -317,7 +340,67 @@ struct RimindSetSundayView_Previews: PreviewProvider {
 extension RimindSetSundayView {
     
     
-    
+    private func rimindhirumaeUpdate(time: String){
+        
+        
+        let realm = try! Realm()
+        
+        // MARK: 曜日を変更
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        do{
+            try realm.write{
+                rimaindGroups22[0].hirumae = time
+            }
+        }catch {
+            print("Error \(error)")
+        }
+        
+    }
+    private func rimindhiruatoUpdate(time: String){
+        
+        // ① realmインスタンスの生成
+        let realm = try! Realm()
+        //        // ② 更新したいデータを検索する
+        
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        
+        
+        // ③ 部署を更新する
+        do{
+            try realm.write{
+                
+                
+                rimaindGroups22[0].hiruato = time
+                
+            }
+        }catch {
+            print("Error \(error)")
+        }
+        
+    }
+
+    private func rimindoyatuUpdate(time: String){
+        
+        // ① realmインスタンスの生成
+        let realm = try! Realm()
+        //        // ② 更新したいデータを検索する
+        
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        
+        
+        // ③ 部署を更新する
+        do{
+            try realm.write{
+                
+                
+                rimaindGroups22[0].oyatu = time
+                
+            }
+        }catch {
+            print("Error \(error)")
+        }
+        
+    }
     
     private func deleteindex(index: Int) {
         // 削除する行のIDを取得

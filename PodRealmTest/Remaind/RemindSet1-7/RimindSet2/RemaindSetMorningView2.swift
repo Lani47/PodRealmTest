@@ -1,14 +1,16 @@
 //
-//  RemaindSetView.swift
+//  RemaindSetMorningView2.swift
 //  PodRealmTest
 //
-//  Created by cmStudent on 2022/12/06.
+//  Created by cmStudent on 2023/01/18.
 //
+
+import SwiftUI
 
 import SwiftUI
 import RealmSwift
 
-struct RemaindSetMorningView: View {
+struct RemaindSetMorningView2: View {
     
     @State var dateModel = DateFormatterModel()
     
@@ -22,7 +24,7 @@ struct RemaindSetMorningView: View {
     
     @State private var move = ""
     
-    @State var drugDay = "月曜日"
+    @State var drugDay = "火曜日"
     
     //    @Binding var drugDay: String
     @State var drugTime = "朝"
@@ -42,7 +44,8 @@ struct RemaindSetMorningView: View {
     
     //　フィルター
     @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "起床時"}) var rimaindGroups1
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食後"}) var rimaindGroups2
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食前"}) var rimaindGroups2
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食後"}) var rimaindGroups3
     
     // RimindTestDB
     //    @ObservedResults(RimindTestDB.self) var rimindGroups
@@ -65,18 +68,12 @@ struct RemaindSetMorningView: View {
     
     @EnvironmentObject private var rimindTimeStore: RimindTimeStore
     // MARK: 曜日を設定
-    @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+    @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "火曜日"}) var rimaindGroups22
+    @State var date1:Date = Date()
     
-    
-    
-    
-    
-    
-//    @State var date1:Date = Calendar.current.date(from: DateComponents(year : 2022, month: 1, day: 1)) ?? Date()
-    @State var date1:Date = Calendar.current.date(from: DateComponents(hour: 6, minute: 30)) ?? Date()
-    
-    @State var date2:Date = Calendar.current.date(from: DateComponents(hour: 7, minute: 0)) ?? Date()
-    @State var date3:Date = Calendar.current.date(from: DateComponents(hour: 7, minute: 15)) ?? Date()
+    @State var date2:Date = Date()
+    @State var date3:Date = Date()
+
     
     
     
@@ -87,13 +84,13 @@ struct RemaindSetMorningView: View {
         ScrollView{
             
             VStack{
-               
+                
                 HStack{
                     
                     
-
+                    
                     Text("起床時:").font(.largeTitle)
-                        
+                    
                     
                     DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
                         .frame(width: widht * 0.3)
@@ -140,10 +137,7 @@ struct RemaindSetMorningView: View {
                     .frame(height: 1 * (100 + 0.4))
                     
                 }
-                
-                
-                
-                
+  
                 ZStack{
                     
                     Ellipse()
@@ -153,96 +147,36 @@ struct RemaindSetMorningView: View {
                     
                     Text("+")
                         .onTapGesture {
-                            //                        if groups.count == 0{
-                            //                            print("薬が登録されていません。")
-                            //
-                            //                        } else {
-                            //                            print("TopMenuView:薬登録に移動")
-                            //
-                            //                        }
                             self.drugTime = "起床時"
-                            self.drugDay = "月曜日"
+                            self.drugDay = "火曜日"
                             print($drugTime)
                             
                             isDrugView.toggle()
-                            
-                            
-                            
                         }
                         .sheet(isPresented: $isDrugView) {
                             let realm = try! Realm()
-                            
-                            
-                            
                             DrugListView(drugDay: $drugDay, drugTime: $drugTime)
                                 .environmentObject(DrugStore(realm: realm))
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
-                            
-                            
                         }
                     
                 }
-                
-                
-                
+                //朝食前 ここから
                 HStack{
-                    //                Text("朝食前")
-                    //                    .font(.largeTitle)
-                    //                Text("@@:@@")
-                    //                    .font(.largeTitle)
-                    
-                    
                     Text("朝食前:").font(.largeTitle)
                     
                     DatePicker("", selection: $date2,displayedComponents: .hourAndMinute)
                         .frame(width: widht * 0.3)
                         .font(.largeTitle)
+                        .onChange(of: date2, perform: {newValue in
+                            
+                            let dateset = dateModel.date_string(date: date2)
+                            rimindasamaeUpdate(time: dateset)
+                            
+                            print("$date2が操作された:\(dateset)")
+                        })
                 }
-                
-                
-                ZStack{
-                    
-                    Ellipse()
-                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-                    
-                        .frame(width: 50, height: 50)
-                    
-                    Text("+")
-                        .onTapGesture {
-                            
-                            //データの一覧を表示
-                            
-                            let realm = try! Realm()
-                            
-                            let drugTable = realm.objects(RimindDrugDB.self)
-                            //                        print(drugTable)
-                            var test = dateModel.date_string(date: date1)
-                            
-                            let timeTable = realm.objects(RimindTimeDB.self)
-                            
-                            print(timeTable)
-                            
-                            
-                            
-                            
-                            
-                        }
-                    
-                    
-                }
-                HStack{
-                    //                Text("朝食後")
-                    //                    .font(.largeTitle)
-                    //                Text("@@:@@")
-                    //                    .font(.largeTitle)
-                    Text("朝食後:").font(.largeTitle)
-                    
-                    DatePicker("", selection: $date3,displayedComponents: .hourAndMinute)
-                        .frame(width: widht * 0.3)
-                        .font(.largeTitle)
-                }
-                
                 if rimaindGroups2.count != 0 {
                     ScrollViewReader { reader in List {
                         
@@ -250,7 +184,7 @@ struct RemaindSetMorningView: View {
                         
                         ForEach(rimaindGroups2) { item in
                             
-                            if item.rimindTime == "朝食後"{
+                            if item.rimindTime == "朝食前"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -267,6 +201,92 @@ struct RemaindSetMorningView: View {
                     }
                     }
                     .frame(height: 1 * (100 + 0.4))
+                    
+                }
+                
+                
+                ZStack{
+                    
+                    Ellipse()
+                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
+                    
+                        .frame(width: 50, height: 50)
+                    
+                    Text("+")
+                    // テスト用
+                        .onTapGesture {
+
+                            //データの一覧を表示
+
+                            let realm = try! Realm()
+
+                            let drugTable = realm.objects(RimindDrugDB.self)
+                            //                        print(drugTable)
+
+
+                            let timeTable = realm.objects(RimindTimeDB.self)
+
+                            print(drugTable)
+
+                        }
+                    
+                    // 実践用
+//                        .onTapGesture {
+//                            self.drugTime = "朝食前"
+//                            self.drugDay = "月曜日"
+//                            print($drugTime)
+//
+//                            isDrugView.toggle()
+//                        }
+//                        .sheet(isPresented: $isDrugView) {
+//                            let realm = try! Realm()
+//                            DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+//                                .environmentObject(DrugStore(realm: realm))
+//                                .environmentObject(RimaindStore(realm: realm))
+//                                .environmentObject(RimindTestStore(realm: realm))
+//                        }
+                    
+                }
+                //朝食前　ここまで
+                
+                HStack{
+                    //                Text("朝食後")
+                    //                    .font(.largeTitle)
+                    //                Text("@@:@@")
+                    //                    .font(.largeTitle)
+                    Text("朝食後:").font(.largeTitle)
+                    
+                    DatePicker("", selection: $date2,displayedComponents: .hourAndMinute)
+                        .frame(width: widht * 0.3)
+                        .font(.largeTitle)
+                        .onChange(of: date3, perform: {newValue in
+                            
+                            let dateset = dateModel.date_string(date: date3)
+                            rimindasaatoUpdate(time: dateset)
+                            
+                            print("$date3が操作された:\(dateset)")
+                        })
+                }
+                
+                if rimaindGroups3.count != 0 {
+                    ScrollViewReader { reader in List {
+                        
+                        
+                        
+                        ForEach(rimaindGroups3) { item in
+                            
+                            if item.rimindTime == "朝食後"{
+                                Text(item.name)
+                                    .font(.largeTitle)
+                                    .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
+                                    .onTapGesture {
+                                        deleteindex(index: item.order)
+                                    }
+                            }
+                        }
+                    }
+                    }
+                    .frame(height: 1 * (100 + 0.4))
                 }
                 
                 ZStack{
@@ -278,34 +298,21 @@ struct RemaindSetMorningView: View {
                     
                     Text("+")
                         .onTapGesture {
-                            
                             self.drugTime = "朝食後"
-                            self.drugDay = "月曜日"
+                            self.drugDay = "火曜日"
                             print($drugTime)
-                            
                             isDrugView.toggle()
                         }
                         .sheet(isPresented: $isDrugView) {
                             let realm = try! Realm()
-                            
-                            
-                            
                             DrugListView(drugDay: $drugDay, drugTime: $drugTime)
                                 .environmentObject(DrugStore(realm: realm))
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
-                            
-                            
-                            
                         }
-                    
-                    
+           
                 }
-                
-                
-                
-                
-                
+ 
             }
         }
         
@@ -317,14 +324,14 @@ struct RemaindSetMorningView: View {
 
 
 // MARK: 時間別に設定
-struct RemaindSetMorningView_Previews: PreviewProvider {
+struct RemaindSetMorningView2_Previews: PreviewProvider {
     static var previews: some View {
-        RemaindSetMorningView()
+        RemaindSetMorningView2()
     }
 }
 
 
-extension RemaindSetMorningView {
+extension RemaindSetMorningView2 {
     
     private func datefunc() -> Date{
         let datetest:Date = Calendar.current.date(from: DateComponents(hour: 6, minute: 30)) ?? Date()
@@ -333,62 +340,62 @@ extension RemaindSetMorningView {
     }
     
     private func rimindkisyouUpdate(time: String){
- 
+        
         
         let realm = try! Realm()
-
+        
         // MARK: 曜日を変更
-        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "火曜日"}) var rimaindGroups22
         do{
-          try realm.write{
-              rimaindGroups22[0].kisyou = time
-          }
+            try realm.write{
+                rimaindGroups22[0].kisyou = time
+            }
         }catch {
-          print("Error \(error)")
+            print("Error \(error)")
         }
         
     }
     private func rimindasamaeUpdate(time: String){
- 
+        
         // ① realmインスタンスの生成
         let realm = try! Realm()
-//        // ② 更新したいデータを検索する
+        //        // ② 更新したいデータを検索する
         
-        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
-       
-
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "火曜日"}) var rimaindGroups22
+        
+        
         // ③ 部署を更新する
         do{
-          try realm.write{
-
-              
-              rimaindGroups22[0].asamae = time
-
-          }
+            try realm.write{
+                
+                
+                rimaindGroups22[0].asamae = time
+                
+            }
         }catch {
-          print("Error \(error)")
+            print("Error \(error)")
         }
         
     }
     private func rimindasaatoUpdate(time: String){
- 
+        
         // ① realmインスタンスの生成
         let realm = try! Realm()
-//        // ② 更新したいデータを検索する
+        //        // ② 更新したいデータを検索する
         
-        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
-       
-
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "火曜日"}) var rimaindGroups22
+        
+        
         // ③ 部署を更新する
         do{
-          try realm.write{
-
-              
-              rimaindGroups22[0].asaato = time
-
-          }
+            try realm.write{
+                
+                
+                rimaindGroups22[0].asaato = time
+                
+            }
         }catch {
-          print("Error \(error)")
+            print("Error \(error)")
         }
         
     }
@@ -410,15 +417,12 @@ extension RemaindSetMorningView {
         //        // 行を削除する
         rimaindStore.delete(id: deleteId)
         
-        //
-        //        store.test()
-        
-        //        print("id:\(deleteId)name:\(groups[index].name)")
-        //        print("index:\(index)")
+
     }
     
     //    private func move(sourceIndexSet: IndexSet, destination: Int) {
     //        store.move(sourceIndexSet: sourceIndexSet, destination: destination)
     //    }
 }
+
 

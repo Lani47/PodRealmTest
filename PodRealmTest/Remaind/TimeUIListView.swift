@@ -21,9 +21,14 @@ struct TimeUIListView: View {
     
     
     // 表示フラグ
-    @State private var morningRimaindView: Bool = false
+    @State private var morningRimaindView1: Bool = false
     
-    @State private var sundayRimaindView: Bool = false
+    @State private var sundayRimaindView1: Bool = false
+    
+    @State private var nightRimaindView1: Bool = false
+    
+    @State private var sleepRimaindView1: Bool = false
+    
     
     var body: some View {
         ScrollViewReader { reader in
@@ -55,9 +60,9 @@ struct TimeUIListView: View {
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                             .onTapGesture {
-                                                morningRimaindView.toggle()
+                                                morningRimaindView1.toggle()
                                             }
-                                            .sheet(isPresented: $morningRimaindView) {
+                                            .sheet(isPresented: $morningRimaindView1) {
                                                 RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
                                             }
                                     }
@@ -71,9 +76,9 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         //設定呼び出し
                                             .onTapGesture {
-                                                sundayRimaindView.toggle()
+                                                sundayRimaindView1.toggle()
                                             }
-                                            .sheet(isPresented: $sundayRimaindView) {
+                                            .sheet(isPresented: $sundayRimaindView1) {
                                                 RimindSetSundayView().environmentObject(RimaindStore(realm: realm))
                                             }
                                     } .padding(.leading, 10.0)
@@ -85,6 +90,12 @@ struct TimeUIListView: View {
                                         Text(drugState)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                nightRimaindView1.toggle()
+                                            }
+                                            .sheet(isPresented: $nightRimaindView1) {
+                                                RimindSetNightView().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }.padding(.leading, 10.0)
                                     //                                .offset(x:20, y: 0)
                                     
@@ -95,6 +106,12 @@ struct TimeUIListView: View {
                                         Text(drugState)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                sleepRimaindView1.toggle()
+                                            }
+                                            .sheet(isPresented: $sleepRimaindView1) {
+                                                RimindSetSleepView().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
@@ -130,12 +147,7 @@ struct TimeUIListView: View {
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                         //設定呼び出し
-                                            .onTapGesture {
-                                                morningRimaindView.toggle()
-                                            }
-                                            .sheet(isPresented: $morningRimaindView) {
-                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
-                                            }
+                                            
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
@@ -147,12 +159,7 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         //設定呼び出し
-                                            .onTapGesture {
-                                                morningRimaindView.toggle()
-                                            }
-                                            .sheet(isPresented: $morningRimaindView) {
-                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
-                                            }
+                                            
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{
