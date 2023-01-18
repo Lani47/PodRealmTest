@@ -70,7 +70,7 @@ class DateFormatterModel: ObservableObject{
         //日付をStringに変換する
         let sDate = format.string(from: date)
         
-        print("時間\(sDate)")
+//        print("時間\(sDate)")
         return sDate
         
         

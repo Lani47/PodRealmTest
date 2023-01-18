@@ -64,6 +64,12 @@ struct RemaindSetMorningView: View {
     @State private var rimindTimeset: RimindTimeItem?
     
     @EnvironmentObject private var rimindTimeStore: RimindTimeStore
+    // MARK: 曜日を設定
+    @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+    
+    
+    
+    
     
     
 //    @State var date1:Date = Calendar.current.date(from: DateComponents(year : 2022, month: 1, day: 1)) ?? Date()
@@ -75,33 +81,36 @@ struct RemaindSetMorningView: View {
     
     
     var body: some View {
+        
+        
+        
         ScrollView{
+            
             VStack{
+               
                 HStack{
-                    //                Text("起床時")
-                    //                    .font(.largeTitle)
-                    //                Text("@@:@@")
-                    //                    .font(.largeTitle)
-                    //                    .onTapGesture {
-                    //                        isDrugView.toggle()
-                    //                    }
-                    //                    .sheet(isPresented: $isDatePickerView) {
-                    //
-                    //
-                    //                        DatePickerView()
-                    //
-                    //
-                    //                    }
+                    
+                    
+
                     Text("起床時:").font(.largeTitle)
+                        
                     
                     DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
                         .frame(width: widht * 0.3)
                         .font(.largeTitle)
-                    
-                    
-                    
-                    
-                    
+                        .onChange(of: date1, perform: {newValue in
+                            
+                            let dateset = dateModel.date_string(date: date1)
+                            rimindkisyouUpdate(time: dateset)
+                            
+                            print("$date1が操作された:\(dateset)")
+                        })
+                    // MARK: 初期時刻を設定
+                        .onAppear(perform: {
+                            date1 = dateModel.StringToDate(dateValue: rimaindGroups22[0].kisyou)
+                            date2 = dateModel.StringToDate(dateValue: rimaindGroups22[0].asamae)
+                            date3 = dateModel.StringToDate(dateValue: rimaindGroups22[0].asaato)
+                        })
                     
                 }
                 
@@ -307,7 +316,7 @@ struct RemaindSetMorningView: View {
 }
 
 
-
+// MARK: 時間別に設定
 struct RemaindSetMorningView_Previews: PreviewProvider {
     static var previews: some View {
         RemaindSetMorningView()
@@ -317,7 +326,72 @@ struct RemaindSetMorningView_Previews: PreviewProvider {
 
 extension RemaindSetMorningView {
     
+    private func datefunc() -> Date{
+        let datetest:Date = Calendar.current.date(from: DateComponents(hour: 6, minute: 30)) ?? Date()
+        
+        return datetest
+    }
     
+    private func rimindkisyouUpdate(time: String){
+ 
+        
+        let realm = try! Realm()
+
+        // MARK: 曜日を変更
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        do{
+          try realm.write{
+              rimaindGroups22[0].kisyou = time
+          }
+        }catch {
+          print("Error \(error)")
+        }
+        
+    }
+    private func rimindasamaeUpdate(time: String){
+ 
+        // ① realmインスタンスの生成
+        let realm = try! Realm()
+//        // ② 更新したいデータを検索する
+        
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+       
+
+        // ③ 部署を更新する
+        do{
+          try realm.write{
+
+              
+              rimaindGroups22[0].asamae = time
+
+          }
+        }catch {
+          print("Error \(error)")
+        }
+        
+    }
+    private func rimindasaatoUpdate(time: String){
+ 
+        // ① realmインスタンスの生成
+        let realm = try! Realm()
+//        // ② 更新したいデータを検索する
+        
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+       
+
+        // ③ 部署を更新する
+        do{
+          try realm.write{
+
+              
+              rimaindGroups22[0].asaato = time
+
+          }
+        }catch {
+          print("Error \(error)")
+        }
+        
+    }
     
     
     private func deleteindex(index: Int) {
