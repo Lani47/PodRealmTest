@@ -210,7 +210,9 @@ struct RemaindSetMorningView: View {
                             //                        print(drugTable)
                             var test = dateModel.date_string(date: date1)
                             
-                            print(test)
+                            let timeTable = realm.objects(RimindTimeDB.self)
+                            
+                            print(timeTable)
                             
                             
                             

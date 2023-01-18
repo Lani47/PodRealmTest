@@ -24,9 +24,9 @@ class TopMenuViewModel: ObservableObject{
     func requestIfNeeded() {
         
         launchedCount += 1
-        
+        print("起動回数:\(launchedCount)")
         if launchedCount == 1 {
-            print("起動回数:\(launchedCount)")
+            
             newSet()
         }
     }
