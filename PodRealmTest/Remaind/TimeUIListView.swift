@@ -13,6 +13,14 @@ struct TimeUIListView: View {
     let widht = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
+    // RimindResultDB テンプレ
+    @EnvironmentObject private var RimindResultStore: RimindResultStore
+    
+    @ObservedResults(RimindResultDB.self) var rimaindResultGroups
+    
+    @State private var RimindResultset: RimindResultItem?
+    
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimindResult
     
     @State var drugState = "◎";
 //    @State var drugday = "月曜日"
@@ -55,23 +63,30 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(drugState)
+                                        Text(rimindResult[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                             .onTapGesture {
                                                 morningRimaindView1.toggle()
                                             }
-                                            .sheet(isPresented: $morningRimaindView1) {
-                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
-                                            }
+//                                            .sheet(isPresented: $morningRimaindView1) {
+//                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
+//                                            }
+                                            .sheet(isPresented : $morningRimaindView1 , onDismiss : {
+                                                        //処理
+                                                
+                                               }) {
+                                                      //ビュー
+                                                   RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
+                                               }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult[0].asamae)
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                         //設定呼び出し
@@ -87,7 +102,7 @@ struct TimeUIListView: View {
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
                                             .onTapGesture {
@@ -103,7 +118,7 @@ struct TimeUIListView: View {
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
                                             .onTapGesture {

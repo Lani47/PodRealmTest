@@ -18,7 +18,14 @@ class TopMenuViewModel: ObservableObject{
     
     @AppStorage("launchedCount") var launchedCount = 0
     
+    // RimindResultStore テンプレ
+    @EnvironmentObject private var RimindResultStore: RimindResultStore
     
+    @ObservedResults(RimindResultDB.self) var rimaindResultGroups
+    
+    @State private var RimindResultset: RimindResultItem?
+    
+//    RimindResult
     
     /// 初回起動なら発動
     func requestIfNeeded() {
@@ -26,7 +33,7 @@ class TopMenuViewModel: ObservableObject{
         launchedCount += 1
         print("起動回数:\(launchedCount)")
         if launchedCount == 1 {
-            
+            print("初回処理発動")
             newSet()
         }
     }
@@ -54,10 +61,33 @@ class TopMenuViewModel: ObservableObject{
         create(rimindDay: "金曜日", kisyou: "06:30", asamae: "07:00", asaato: "07:15", hirumae: "12:30", hiruato: "13:00", oyatu: "15:00", banmae: "19:00", banato: "19:30", nerumae: "21:00")
         create(rimindDay: "土曜日", kisyou: "06:30", asamae: "07:00", asaato: "07:15", hirumae: "12:30", hiruato: "13:00", oyatu: "15:00", banmae: "19:00", banato: "19:30", nerumae: "21:00")
         create(rimindDay: "日曜日", kisyou: "06:30", asamae: "07:00", asaato: "07:15", hirumae: "12:30", hiruato: "13:00", oyatu: "15:00", banmae: "19:00", banato: "19:30", nerumae: "21:00")
+        
+        rimindResultcreate(rimindDay: "月曜日", kisyou: "ー", asamae: "ー", asaato: "ー", hirumae: "ー", hiruato: "ー", oyatu: "ー", banmae: "ー", banato: "ー", nerumae: "ー")
+        rimindResultcreate(rimindDay: "火曜日", kisyou: "ー", asamae: "ー", asaato: "ー", hirumae: "ー", hiruato: "ー", oyatu: "ー", banmae: "ー", banato: "ー", nerumae: "ー")
+        rimindResultcreate(rimindDay: "水曜日", kisyou: "ー", asamae: "ー", asaato: "ー", hirumae: "ー", hiruato: "ー", oyatu: "ー", banmae: "ー", banato: "ー", nerumae: "ー")
+        rimindResultcreate(rimindDay: "木曜日", kisyou: "ー", asamae: "ー", asaato: "ー", hirumae: "ー", hiruato: "ー", oyatu: "ー", banmae: "ー", banato: "ー", nerumae: "ー")
+        rimindResultcreate(rimindDay: "金曜日", kisyou: "ー", asamae: "ー", asaato: "ー", hirumae: "ー", hiruato: "ー", oyatu: "ー", banmae: "ー", banato: "ー", nerumae: "ー")
+        rimindResultcreate(rimindDay: "土曜日", kisyou: "ー", asamae: "ー", asaato: "ー", hirumae: "ー", hiruato: "ー", oyatu: "ー", banmae: "ー", banato: "ー", nerumae: "ー")
+        rimindResultcreate(rimindDay: "日曜日", kisyou: "ー", asamae: "ー", asaato: "ー", hirumae: "ー", hiruato: "ー", oyatu: "ー", banmae: "ー", banato: "ー", nerumae: "ー")
         print("初期データセット完了")
         
         
     }
+    
+    func bobpermission(){
+        //通知許諾ウィンドウ表示(初回だけ)
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]){
+                (granted, _) in
+                if granted {
+                    //通知が許可されているときの処理
+                    print("許可")
+                }else {
+                    //通知が拒否されているときの処理
+                    print("拒否")
+                }
+            }
+    }
+    
     func create(rimindDay: String, kisyou:String, asamae:String, asaato: String, hirumae: String, hiruato:String, oyatu:String,banmae:String,banato:String,nerumae:String) {
         
         objectWillChange.send()
@@ -87,72 +117,33 @@ class TopMenuViewModel: ObservableObject{
         print("test")
     }
     
+    func rimindResultcreate(rimindDay: String, kisyou:String, asamae:String, asaato: String, hirumae: String, hiruato:String, oyatu:String,banmae:String,banato:String,nerumae:String){
+        
+        objectWillChange.send()
+//
+        do {
+            let realm = try Realm()
+
+            let rimind = RimindResultDB()
+            rimind.id = UUID().uuidString
+            rimind.rimindDay = rimindDay
+            rimind.kisyou = kisyou
+            rimind.asamae = asamae
+            rimind.asaato = asaato
+            rimind.hirumae = hirumae
+            rimind.hiruato = hiruato
+            rimind.oyatu = oyatu
+            rimind.banmae = banmae
+            rimind.banato = banato
+            rimind.nerumae = nerumae
+            
+            try realm.write {
+                realm.add(rimind)
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        print("test")
+    }
+    
 }
-//extension TopMenuViewModel {
-//
-//    private func create(index: Int) {
-//        //    store.create(title: self.title, order: items.count)
-//        //    self.title = ""
-//
-//        rimaindStore.create(rimindDay: <#T##String#>, kisyou: <#T##String#>, asamae: <#T##String#>, asaato: <#T##String#>, hirumae: <#T##String#>, hiruato: <#T##String#>, oyatu: <#T##String#>, banmae: <#T##String#>, banato: <#T##String#>, nerumae: <#T##String#>)
-//
-//        //        print("name:\(groups[index].name)drugcalc:\(groups[index].drugcalc)drugDay:\(drugDay)drugTime:\(drugTime)")
-//    }
-//
-//    private func delete(offsets: IndexSet) {
-//        guard let index = offsets.first else {
-//            return
-//        }
-//        // 削除する行のIDを取得
-//        let deleteId = groups[index].id
-//        // 削除する行の行番号を取得
-//        let deleteOrder = groups[index].order
-//        let allcount = groups.count
-//        if deleteOrder == allcount {
-//        } else {
-//            // 削除する行の行番号より大きい行番号を全て -1 する
-//            for i in (deleteOrder + 1)..<groups.count {
-//                store.update(id: groups[i].id, order: groups[i].order - 1)
-//            }
-//        }
-//        //        // 行を削除する
-//        store.delete(id: deleteId)
-//
-//        //
-//        //        store.test()
-//
-//        //        print("id:\(deleteId)name:\(groups[index].name)")
-//        print("index:\(index)")
-//    }
-//
-//    private func deleteindex(index: Int) {
-//        // 削除する行のIDを取得
-//        let deleteId = groups[index].id
-//        // 削除する行の行番号を取得
-//        let deleteOrder = groups[index].order
-//        let allcount = groups.count
-//        if deleteOrder == allcount {
-//        } else {
-//            // 削除する行の行番号より大きい行番号を全て -1 する
-//            for i in (deleteOrder + 1)..<groups.count {
-//                store.update(id: groups[i].id, order: groups[i].order - 1)
-//            }
-//        }
-//        //        // 行を削除する
-//        store.delete(id: deleteId)
-//
-//        //
-//        //        store.test()
-//
-//        //        print("id:\(deleteId)name:\(groups[index].name)")
-////        print("index:\(index)")
-//    }
-//
-//    private func move(sourceIndexSet: IndexSet, destination: Int) {
-//        store.move(sourceIndexSet: sourceIndexSet, destination: destination)
-//    }
-//}
-//
-//
-//
-//

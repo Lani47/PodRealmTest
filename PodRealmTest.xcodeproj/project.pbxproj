@@ -22,6 +22,8 @@
 		7F54E3ED291DECB700FAE487 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F54E3EC291DECB700FAE487 /* ColorView.swift */; };
 		7F5A7D5F2977BEE900D072E9 /* RimindSetSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A7D5E2977BEE900D072E9 /* RimindSetSleepView.swift */; };
 		7F5A7D642977C1F000D072E9 /* RemaindSetMorningView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A7D632977C1F000D072E9 /* RemaindSetMorningView2.swift */; };
+		7F6A6744297A3166000FEA7D /* RimindResultDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6A6743297A3166000FEA7D /* RimindResultDB.swift */; };
+		7F6A6746297A3280000FEA7D /* RimindResultStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6A6745297A3280000FEA7D /* RimindResultStore.swift */; };
 		7F6B0CC2292713C00020EA57 /* SceneDelemodoki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0CC1292713C00020EA57 /* SceneDelemodoki.swift */; };
 		7F6B0CC4292715B30020EA57 /* MySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0CC3292715B30020EA57 /* MySceneDelegate.swift */; };
 		7F729C9B293067190001EA8E /* TimeUIListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F729C9A293067190001EA8E /* TimeUIListView.swift */; };
@@ -41,6 +43,7 @@
 		7FB44C992923329C00F05EF4 /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C982923329C00F05EF4 /* TopMenuView.swift */; };
 		7FB44C9B2923365700F05EF4 /* SystemColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C9A2923365700F05EF4 /* SystemColor.swift */; };
 		7FB44CA129233A5400F05EF4 /* DrugStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44CA029233A5400F05EF4 /* DrugStore.swift */; };
+		7FC715CA2978E833006D2A41 /* UserNotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC715C92978E833006D2A41 /* UserNotificationUtil.swift */; };
 		EA39410D2EFED2ACAA8272F2 /* Pods_PodRealmTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52542312CDB292BF1CE6363F /* Pods_PodRealmTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +65,8 @@
 		7F54E3EC291DECB700FAE487 /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		7F5A7D5E2977BEE900D072E9 /* RimindSetSleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSleepView.swift; sourceTree = "<group>"; };
 		7F5A7D632977C1F000D072E9 /* RemaindSetMorningView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemaindSetMorningView2.swift; sourceTree = "<group>"; };
+		7F6A6743297A3166000FEA7D /* RimindResultDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindResultDB.swift; sourceTree = "<group>"; };
+		7F6A6745297A3280000FEA7D /* RimindResultStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindResultStore.swift; sourceTree = "<group>"; };
 		7F6B0CC1292713C00020EA57 /* SceneDelemodoki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelemodoki.swift; sourceTree = "<group>"; };
 		7F6B0CC3292715B30020EA57 /* MySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySceneDelegate.swift; sourceTree = "<group>"; };
 		7F729C9A293067190001EA8E /* TimeUIListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIListView.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 		7FB44C982923329C00F05EF4 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
 		7FB44C9A2923365700F05EF4 /* SystemColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemColor.swift; sourceTree = "<group>"; };
 		7FB44CA029233A5400F05EF4 /* DrugStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugStore.swift; sourceTree = "<group>"; };
+		7FC715C92978E833006D2A41 /* UserNotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationUtil.swift; sourceTree = "<group>"; };
 		913B588B7B871D570557630C /* Pods-PodRealmTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodRealmTest.debug.xcconfig"; path = "Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest.debug.xcconfig"; sourceTree = "<group>"; };
 		B884A852C10D0DCF5B9E45D8 /* Pods-PodRealmTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodRealmTest.release.xcconfig"; path = "Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,8 +165,8 @@
 		7F5A7D602977BF1200D072E9 /* RemindSet1-7 */ = {
 			isa = PBXGroup;
 			children = (
-				7F5A7D622977C1D100D072E9 /* RimindSet2 */,
 				7F5A7D612977C04400D072E9 /* RimindSet1 */,
+				7F5A7D622977C1D100D072E9 /* RimindSet2 */,
 			);
 			path = "RemindSet1-7";
 			sourceTree = "<group>";
@@ -182,6 +188,15 @@
 				7F5A7D632977C1F000D072E9 /* RemaindSetMorningView2.swift */,
 			);
 			path = RimindSet2;
+			sourceTree = "<group>";
+		};
+		7F6A6742297A314D000FEA7D /* RimindResult */ = {
+			isa = PBXGroup;
+			children = (
+				7F6A6743297A3166000FEA7D /* RimindResultDB.swift */,
+				7F6A6745297A3280000FEA7D /* RimindResultStore.swift */,
+			);
+			path = RimindResult;
 			sourceTree = "<group>";
 		};
 		7F864DF529513B61001A84CB /* RimindTest */ = {
@@ -231,6 +246,7 @@
 		7FB31C072942BE3400B82D30 /* Remaind */ = {
 			isa = PBXGroup;
 			children = (
+				7FC715C82978E81D006D2A41 /* Pushhon */,
 				7F5A7D602977BF1200D072E9 /* RemindSet1-7 */,
 				7F729C9A293067190001EA8E /* TimeUIListView.swift */,
 				7F7399D62952CB5D00C87711 /* DateFomatterModel.swift */,
@@ -262,6 +278,7 @@
 		7FB44C9F292338CA00F05EF4 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				7F6A6742297A314D000FEA7D /* RimindResult */,
 				7F864DFA29513BE0001A84CB /* RimindTimeDB */,
 				7F864DF829513BC3001A84CB /* DrugDB */,
 				7F864DF529513B61001A84CB /* RimindTest */,
@@ -269,6 +286,14 @@
 				7FA3D2DD29403E8B00E29CEC /* Rimaind */,
 			);
 			path = DataBase;
+			sourceTree = "<group>";
+		};
+		7FC715C82978E81D006D2A41 /* Pushhon */ = {
+			isa = PBXGroup;
+			children = (
+				7FC715C92978E833006D2A41 /* UserNotificationUtil.swift */,
+			);
+			path = Pushhon;
 			sourceTree = "<group>";
 		};
 		BFAE10312175922B1BD9DC30 /* Frameworks */ = {
@@ -400,8 +425,10 @@
 				7FB44C992923329C00F05EF4 /* TopMenuView.swift in Sources */,
 				7F54E3E9291DDF4900FAE487 /* EntryNotificationView.swift in Sources */,
 				7F744887294BFBBE002B50E7 /* DBCreateTest.swift in Sources */,
+				7F6A6746297A3280000FEA7D /* RimindResultStore.swift in Sources */,
 				7F729C9B293067190001EA8E /* TimeUIListView.swift in Sources */,
 				7F864E0029514374001A84CB /* RimindTestStore.swift in Sources */,
+				7FC715CA2978E833006D2A41 /* UserNotificationUtil.swift in Sources */,
 				7F54E3D7291DDD6E00FAE487 /* ContentView.swift in Sources */,
 				7F5A7D642977C1F000D072E9 /* RemaindSetMorningView2.swift in Sources */,
 				7FB44CA129233A5400F05EF4 /* DrugStore.swift in Sources */,
@@ -415,6 +442,7 @@
 				7F54E3E5291DDE4400FAE487 /* RWBYTest.swift in Sources */,
 				7F864DF729513B79001A84CB /* RimindTest.swift in Sources */,
 				7FA3D2DF29403E9F00E29CEC /* RimaindStore.swift in Sources */,
+				7F6A6744297A3166000FEA7D /* RimindResultDB.swift in Sources */,
 				7F7399D92952CE8F00C87711 /* RWBYViewModel.swift in Sources */,
 				7F54E3E7291DDEA200FAE487 /* NotificationRequestManager.swift in Sources */,
 				7FB44C9729231F9400F05EF4 /* DrugDB.swift in Sources */,

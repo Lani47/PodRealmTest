@@ -28,6 +28,10 @@ class MyAppDelegate: UIResponder, UIApplicationDelegate {
         
         // 起動時に1回だけやる処理をここに記述する
         print("起動処理")
+        
+        
+        viewModel.bobpermission()
+    
         viewModel.requestIfNeeded()
         
         
