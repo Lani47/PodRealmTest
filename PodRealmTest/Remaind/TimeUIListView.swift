@@ -64,7 +64,7 @@ struct TimeUIListView: View {
                                         
                                         
                                         Text(rimindResult[0].kisyou)
-                                        
+                                            
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                             .onTapGesture {
@@ -86,7 +86,7 @@ struct TimeUIListView: View {
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(rimindResult[0].asamae)
+                                        Text(rimindResult[0].hirumae)
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                         //設定呼び出し

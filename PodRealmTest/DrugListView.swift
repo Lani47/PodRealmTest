@@ -99,11 +99,7 @@ struct DrugListView: View {
                         RoundedRectangle(cornerRadius: 20)
                         .fill(Color(red: 0.85, green: 0.85, blue: 0.85))
                         .frame(width: widht * 0.80, height: height * 0.1)
-                        .onTapGesture {
-                            create(index: item.order)
-                            dismiss()
-//                            deleteindex(index: item.order)
-                        }
+                        
                         
                         HStack{
                             Ellipse()
@@ -120,11 +116,11 @@ struct DrugListView: View {
                                 .frame(width: 150, height: 54)
 
 
-                            Button(action: {
-                                self.showingAlert.toggle()
-                            }, label: {
-                                Image(systemName: "trash")
-                            })
+//                            Button(action: {
+//                                self.showingAlert.toggle()
+//                            }, label: {
+//                                Image(systemName: "trash")
+//                            })
                             //　通知シリーズ１
 //                            .alert("警告", isPresented: self.$showingAlert){
 //
@@ -166,6 +162,10 @@ struct DrugListView: View {
                         
                         
                         
+                    }.onTapGesture {
+                        create(index: item.order)
+                        dismiss()
+//                            deleteindex(index: item.order)
                     }
                     
                     }

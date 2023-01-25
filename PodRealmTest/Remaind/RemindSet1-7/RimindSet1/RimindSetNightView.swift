@@ -27,7 +27,8 @@ struct RimindSetNightView: View {
     @State var drugDay = "月曜日"
     @State var drugTime = "夜"
     
-    @State private var isDrugView: Bool = false
+    @State private var isDrugView1: Bool = false
+    @State private var isDrugView2: Bool = false
     @State private var isDatePickerView: Bool = false
     
     let widht = UIScreen.main.bounds.width
@@ -44,12 +45,6 @@ struct RimindSetNightView: View {
     @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食前"}) var rimaindGroups1
     @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食後"}) var rimaindGroups2
     
-    // RimindTestDB
-    //    @ObservedResults(RimindTestDB.self) var rimindGroups
-    //
-    //    @State private var rimaindItemset: RimindTestItem?
-    //
-    //    @EnvironmentObject private var rimaindStore: RimindTestStore
     
     // DrugStoreテンプレ
     @EnvironmentObject private var store: DrugStore
@@ -147,10 +142,13 @@ struct RimindSetNightView: View {
                         self.drugDay = "月曜日"
                         print($drugTime)
                         
-                        isDrugView.toggle()
+                        isDrugView1.toggle()
                             
                     }
-                    .sheet(isPresented: $isDrugView) {
+                    .sheet(isPresented: $isDrugView1,onDismiss: {
+                        let dateset = dateModel.date_string(date: date1)
+                        rimindbanmaeUpdate(time: dateset)
+                    }) {
                         let realm = try! Realm()
                         
                         
@@ -160,6 +158,7 @@ struct RimindSetNightView: View {
                             .environmentObject(RimaindStore(realm: realm))
                             .environmentObject(RimindTestStore(realm: realm))
                     }
+                    .font(.largeTitle)
             }
             
             //夜食前ここまで
@@ -221,9 +220,12 @@ struct RimindSetNightView: View {
                         self.drugDay = "月曜日"
                         print($drugTime)
                         
-                        isDrugView.toggle()
+                        isDrugView2.toggle()
                     }
-                    .sheet(isPresented: $isDrugView) {
+                    .sheet(isPresented: $isDrugView2,onDismiss: {
+                        let dateset = dateModel.date_string(date: date2)
+                        rimindbanatoUpdate(time: dateset)
+                    }) {
                         let realm = try! Realm()
                         
                         
@@ -236,6 +238,7 @@ struct RimindSetNightView: View {
                         
                         
                     }
+                    .font(.largeTitle)
                 
                 
             }
@@ -271,11 +274,32 @@ extension RimindSetNightView {
         
         let realm = try! Realm()
         
+//        // MARK: 曜日を変更
+//        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+//        do{
+//            try realm.write{
+//                rimaindGroups22[0].banmae = time
+//            }
+//        }catch {
+//            print("Error \(error)")
+//        }
+        
         // MARK: 曜日を変更
         @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+
         do{
             try realm.write{
+                
                 rimaindGroups22[0].banmae = time
+                if rimaindGroups1.count != 0 {
+                    rimaindGroups23[0].banmae = "◎"
+                    bom(charArray: Array(rimaindGroups22[0].banmae),timeStr: "夜食前", drugCount: rimaindGroups1.count)
+                }
+//                else {
+//                    rimaindGroups23[0].banmae = "ー"
+//                }
+                
             }
         }catch {
             print("Error \(error)")
@@ -288,15 +312,35 @@ extension RimindSetNightView {
         let realm = try! Realm()
         //        // ② 更新したいデータを検索する
         
+//        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+//
+//
+//        // ③ 部署を更新する
+//        do{
+//            try realm.write{
+//
+//
+//                rimaindGroups22[0].banato = time
+//
+//            }
+//        }catch {
+//            print("Error \(error)")
+//        }
+        // MARK: 曜日を変更
         @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
-        
-        
-        // ③ 部署を更新する
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+
         do{
             try realm.write{
                 
-                
                 rimaindGroups22[0].banato = time
+                if rimaindGroups2.count != 0 {
+                    rimaindGroups23[0].banmae = "◎"
+                    bom(charArray: Array(rimaindGroups22[0].banato),timeStr: "夜食後", drugCount: rimaindGroups1.count)
+                }
+//                else {
+//                    rimaindGroups23[0].banmae = "ー"
+//                }
                 
             }
         }catch {
@@ -304,6 +348,79 @@ extension RimindSetNightView {
         }
         
     }
+    private func bom(charArray: Array<Character>, timeStr: String, drugCount: Int){
+        //　通知を設定した時間に毎週設定
+        
+        //　全ての通知を消す
+        let center = UNUserNotificationCenter.current()
+//        center.removeAllPendingNotificationRequests()
+        center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
+        
+        let content = UNMutableNotificationContent()
+        content.title = "\(timeStr)の薬を飲みましょう！"
+        content.body = "\(drugCount)種類の薬を飲む必要があります。"
+        //StringからDateに変換する準備
+//        let charArray = Array(rimaindGroups22[0].kisyou)
+
+//        print(type(of: charArray))
+        
+        let hour1 = "\(charArray[0])"
+        
+        let hour = hour1 == "0" ? "\(charArray[1])": "\(charArray[0])\(charArray[1])"
+        let minute1 = "\(charArray[3])"
+
+        
+        let minute = minute1 == "0" ?  "\(charArray[4])" : "\(charArray[3])\(charArray[4])"
+        print("\(hour)時\(minute)分")
+        
+        
+        //準備ができたので変換する
+        let hourInt = Int(hour)!
+        let munuteInt = Int(minute)!
+        
+       
+
+
+
+        content.sound = UNNotificationSound.default
+
+        let notificationCenter = UNUserNotificationCenter.current()
+
+        var dateComponentsDay = DateComponents()
+
+        dateComponentsDay.hour = hourInt
+        dateComponentsDay.minute = munuteInt
+        dateComponentsDay.weekday = 2
+
+
+                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
+       
+
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "\(drugDay)\(timeStr)", content: content, trigger: trigger)
+
+        //⑤④のリクエストの通りに通知を実行させる
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                print(error.debugDescription)
+            }
+        }
+        print("-----------------------------------------------------")
+        // 登録されている通知確認
+        UNUserNotificationCenter.current().getPendingNotificationRequests {
+            print("Pending requests :", $0)
+        }
+
+    }
+    // ケルシーに殺される
+    private func mon3ter(timeStr: String){
+        
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
+    }
+    
     
     
     private func deleteindex(index: Int) {
@@ -321,6 +438,30 @@ extension RimindSetNightView {
         }
         //        // 行を削除する
         rimaindStore.delete(id: deleteId)
+        
+        let realm = try! Realm()
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+
+        do{
+            try realm.write{
+                
+                // これを全てにやる
+                if rimaindGroups1.count == 0 && rimaindGroups2.count == 0{
+                    rimaindGroups23[0].banmae = "ー"
+                }
+                // 薬がなくなったら通知を削除する
+                if rimaindGroups1.count == 0 {
+                    mon3ter(timeStr: "夜食前")
+                }
+                if rimaindGroups2.count == 0 {
+                    mon3ter(timeStr: "夜食後")
+                }
+                
+                
+            }
+        }catch {
+            print("Error \(error)")
+        }
         
         //
         //        store.test()

@@ -219,12 +219,12 @@ struct RemaindSetMorningView2: View {
                             //データの一覧を表示
 
                             let realm = try! Realm()
-
+//
                             let drugTable = realm.objects(RimindDrugDB.self)
                             //                        print(drugTable)
 
 
-                            let timeTable = realm.objects(RimindTimeDB.self)
+//                            let timeTable = realm.objects(RimindTimeDB.self)
 
                             print(drugTable)
 

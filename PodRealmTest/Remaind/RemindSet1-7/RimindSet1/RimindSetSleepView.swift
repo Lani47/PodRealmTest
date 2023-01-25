@@ -138,7 +138,10 @@ struct RimindSetSleepView: View {
                         isDrugView.toggle()
                             
                     }
-                    .sheet(isPresented: $isDrugView) {
+                    .sheet(isPresented: $isDrugView,onDismiss: {
+                        let dateset = dateModel.date_string(date: date1)
+                        rimindnerumeUpdate(time: dateset)
+                    }) {
                         let realm = try! Realm()
                         
                         
@@ -148,6 +151,7 @@ struct RimindSetSleepView: View {
                             .environmentObject(RimaindStore(realm: realm))
                             .environmentObject(RimindTestStore(realm: realm))
                     }
+                    .font(.largeTitle)
             }
             
             //夜食前ここまで
@@ -179,17 +183,113 @@ extension RimindSetSleepView {
         
         let realm = try! Realm()
         
+//        // MARK: 曜日を変更
+//        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+//        do{
+//            try realm.write{
+//                rimaindGroups22[0].nerumae = time
+//            }
+//        }catch {
+//            print("Error \(error)")
+//        }
         // MARK: 曜日を変更
         @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+
         do{
             try realm.write{
+                
                 rimaindGroups22[0].nerumae = time
+                if rimaindGroups1.count != 0 {
+                    rimaindGroups23[0].nerumae = "◎"
+                    bom(charArray: Array(rimaindGroups22[0].nerumae),timeStr: "就寝前", drugCount: rimaindGroups1.count)
+                }
+                else {
+                    rimaindGroups23[0].nerumae = "ー"
+                }
+                
             }
         }catch {
             print("Error \(error)")
         }
         
     }
+    private func bom(charArray: Array<Character>, timeStr: String, drugCount: Int){
+        //　通知を設定した時間に毎週設定
+        
+        //　全ての通知を消す
+        let center = UNUserNotificationCenter.current()
+//        center.removeAllPendingNotificationRequests()
+        center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
+        
+        let content = UNMutableNotificationContent()
+        content.title = "\(timeStr)の薬を飲みましょう！"
+        content.body = "\(drugCount)種類の薬を飲む必要があります。"
+        //StringからDateに変換する準備
+//        let charArray = Array(rimaindGroups22[0].kisyou)
+
+//        print(type(of: charArray))
+        
+        let hour1 = "\(charArray[0])"
+        
+        let hour = hour1 == "0" ? "\(charArray[1])": "\(charArray[0])\(charArray[1])"
+        let minute1 = "\(charArray[3])"
+
+        
+        let minute = minute1 == "0" ?  "\(charArray[4])" : "\(charArray[3])\(charArray[4])"
+        print("\(hour)時\(minute)分")
+        
+        
+        //準備ができたので変換する
+        let hourInt = Int(hour)!
+        let munuteInt = Int(minute)!
+        
+       
+
+
+
+        content.sound = UNNotificationSound.default
+
+        let notificationCenter = UNUserNotificationCenter.current()
+
+        var dateComponentsDay = DateComponents()
+
+        dateComponentsDay.hour = hourInt
+        dateComponentsDay.minute = munuteInt
+        dateComponentsDay.weekday = 2
+
+
+                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
+       
+
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "\(drugDay)\(timeStr)", content: content, trigger: trigger)
+
+        //⑤④のリクエストの通りに通知を実行させる
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                print(error.debugDescription)
+            }
+        }
+        print("-----------------------------------------------------")
+        
+        // 登録されている通知確認
+        UNUserNotificationCenter.current().getPendingNotificationRequests {
+            print("Pending requests :", $0)
+        }
+
+    }
+    // ケルシーに殺される
+    private func mon3ter(timeStr: String){
+        
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
+    }
+    
+    
+    
    
     
     
@@ -208,6 +308,28 @@ extension RimindSetSleepView {
         }
         //        // 行を削除する
         rimaindStore.delete(id: deleteId)
+        
+        let realm = try! Realm()
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+
+        do{
+            try realm.write{
+                
+                // これを全てにやる
+                if rimaindGroups1.count == 0 {
+                    rimaindGroups23[0].nerumae = "ー"
+                }
+                // 薬がなくなったら通知を削除する
+                if rimaindGroups1.count == 0 {
+                    mon3ter(timeStr: "就寝前")
+                }
+                
+                
+                
+            }
+        }catch {
+            print("Error \(error)")
+        }
         
         //
         //        store.test()
