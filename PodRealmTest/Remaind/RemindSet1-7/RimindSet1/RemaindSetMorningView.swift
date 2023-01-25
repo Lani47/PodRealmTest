@@ -84,7 +84,7 @@ struct RemaindSetMorningView: View {
     @State var date3:Date = Date()
     
     
-
+    
     
     
     
@@ -119,7 +119,7 @@ struct RemaindSetMorningView: View {
                             date2 = dateModel.StringToDate(dateValue: rimaindGroups22[0].asamae)
                             date3 = dateModel.StringToDate(dateValue: rimaindGroups22[0].asaato)
                             
-
+                            
                         })
                     
                 }
@@ -150,15 +150,17 @@ struct RemaindSetMorningView: View {
                     .frame(height: 1 * (100 + 0.4))
                     
                 }
-  
+                
                 ZStack{
                     
                     Ellipse()
-                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-                    
+//                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
+                        .fill(Color.blue)
+                        
                         .frame(width: 50, height: 50)
-                    
                     Text("+")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
                         .onTapGesture {
                             self.drugTime = "起床時"
                             self.drugDay = "月曜日"
@@ -177,7 +179,7 @@ struct RemaindSetMorningView: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                        .font(.largeTitle)
+                        
                     
                 }
                 //朝食前 ここから
@@ -226,53 +228,55 @@ struct RemaindSetMorningView: View {
                 ZStack{
                     
                     Ellipse()
-                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
+                        .fill(Color.blue)
+                        
                     
                         .frame(width: 50, height: 50)
                     
                     Text("+")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
                     // テスト用
-                        .onTapGesture {
-
-                            //データの一覧を表示
-
-                            let realm = try! Realm()
-
-                            let drugTable = realm.objects(RimindDrugDB.self)
-                            //                        print(drugTable)
-
-
-                            let timeTable = realm.objects(RimindTimeDB.self)
-
-                            let rimindResult = realm.objects(RimindResultDB.self)
-
-
-//                            bom(charArray: Array(rimaindGroups22[0].kisyou))
-
-                            print(rimindResult)
-
-                        }
+//                        .onTapGesture {
+//
+//                            //データの一覧を表示
+//
+//                            let realm = try! Realm()
+//
+//                            let drugTable = realm.objects(RimindDrugDB.self)
+//                            //                        print(drugTable)
+//
+//
+//                            let timeTable = realm.objects(RimindTimeDB.self)
+//
+//                            let rimindResult = realm.objects(RimindResultDB.self)
+//
+//
+//                            //                            bom(charArray: Array(rimaindGroups22[0].kisyou))
+//
+//                            print(rimindResult)
+//
+//                        }
                     
                     // 実践用
-//                        .onTapGesture {
-//                            self.drugTime = "朝食前"
-//                            self.drugDay = "月曜日"
-//                            print($drugTime)
-//
-//                            isDrugView2.toggle()
-//                        }
-//                        .sheet(isPresented: $isDrugView2,onDismiss: {
-//                            let dateset = dateModel.date_string(date: date2)
-//                            rimindasamaeUpdate(time: dateset)
-//                        }) {
-//                            let realm = try! Realm()
-//                            DrugListView(drugDay: $drugDay, drugTime: $drugTime)
-//                                .environmentObject(DrugStore(realm: realm))
-//                                .environmentObject(RimaindStore(realm: realm))
-//                                .environmentObject(RimindTestStore(realm: realm))
-//                        }
-                        .font(.largeTitle)
+                                            .onTapGesture {
+                                                self.drugTime = "朝食前"
+                                                self.drugDay = "月曜日"
+                                                print($drugTime)
                     
+                                                isDrugView2.toggle()
+                                            }
+                                            .sheet(isPresented: $isDrugView2,onDismiss: {
+                                                let dateset = dateModel.date_string(date: date2)
+                                                rimindasamaeUpdate(time: dateset)
+                                            }) {
+                                                let realm = try! Realm()
+                                                DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+                                                    .environmentObject(DrugStore(realm: realm))
+                                                    .environmentObject(RimaindStore(realm: realm))
+                                                    .environmentObject(RimindTestStore(realm: realm))
+                                            }
+                                            
                     
                 }
                 //朝食前　ここまで
@@ -320,17 +324,21 @@ struct RemaindSetMorningView: View {
                 ZStack{
                     
                     Ellipse()
-                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
+                        .fill(Color.blue)
+                        
                     
                         .frame(width: 50, height: 50)
                     
                     Text("+")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
                         .onTapGesture {
                             self.drugTime = "朝食後"
                             self.drugDay = "月曜日"
                             print($drugTime)
                             isDrugView3.toggle()
                         }
+                        
                         .sheet(isPresented: $isDrugView3, onDismiss: {
                             print("dismis3")
                             let dateset = dateModel.date_string(date: date3)
@@ -342,10 +350,11 @@ struct RemaindSetMorningView: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                        .font(.largeTitle)
-           
+                    
+                       
+                    
                 }
- 
+                
             }
         }
         
@@ -391,11 +400,11 @@ extension RemaindSetMorningView {
                 if rimaindGroups2.count != 0 {
                     rimaindGroups23[0].kisyou = "◎"
                     
-                bom(charArray: Array(rimaindGroups22[0].asamae),timeStr: "朝食前", drugCount: rimaindGroups2.count)
+                    bom(charArray: Array(rimaindGroups22[0].asamae),timeStr: "朝食前", drugCount: rimaindGroups2.count)
                 }
-//                else {
-//                    rimaindGroups23[0].kisyou = "ー"
-//                }
+                //                else {
+                //                    rimaindGroups23[0].kisyou = "ー"
+                //                }
             }
         }catch {
             print("Error \(error)")
@@ -411,7 +420,7 @@ extension RemaindSetMorningView {
         // MARK: 曜日を変更
         @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
         @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
-
+        
         do{
             try realm.write{
                 
@@ -421,9 +430,9 @@ extension RemaindSetMorningView {
                     print("test1")
                     bom(charArray: Array(rimaindGroups22[0].kisyou),timeStr: "起床時", drugCount: rimaindGroups1.count)
                 }
-//                else {
-//                    rimaindGroups23[0].kisyou = "ー"
-//                }
+                //                else {
+                //                    rimaindGroups23[0].kisyou = "ー"
+                //                }
                 
             }
         }catch {
@@ -448,12 +457,12 @@ extension RemaindSetMorningView {
                 rimaindGroups22[0].asaato = time
                 if rimaindGroups3.count != 0 {
                     rimaindGroups23[0].kisyou = "◎"
-
-                bom(charArray: Array(rimaindGroups22[0].asaato),timeStr: "朝食後", drugCount: rimaindGroups3.count)
+                    
+                    bom(charArray: Array(rimaindGroups22[0].asaato),timeStr: "朝食後", drugCount: rimaindGroups3.count)
                 }
-//                else {
-//                    rimaindGroups23[0].kisyou = "ー"
-//                }
+                //                else {
+                //                    rimaindGroups23[0].kisyou = "ー"
+                //                }
             }
         }catch {
             print("Error \(error)")
@@ -468,22 +477,22 @@ extension RemaindSetMorningView {
         
         //　全ての通知を消す
         let center = UNUserNotificationCenter.current()
-//        center.removeAllPendingNotificationRequests()
+        //        center.removeAllPendingNotificationRequests()
         center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
         
         let content = UNMutableNotificationContent()
         content.title = "\(timeStr)の薬を飲みましょう！"
         content.body = "\(drugCount)種類の薬を飲む必要があります。"
         //StringからDateに変換する準備
-//        let charArray = Array(rimaindGroups22[0].kisyou)
-
-//        print(type(of: charArray))
+        //        let charArray = Array(rimaindGroups22[0].kisyou)
+        
+        //        print(type(of: charArray))
         
         let hour1 = "\(charArray[0])"
         
         let hour = hour1 == "0" ? "\(charArray[1])": "\(charArray[0])\(charArray[1])"
         let minute1 = "\(charArray[3])"
-
+        
         
         let minute = minute1 == "0" ?  "\(charArray[4])" : "\(charArray[3])\(charArray[4])"
         print("\(hour)時\(minute)分")
@@ -494,29 +503,29 @@ extension RemaindSetMorningView {
         let munuteInt = Int(minute)!
         
         
-       
-
-
-
+        
+        
+        
+        
         content.sound = UNNotificationSound.default
-
+        
         let notificationCenter = UNUserNotificationCenter.current()
-
+        
         var dateComponentsDay = DateComponents()
-
+        
         dateComponentsDay.hour = hourInt
         dateComponentsDay.minute = munuteInt
         dateComponentsDay.weekday = 2
-
-
-                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
-       
-
-//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
+        
+        
+        //        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         let request = UNNotificationRequest(identifier: "\(drugDay)\(timeStr)", content: content, trigger: trigger)
-
+        
         //⑤④のリクエストの通りに通知を実行させる
-                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
         notificationCenter.add(request) { (error) in
             if error != nil {
@@ -529,7 +538,7 @@ extension RemaindSetMorningView {
         UNUserNotificationCenter.current().getPendingNotificationRequests {
             print("Pending requests :", $0)
         }
-
+        
     }
     // ケルシーに殺される
     private func mon3ter(timeStr: String){
@@ -559,7 +568,7 @@ extension RemaindSetMorningView {
         
         let realm = try! Realm()
         @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
-
+        
         do{
             try realm.write{
                 
@@ -587,7 +596,7 @@ extension RemaindSetMorningView {
             print("Error \(error)")
         }
         
-
+        
     }
     
     //    private func move(sourceIndexSet: IndexSet, destination: Int) {

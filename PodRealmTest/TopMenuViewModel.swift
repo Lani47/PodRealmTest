@@ -84,6 +84,7 @@ class TopMenuViewModel: ObservableObject{
                 }else {
                     //通知が拒否されているときの処理
                     print("拒否")
+                    
                 }
             }
     }

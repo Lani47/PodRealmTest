@@ -116,7 +116,7 @@ struct RWBYView: View {
                 .sheet(isPresented: $isDrugView) {
                     let realm = try! Realm()
                     
-                    DrugListView(drugDay: $viewModel.drugname, drugTime: $viewModel.drugname)
+                    DrugPreviewView(drugDay: $viewModel.drugname, drugTime: $viewModel.drugname)
                         .environmentObject(DrugStore(realm: realm))
                     
                 }

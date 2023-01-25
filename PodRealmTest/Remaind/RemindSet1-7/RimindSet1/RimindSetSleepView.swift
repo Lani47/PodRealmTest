@@ -70,95 +70,97 @@ struct RimindSetSleepView: View {
     
     var body: some View {
         ScrollView{
-        VStack{
-            //就寝前ここから
-            HStack{
-                Text("就寝前")
-                    .font(.largeTitle)
-                DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
-                    .frame(width: widht * 0.3)
-                    .font(.largeTitle)
-                    .onChange(of: date1, perform: {newValue in
+            VStack{
+                //就寝前ここから
+                HStack{
+                    Text("就寝前")
+                        .font(.largeTitle)
+                    DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
+                        .frame(width: widht * 0.3)
+                        .font(.largeTitle)
+                        .onChange(of: date1, perform: {newValue in
+                            
+                            let dateset = dateModel.date_string(date: date1)
+                            rimindnerumeUpdate(time: dateset)
+                            
+                            print("$date1が操作された:\(dateset)")
+                        })
+                    // MARK: 初期時刻を設定
+                        .onAppear(perform: {
+                            date1 = dateModel.StringToDate(dateValue: rimaindGroups22[0].nerumae)
+                            
+                            
+                        })
+                }
+                
+                if rimaindGroups1.count != 0 {
+                    ScrollViewReader { reader in List {
                         
-                        let dateset = dateModel.date_string(date: date1)
-                        rimindnerumeUpdate(time: dateset)
                         
-                        print("$date1が操作された:\(dateset)")
-                    })
-                // MARK: 初期時刻を設定
-                    .onAppear(perform: {
-                        date1 = dateModel.StringToDate(dateValue: rimaindGroups22[0].nerumae)
                         
-                    
-                    })
-            }
-            
-            if rimaindGroups1.count != 0 {
-                ScrollViewReader { reader in List {
-                    
-                    
-                    
-                    ForEach(rimaindGroups1) { item in
-                        
-                        if item.rimindTime == "就寝前"{
-                            Text(item.name)
-                                .font(.largeTitle)
-                                .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
-                                .onTapGesture {
-                                    deleteindex(index: item.order)
-                                }
+                        ForEach(rimaindGroups1) { item in
+                            
+                            if item.rimindTime == "就寝前"{
+                                Text(item.name)
+                                    .font(.largeTitle)
+                                    .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
+                                    .onTapGesture {
+                                        deleteindex(index: item.order)
+                                    }
+                                
+                            }
+                            
+                            
                             
                         }
                         
-                        
-                        
                     }
+                    }
+                    .frame(height: 1 * (100 + 0.4))
                     
                 }
-                }
-                .frame(height: 1 * (100 + 0.4))
                 
-            }
-            
-            
-            
-            ZStack{
                 
-                Ellipse()
-                    .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
                 
-                    .frame(width: 50, height: 50)
-                
-                Text("+")
-                    .onTapGesture {
-                        self.drugTime = "就寝前"
-                        self.drugDay = "月曜日"
-                        print($drugTime)
-                        
-                        isDrugView.toggle()
+                ZStack{
+                    
+                    Ellipse()
+                        .fill(Color.blue)
+                    
+                        .frame(width: 50, height: 50)
+                    
+                    Text("+")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
+                        .onTapGesture {
+                            self.drugTime = "就寝前"
+                            self.drugDay = "月曜日"
+                            print($drugTime)
                             
-                    }
-                    .sheet(isPresented: $isDrugView,onDismiss: {
-                        let dateset = dateModel.date_string(date: date1)
-                        rimindnerumeUpdate(time: dateset)
-                    }) {
-                        let realm = try! Realm()
+                            isDrugView.toggle()
+                            
+                        }
+                        .sheet(isPresented: $isDrugView,onDismiss: {
+                            let dateset = dateModel.date_string(date: date1)
+                            rimindnerumeUpdate(time: dateset)
+                        }) {
+                            let realm = try! Realm()
+                            
+                            
+                            
+                            DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+                                .environmentObject(DrugStore(realm: realm))
+                                .environmentObject(RimaindStore(realm: realm))
+                                .environmentObject(RimindTestStore(realm: realm))
+                        }
                         
-                        
-                        
-                        DrugListView(drugDay: $drugDay, drugTime: $drugTime)
-                            .environmentObject(DrugStore(realm: realm))
-                            .environmentObject(RimaindStore(realm: realm))
-                            .environmentObject(RimindTestStore(realm: realm))
-                    }
-                    .font(.largeTitle)
+                }
+                
+                //夜食前ここまで
+                
+                
+                
             }
-            
-            //夜食前ここまで
-
-            
-            
-        }
         }
         
         // MARK: - ここに飲む予定の薬を表示させたい。
@@ -183,19 +185,19 @@ extension RimindSetSleepView {
         
         let realm = try! Realm()
         
-//        // MARK: 曜日を変更
-//        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
-//        do{
-//            try realm.write{
-//                rimaindGroups22[0].nerumae = time
-//            }
-//        }catch {
-//            print("Error \(error)")
-//        }
+        //        // MARK: 曜日を変更
+        //        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+        //        do{
+        //            try realm.write{
+        //                rimaindGroups22[0].nerumae = time
+        //            }
+        //        }catch {
+        //            print("Error \(error)")
+        //        }
         // MARK: 曜日を変更
         @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
         @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
-
+        
         do{
             try realm.write{
                 
@@ -219,22 +221,22 @@ extension RimindSetSleepView {
         
         //　全ての通知を消す
         let center = UNUserNotificationCenter.current()
-//        center.removeAllPendingNotificationRequests()
+        //        center.removeAllPendingNotificationRequests()
         center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
         
         let content = UNMutableNotificationContent()
         content.title = "\(timeStr)の薬を飲みましょう！"
         content.body = "\(drugCount)種類の薬を飲む必要があります。"
         //StringからDateに変換する準備
-//        let charArray = Array(rimaindGroups22[0].kisyou)
-
-//        print(type(of: charArray))
+        //        let charArray = Array(rimaindGroups22[0].kisyou)
+        
+        //        print(type(of: charArray))
         
         let hour1 = "\(charArray[0])"
         
         let hour = hour1 == "0" ? "\(charArray[1])": "\(charArray[0])\(charArray[1])"
         let minute1 = "\(charArray[3])"
-
+        
         
         let minute = minute1 == "0" ?  "\(charArray[4])" : "\(charArray[3])\(charArray[4])"
         print("\(hour)時\(minute)分")
@@ -244,29 +246,29 @@ extension RimindSetSleepView {
         let hourInt = Int(hour)!
         let munuteInt = Int(minute)!
         
-       
-
-
-
+        
+        
+        
+        
         content.sound = UNNotificationSound.default
-
+        
         let notificationCenter = UNUserNotificationCenter.current()
-
+        
         var dateComponentsDay = DateComponents()
-
+        
         dateComponentsDay.hour = hourInt
         dateComponentsDay.minute = munuteInt
         dateComponentsDay.weekday = 2
-
-
-                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
-       
-
-//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
+        
+        
+        //        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         let request = UNNotificationRequest(identifier: "\(drugDay)\(timeStr)", content: content, trigger: trigger)
-
+        
         //⑤④のリクエストの通りに通知を実行させる
-                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
         notificationCenter.add(request) { (error) in
             if error != nil {
@@ -279,7 +281,7 @@ extension RimindSetSleepView {
         UNUserNotificationCenter.current().getPendingNotificationRequests {
             print("Pending requests :", $0)
         }
-
+        
     }
     // ケルシーに殺される
     private func mon3ter(timeStr: String){
@@ -290,7 +292,7 @@ extension RimindSetSleepView {
     
     
     
-   
+    
     
     
     private func deleteindex(index: Int) {
@@ -311,7 +313,7 @@ extension RimindSetSleepView {
         
         let realm = try! Realm()
         @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
-
+        
         do{
             try realm.write{
                 

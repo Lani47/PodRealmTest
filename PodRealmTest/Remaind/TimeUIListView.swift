@@ -23,7 +23,9 @@ struct TimeUIListView: View {
     @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimindResult
     
     @State var drugState = "◎";
-//    @State var drugday = "月曜日"
+    
+    @State var kousinyou = 0
+    //    @State var drugday = "月曜日"
     
     let realm = try! Realm()
     
@@ -38,11 +40,16 @@ struct TimeUIListView: View {
     @State private var sleepRimaindView1: Bool = false
     
     
+    var isHidden = true
+    
     var body: some View {
         ScrollViewReader { reader in
             VStack{
+                if !isHidden {
+                      Text("\(kousinyou)") // text1とtext3の間にスペースが残らない
+                   }
                 // MARK: - 曜日のリスト
-            List {
+                List {
                     ZStack{
                         RoundedRectangle(cornerRadius: 0)
                             .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
@@ -64,22 +71,22 @@ struct TimeUIListView: View {
                                         
                                         
                                         Text(rimindResult[0].kisyou)
-                                            
+                                        
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                             .onTapGesture {
                                                 morningRimaindView1.toggle()
                                             }
-//                                            .sheet(isPresented: $morningRimaindView1) {
-//                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
-//                                            }
+                                        //                                            .sheet(isPresented: $morningRimaindView1) {
+                                        //                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
+                                        //                                            }
                                             .sheet(isPresented : $morningRimaindView1 , onDismiss : {
-                                                        //処理
-                                                
-                                               }) {
-                                                      //ビュー
-                                                   RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
-                                               }
+                                                //処理
+                                                kousinyou = 1
+                                            }) {
+                                                //ビュー
+                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
@@ -93,7 +100,10 @@ struct TimeUIListView: View {
                                             .onTapGesture {
                                                 sundayRimaindView1.toggle()
                                             }
-                                            .sheet(isPresented: $sundayRimaindView1) {
+                                            .sheet(isPresented: $sundayRimaindView1, onDismiss : {
+                                                //処理
+                                                kousinyou = 2
+                                            }) {
                                                 RimindSetSundayView().environmentObject(RimaindStore(realm: realm))
                                             }
                                     } .padding(.leading, 10.0)
@@ -108,7 +118,10 @@ struct TimeUIListView: View {
                                             .onTapGesture {
                                                 nightRimaindView1.toggle()
                                             }
-                                            .sheet(isPresented: $nightRimaindView1) {
+                                            .sheet(isPresented: $nightRimaindView1, onDismiss : {
+                                                //処理
+                                                kousinyou = 3
+                                            }) {
                                                 RimindSetNightView().environmentObject(RimaindStore(realm: realm))
                                             }
                                     }.padding(.leading, 10.0)
@@ -124,14 +137,17 @@ struct TimeUIListView: View {
                                             .onTapGesture {
                                                 sleepRimaindView1.toggle()
                                             }
-                                            .sheet(isPresented: $sleepRimaindView1) {
+                                            .sheet(isPresented: $sleepRimaindView1, onDismiss : {
+                                                //処理
+                                                kousinyou = 4
+                                            }) {
                                                 RimindSetSleepView().environmentObject(RimaindStore(realm: realm))
                                             }
                                     }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
                                     
-                                
+                                    
                                 }
                             }
                             
@@ -162,7 +178,7 @@ struct TimeUIListView: View {
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                         //設定呼び出し
-                                            
+                                        
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
@@ -174,7 +190,7 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         //設定呼び出し
-                                            
+                                        
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{

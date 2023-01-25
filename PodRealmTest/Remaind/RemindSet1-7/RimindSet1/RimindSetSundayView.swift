@@ -47,7 +47,7 @@ struct RimindSetSundayView: View {
     @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "昼食後"}) var rimaindGroups2
     @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "間食"}) var rimaindGroups3
     
-   
+    
     
     // DrugStoreテンプレ
     @EnvironmentObject private var store: DrugStore
@@ -77,258 +77,267 @@ struct RimindSetSundayView: View {
     
     var body: some View {
         ScrollView{
-        VStack{
-            //昼食前ここから
-            HStack{
-                Text("昼食前")
-                    .font(.largeTitle)
-                DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
-                    .frame(width: widht * 0.3)
-                    .font(.largeTitle)
-                    .onChange(of: date1, perform: {newValue in
-                        
-                        let dateset = dateModel.date_string(date: date1)
-                        rimindhirumaeUpdate(time: dateset)
-                        
-                        print("$date1が操作された:\(dateset)")
-                    })
-                // MARK: 初期時刻を設定
-                    .onAppear(perform: {
-                        date1 = dateModel.StringToDate(dateValue: rimaindGroups22[0].hirumae)
-                        date2 = dateModel.StringToDate(dateValue: rimaindGroups22[0].hiruato)
-                        date3 = dateModel.StringToDate(dateValue: rimaindGroups22[0].oyatu)
-                    })
-                
-                
-                
-                
-                
-            }
-            
-            if rimaindGroups1.count != 0 {
-                ScrollViewReader { reader in List {
+            VStack{
+                //昼食前ここから
+                HStack{
+                    Text("昼食前")
+                        .font(.largeTitle)
+                    DatePicker("", selection: $date1,displayedComponents: .hourAndMinute)
+                        .frame(width: widht * 0.3)
+                        .font(.largeTitle)
+                        .onChange(of: date1, perform: {newValue in
+                            
+                            let dateset = dateModel.date_string(date: date1)
+                            rimindhirumaeUpdate(time: dateset)
+                            
+                            print("$date1が操作された:\(dateset)")
+                        })
+                    // MARK: 初期時刻を設定
+                        .onAppear(perform: {
+                            date1 = dateModel.StringToDate(dateValue: rimaindGroups22[0].hirumae)
+                            date2 = dateModel.StringToDate(dateValue: rimaindGroups22[0].hiruato)
+                            date3 = dateModel.StringToDate(dateValue: rimaindGroups22[0].oyatu)
+                        })
                     
                     
                     
-                    ForEach(rimaindGroups1) { item in
+                    
+                    
+                }
+                
+                if rimaindGroups1.count != 0 {
+                    ScrollViewReader { reader in List {
                         
-                        if item.rimindTime == "昼食前"{
-                            Text(item.name)
-                                .font(.largeTitle)
-                                .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
-                                .onTapGesture {
-                                    deleteindex(index: item.order)
-                                }
+                        
+                        
+                        ForEach(rimaindGroups1) { item in
+                            
+                            if item.rimindTime == "昼食前"{
+                                Text(item.name)
+                                    .font(.largeTitle)
+                                    .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
+                                    .onTapGesture {
+                                        deleteindex(index: item.order)
+                                    }
+                                
+                            }
+                            
+                            
                             
                         }
                         
-                        
-                        
                     }
+                    }
+                    .frame(height: 1 * (100 + 0.4))
                     
                 }
+                
+                ZStack{
+                    
+                    Ellipse()
+                        .fill(Color.blue)
+                        
+                    
+                        .frame(width: 50, height: 50)
+                    
+                    Text("+")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
+                        .onTapGesture {
+                            //                        if groups.count == 0{
+                            //                            print("薬が登録されていません。")
+                            //
+                            //                        } else {
+                            //                            print("TopMenuView:薬登録に移動")
+                            //
+                            //                        }
+                            self.drugTime = "昼食前"
+                            self.drugDay = "月曜日"
+                            print($drugTime)
+                            
+                            isDrugView1.toggle()
+                            
+                            
+                            
+                        }
+                        .sheet(isPresented: $isDrugView1 ,onDismiss: {
+                            let dateset = dateModel.date_string(date: date1)
+                            rimindhirumaeUpdate(time: dateset)
+                        }) {
+                            let realm = try! Realm()
+                            
+                            
+                            
+                            DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+                                .environmentObject(DrugStore(realm: realm))
+                                .environmentObject(RimaindStore(realm: realm))
+                                .environmentObject(RimindTestStore(realm: realm))
+                            
+                            
+                            
+                        }
+                    
+                        
+                    
+                    
                 }
-                .frame(height: 1 * (100 + 0.4))
+                //昼食前ここまで
+                //昼食後ここから
+                HStack{
+                    Text("昼食後")
+                        .font(.largeTitle)
+                    DatePicker("", selection: $date2,displayedComponents: .hourAndMinute)
+                        .frame(width: widht * 0.3)
+                        .font(.largeTitle)
+                        .onChange(of: date2, perform: {newValue in
+                            
+                            let dateset = dateModel.date_string(date: date2)
+                            rimindhiruatoUpdate(time: dateset)
+                            
+                            print("$date2が操作された:\(dateset)")
+                        })
+                }
                 
-            }
-
-            ZStack{
-                
-                Ellipse()
-                    .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-                
-                    .frame(width: 50, height: 50)
-                
-                Text("+")
-                    .onTapGesture {
-                        //                        if groups.count == 0{
-                        //                            print("薬が登録されていません。")
-                        //
-                        //                        } else {
-                        //                            print("TopMenuView:薬登録に移動")
-                        //
-                        //                        }
-                        self.drugTime = "昼食前"
-                        self.drugDay = "月曜日"
-                        print($drugTime)
-                        
-                        isDrugView1.toggle()
+                if rimaindGroups2.count != 0 {
+                    ScrollViewReader { reader in List {
                         
                         
                         
-                    }
-                    .sheet(isPresented: $isDrugView1 ,onDismiss: {
-                        let dateset = dateModel.date_string(date: date1)
-                        rimindhirumaeUpdate(time: dateset)
-                    }) {
-                        let realm = try! Realm()
-                        
-                        
-                        
-                        DrugListView(drugDay: $drugDay, drugTime: $drugTime)
-                            .environmentObject(DrugStore(realm: realm))
-                            .environmentObject(RimaindStore(realm: realm))
-                            .environmentObject(RimindTestStore(realm: realm))
-                        
-                        
-                        
-                    }
-                
-                    .font(.largeTitle)
-                
-                
-            }
-            //昼食前ここまで
-            //昼食後ここから
-            HStack{
-                Text("昼食後")
-                    .font(.largeTitle)
-                DatePicker("", selection: $date2,displayedComponents: .hourAndMinute)
-                    .frame(width: widht * 0.3)
-                    .font(.largeTitle)
-                    .onChange(of: date2, perform: {newValue in
-                        
-                        let dateset = dateModel.date_string(date: date2)
-                        rimindhiruatoUpdate(time: dateset)
-                        
-                        print("$date2が操作された:\(dateset)")
-                    })
-            }
-            
-            if rimaindGroups2.count != 0 {
-                ScrollViewReader { reader in List {
-                    
-                    
-                    
-                    ForEach(rimaindGroups2) { item in
-                        
-                        if item.rimindTime == "昼食後"{
-                            Text(item.name)
-                                .font(.largeTitle)
-                                .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
-                                .onTapGesture {
-                                    deleteindex(index: item.order)
-                                }
+                        ForEach(rimaindGroups2) { item in
+                            
+                            if item.rimindTime == "昼食後"{
+                                Text(item.name)
+                                    .font(.largeTitle)
+                                    .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
+                                    .onTapGesture {
+                                        deleteindex(index: item.order)
+                                    }
+                                
+                            }
+                            
+                            
                             
                         }
                         
-                        
-                        
                     }
-                    
+                    }
+                    .frame(height: 1 * (100 + 0.4))
                 }
+                
+                ZStack{
+                    
+                    Ellipse()
+                        .fill(Color.blue)
+                       
+                    
+                        .frame(width: 50, height: 50)
+                    
+                    Text("+")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
+                        .onTapGesture {
+                            
+                            self.drugTime = "昼食後"
+                            self.drugDay = "月曜日"
+                            print($drugTime)
+                            
+                            isDrugView2.toggle()
+                        }
+                        .sheet(isPresented: $isDrugView2,onDismiss: {
+                            let dateset = dateModel.date_string(date: date2)
+                            rimindhiruatoUpdate(time: dateset)
+                        }) {
+                            let realm = try! Realm()
+                            DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+                                .environmentObject(DrugStore(realm: realm))
+                                .environmentObject(RimaindStore(realm: realm))
+                                .environmentObject(RimindTestStore(realm: realm))
+                        }
+                  
                 }
-                .frame(height: 1 * (100 + 0.4))
-            }
-
-            ZStack{
-
-                Ellipse()
-                    .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-
-                    .frame(width: 50, height: 50)
-
-                Text("+")
-                    .onTapGesture {
+                //昼食後ここまで
+                //間食ここから
+                HStack{
+                    Text("間食　x")
+                        .font(.largeTitle)
+                    DatePicker("", selection: $date3,displayedComponents: .hourAndMinute)
+                        .frame(width: widht * 0.3)
+                        .font(.largeTitle)
+                        .onChange(of: date3, perform: {newValue in
+                            
+                            let dateset = dateModel.date_string(date: date3)
+                            rimindoyatuUpdate(time: dateset)
+                            
+                            print("$date3が操作された:\(dateset)")
+                        })
+                }
+                
+                if rimaindGroups3.count != 0 {
+                    ScrollViewReader { reader in List {
                         
-                        self.drugTime = "昼食後"
-                        self.drugDay = "月曜日"
-                        print($drugTime)
                         
-                        isDrugView2.toggle()
-                    }
-                    .sheet(isPresented: $isDrugView2,onDismiss: {
-                        let dateset = dateModel.date_string(date: date2)
-                        rimindhiruatoUpdate(time: dateset)
-                    }) {
-                        let realm = try! Realm()
-                        DrugListView(drugDay: $drugDay, drugTime: $drugTime)
-                            .environmentObject(DrugStore(realm: realm))
-                            .environmentObject(RimaindStore(realm: realm))
-                            .environmentObject(RimindTestStore(realm: realm))
-                    }
-                    .font(.largeTitle)
-            }
-            //昼食後ここまで
-            //間食ここから
-            HStack{
-                Text("間食　")
-                    .font(.largeTitle)
-                DatePicker("", selection: $date3,displayedComponents: .hourAndMinute)
-                    .frame(width: widht * 0.3)
-                    .font(.largeTitle)
-                    .onChange(of: date3, perform: {newValue in
                         
-                        let dateset = dateModel.date_string(date: date3)
-                        rimindoyatuUpdate(time: dateset)
-                        
-                        print("$date3が操作された:\(dateset)")
-                    })
-            }
-            
-            if rimaindGroups3.count != 0 {
-                ScrollViewReader { reader in List {
-                    
-                    
-                    
-                    ForEach(rimaindGroups3) { item in
-                        
-                        if item.rimindTime == "間食"{
-                            Text(item.name)
-                                .font(.largeTitle)
-                                .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
-                                .onTapGesture {
-                                    deleteindex(index: item.order)
-                                }
+                        ForEach(rimaindGroups3) { item in
+                            
+                            if item.rimindTime == "間食"{
+                                Text(item.name)
+                                    .font(.largeTitle)
+                                    .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
+                                    .onTapGesture {
+                                        deleteindex(index: item.order)
+                                    }
+                                
+                            }
+                            
+                            
                             
                         }
                         
-                        
-                        
                     }
+                    }
+                    .frame(height: 1 * (100 + 0.4))
+                }
+                
+                ZStack{
+                    
+                    Ellipse()
+                        .fill(Color.blue)
+                       
+                    
+                        .frame(width: 50, height: 50)
+                    
+                    Text("+")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
+                        .onTapGesture {
+                            
+                            self.drugTime = "間食"
+                            self.drugDay = "月曜日"
+                            print($drugTime)
+                            
+                            isDrugView3.toggle()
+                        }
+                        .sheet(isPresented: $isDrugView3, onDismiss: {
+                            let dateset = dateModel.date_string(date: date3)
+                            rimindoyatuUpdate(time: dateset)
+                        }) {
+                            let realm = try! Realm()
+                            
+                            
+                            
+                            DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+                                .environmentObject(DrugStore(realm: realm))
+                                .environmentObject(RimaindStore(realm: realm))
+                                .environmentObject(RimindTestStore(realm: realm))
+                            
+                        }
+                    
+                 
                     
                 }
-                }
-                .frame(height: 1 * (100 + 0.4))
-            }
-            
-            ZStack{
-                
-                Ellipse()
-                    .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
-                
-                    .frame(width: 50, height: 50)
-                
-                Text("+")
-                    .onTapGesture {
-                        
-                        self.drugTime = "間食"
-                        self.drugDay = "月曜日"
-                        print($drugTime)
-                        
-                        isDrugView3.toggle()
-                    }
-                    .sheet(isPresented: $isDrugView3, onDismiss: {
-                        let dateset = dateModel.date_string(date: date3)
-                        rimindoyatuUpdate(time: dateset)
-                    }) {
-                        let realm = try! Realm()
-                        
-                        
-                        
-                        DrugListView(drugDay: $drugDay, drugTime: $drugTime)
-                            .environmentObject(DrugStore(realm: realm))
-                            .environmentObject(RimaindStore(realm: realm))
-                            .environmentObject(RimindTestStore(realm: realm))
-                        
-                    }
-                
-                    .font(.largeTitle)
+                //間食ここまで
                 
             }
-            //間食ここまで
-            
-        }
         }
         
         // MARK: - ここに飲む予定の薬を表示させたい。
@@ -364,10 +373,10 @@ extension RimindSetSundayView {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].hirumae),timeStr: "昼食前", drugCount: rimaindGroups1.count)
                 }
-//                else {
-//                    rimaindGroups23[0].hirumae = "ー"
-//                }
-
+                //                else {
+                //                    rimaindGroups23[0].hirumae = "ー"
+                //                }
+                
             }
         }catch {
             print("Error \(error)")
@@ -381,7 +390,7 @@ extension RimindSetSundayView {
         
         // ① realmインスタンスの生成
         let realm = try! Realm()
-
+        
         // MARK: 曜日を変更
         @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
         @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
@@ -392,19 +401,19 @@ extension RimindSetSundayView {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].hiruato),timeStr: "昼食後", drugCount: rimaindGroups1.count)
                 }
-//                else {
-//                    rimaindGroups23[0].hirumae = "ー"
-//                }
-
+                //                else {
+                //                    rimaindGroups23[0].hirumae = "ー"
+                //                }
+                
             }
         }catch {
             print("Error \(error)")
         }
-
+        
         
     }
     
-
+    
     private func rimindoyatuUpdate(time: String){
         
         // ① realmインスタンスの生成
@@ -419,10 +428,10 @@ extension RimindSetSundayView {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].oyatu),timeStr: "間食", drugCount: rimaindGroups1.count)
                 }
-//                else {
-//                    rimaindGroups23[0].hirumae = "ー"
-//                }
-
+                //                else {
+                //                    rimaindGroups23[0].hirumae = "ー"
+                //                }
+                
             }
         }catch {
             print("Error \(error)")
@@ -434,22 +443,22 @@ extension RimindSetSundayView {
         
         //　全ての通知を消す
         let center = UNUserNotificationCenter.current()
-//        center.removeAllPendingNotificationRequests()
+        //        center.removeAllPendingNotificationRequests()
         center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
         
         let content = UNMutableNotificationContent()
         content.title = "\(timeStr)の薬を飲みましょう！"
         content.body = "\(drugCount)種類の薬を飲む必要があります。"
         //StringからDateに変換する準備
-//        let charArray = Array(rimaindGroups22[0].kisyou)
-
-//        print(type(of: charArray))
+        //        let charArray = Array(rimaindGroups22[0].kisyou)
+        
+        //        print(type(of: charArray))
         
         let hour1 = "\(charArray[0])"
         
         let hour = hour1 == "0" ? "\(charArray[1])": "\(charArray[0])\(charArray[1])"
         let minute1 = "\(charArray[3])"
-
+        
         
         let minute = minute1 == "0" ?  "\(charArray[4])" : "\(charArray[3])\(charArray[4])"
         print("\(hour)時\(minute)分")
@@ -459,29 +468,29 @@ extension RimindSetSundayView {
         let hourInt = Int(hour)!
         let munuteInt = Int(minute)!
         
-       
-
-
-
+        
+        
+        
+        
         content.sound = UNNotificationSound.default
-
+        
         let notificationCenter = UNUserNotificationCenter.current()
-
+        
         var dateComponentsDay = DateComponents()
-
+        
         dateComponentsDay.hour = hourInt
         dateComponentsDay.minute = munuteInt
         dateComponentsDay.weekday = 2
-
-
-                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
-       
-
-//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
+        
+        
+        //        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         let request = UNNotificationRequest(identifier: "\(drugDay)\(timeStr)", content: content, trigger: trigger)
-
+        
         //⑤④のリクエストの通りに通知を実行させる
-                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
         notificationCenter.add(request) { (error) in
             if error != nil {
@@ -493,7 +502,7 @@ extension RimindSetSundayView {
         UNUserNotificationCenter.current().getPendingNotificationRequests {
             print("Pending requests :", $0)
         }
-
+        
     }
     // ケルシーに殺される
     private func mon3ter(timeStr: String){
@@ -521,7 +530,7 @@ extension RimindSetSundayView {
         
         let realm = try! Realm()
         @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
-
+        
         do{
             try realm.write{
                 

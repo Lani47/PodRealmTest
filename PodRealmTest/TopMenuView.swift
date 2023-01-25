@@ -65,8 +65,7 @@ struct TopMenuView: View {
                         .fill(Color(red: 0.665, green: 0.879, blue: 0.631))
                         .frame(width: widht * 0.65, height: height * 0.1)
                     NavigationLink(destination: TimeUIListView()) {
-                    Text("カレンダー")
-                        .multilineTextAlignment(.center).font(.title2)
+                        Text("カレンダー").multilineTextAlignment(.center).font(.title2)
                     }
                     
                 }
