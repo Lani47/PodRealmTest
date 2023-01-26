@@ -94,24 +94,26 @@ struct RWBYView: View {
                                      ,drugColorBlur: drugColors.rgbValues.blue)
                 }, label: {
                     Text("登録")
+                        .font(.largeTitle)
                     
                 }
                 )
                 //データの一覧を表示
-                Button(action: {
-                    let realm = try! Realm()
-                    
-                    let drugTable = realm.objects(DrugDB.self)
-                    print(drugTable)
-                }, label: {
-                    Text("一覧")
-                })
+//                Button(action: {
+//                    let realm = try! Realm()
+//
+//                    let drugTable = realm.objects(DrugDB.self)
+//                    print(drugTable)
+//                }, label: {
+//                    Text("一覧")
+//                })
                 //薬一覧画面を表示
                 Button(action: {
                     isDrugView.toggle()
                     
                 }, label: {
-                    Text("薬一覧β")
+                    Text("登録薬一覧")
+                        .font(.largeTitle)
                 })
                 .sheet(isPresented: $isDrugView) {
                     let realm = try! Realm()

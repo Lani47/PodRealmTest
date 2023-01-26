@@ -550,7 +550,8 @@ struct TimeUIListView: View {
                         Ellipse()
                             .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
                         
-                            .frame(width: widht * 0.1, height: height * 0.06)
+//                            .frame(width: widht * 0.1, height: height * 0.06)
+                            .frame(width: 40, height: 40)
                         
                         Text("月")
                             .font(.title)
@@ -562,12 +563,14 @@ struct TimeUIListView: View {
                             }
                         
                     }
-                    .frame(width: widht * 0.1, height: height * 0.06)
+//                    .frame(width: widht * 0.1, height: height * 0.06)
+                    .frame(width: 40, height: 40)
                     ZStack {
                         Ellipse()
                             .fill(Color(red: 0.997, green: 0.745, blue: 0.451))
                         
-                            .frame(width: widht * 0.1, height: height * 0.06)
+//                            .frame(width: widht * 0.1, height: height * 0.06)
+                            .frame(width: 40, height: 40)
                         
                         Text("火")
                             .font(.title)
@@ -579,12 +582,14 @@ struct TimeUIListView: View {
                             }
                         
                     }
-                    .frame(width: widht * 0.1, height: height * 0.06)
+//                    .frame(width: widht * 0.1, height: height * 0.06)
+                    .frame(width: 40, height: 40)
                     ZStack {
                         Ellipse()
                             .fill(Color(red: 0.901, green: 0.918, blue: 0.206))
                         
-                            .frame(width: widht * 0.1, height: height * 0.06)
+//                            .frame(width: widht * 0.1, height: height * 0.06)
+                            .frame(width: 40, height: 40)
                         
                         Text("水")
                             .font(.title)
@@ -596,13 +601,14 @@ struct TimeUIListView: View {
                             }
                         
                     }
-                    .frame(width: widht * 0.1, height: height * 0.06)
+//                    .frame(width: widht * 0.1, height: height * 0.06)
+                    .frame(width: 40, height: 40)
                     ZStack {
                         Ellipse()
                             .fill(Color(red: 0.665, green: 0.879, blue: 0.631))
                         
-                            .frame(width: widht * 0.1, height: height * 0.06)
-                        
+//                            .frame(width: widht * 0.1, height: height * 0.06)
+                            .frame(width: 40, height: 40)
                         Text("木")
                             .font(.title)
                             .onTapGesture {
@@ -613,12 +619,14 @@ struct TimeUIListView: View {
                             }
                         
                     }
-                    .frame(width: widht * 0.1, height: height * 0.06)
+//                    .frame(width: widht * 0.1, height: height * 0.06)
+                    .frame(width: 40, height: 40)
                     ZStack {
                         Ellipse()
                             .fill(Color(red: 0.631, green: 0.851, blue: 0.879))
                         
-                            .frame(width: widht * 0.1, height: height * 0.06)
+//                            .frame(width: widht * 0.1, height: height * 0.06)
+                            .frame(width: 40, height: 40)
                         
                         Text("金")
                             .font(.title)
@@ -630,12 +638,14 @@ struct TimeUIListView: View {
                             }
                         
                     }
-                    .frame(width: widht * 0.1, height: height * 0.06)
+//                    .frame(width: widht * 0.1, height: height * 0.06)
+                    .frame(width: 40, height: 40)
                     ZStack {
                         Ellipse()
                             .fill(Color(red: 0.521, green: 0.627, blue: 0.999))
                         
-                            .frame(width: widht * 0.1, height: height * 0.06)
+//                            .frame(width: widht * 0.1, height: height * 0.06)
+                            .frame(width: 40, height: 40)
                         
                         Text("土")
                             .font(.title)
@@ -647,12 +657,14 @@ struct TimeUIListView: View {
                             }
                         
                     }
-                    .frame(width: widht * 0.1, height: height * 0.06)
+//                    .frame(width: widht * 0.1, height: height * 0.06)
+                    .frame(width: 40, height: 40)
                     ZStack {
                         Ellipse()
                             .fill(Color(red: 0.916, green: 0.737, blue: 1.0))
                         
-                            .frame(width: widht * 0.1, height: height * 0.06)
+//                            .frame(width: widht * 0.1, height: height * 0.06)
+                            .frame(width: 40, height: 40)
                         
                         Text("日")
                             .font(.title)
@@ -664,7 +676,8 @@ struct TimeUIListView: View {
                             }
                         
                     }
-                    .frame(width: widht * 0.1, height: height * 0.06)
+//                    .frame(width: widht * 0.1, height: height * 0.06)
+                    .frame(width: 40, height: 40)
                     
                     
                 }

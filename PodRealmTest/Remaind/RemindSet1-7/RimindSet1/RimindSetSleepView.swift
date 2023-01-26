@@ -21,6 +21,10 @@ struct RimindSetSleepView: View {
     @State var cat3: Bool = false
     // DrugStore
     //
+    //アラート用変数
+    @State var itemorder = 0
+    @State var itemname = ""
+    @State private var showingAlert = false
     
     @State private var move = ""
     
@@ -105,7 +109,21 @@ struct RimindSetSleepView: View {
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                     .onTapGesture {
-                                        deleteindex(index: item.order)
+                                        itemorder = item.order
+                                        itemname = item.name
+                                        self.showingAlert.toggle()
+                                        
+                                        
+                                    }
+                                    .alert("警告",isPresented: $showingAlert){
+                                        Button("削除", role: .destructive){
+                                            // 正常に取れない
+//                                            print("order:\(itemorder)")
+                                            deleteindex(index: itemorder)
+                                        }
+                                        
+                                    } message:{
+                                        Text("就寝前に飲む薬の\(itemname)が削除されますが、よろしいですか？")
                                     }
                                 
                             }
