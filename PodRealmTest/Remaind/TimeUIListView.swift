@@ -20,7 +20,7 @@ struct TimeUIListView: View {
     
     @State private var RimindResultset: RimindResultItem?
     
-    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimindResult
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimindResult1
     
     @State var drugState = "◎";
     
@@ -70,7 +70,7 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(rimindResult[0].kisyou)
+                                        Text(rimindResult1[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
@@ -93,7 +93,7 @@ struct TimeUIListView: View {
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(rimindResult[0].hirumae)
+                                        Text(rimindResult1[0].hirumae)
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
                                         //設定呼び出し
@@ -112,7 +112,7 @@ struct TimeUIListView: View {
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(rimindResult[0].banmae)
+                                        Text(rimindResult1[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
                                             .onTapGesture {
@@ -131,7 +131,7 @@ struct TimeUIListView: View {
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(rimindResult[0].nerumae)
+                                        Text(rimindResult1[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
                                             .onTapGesture {

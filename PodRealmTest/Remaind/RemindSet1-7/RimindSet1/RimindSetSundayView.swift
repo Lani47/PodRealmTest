@@ -24,7 +24,9 @@ struct RimindSetSundayView: View {
     //アラート用変数
     @State var itemorder = 0
     @State var itemname = ""
-    @State private var showingAlert = false
+    @State private var showingAlert1 = false
+    @State private var showingAlert2 = false
+    @State private var showingAlert3 = false
     
     @State private var move = ""
     
@@ -124,11 +126,11 @@ struct RimindSetSundayView: View {
 //                                        deleteindex(index: item.order)
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert1.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert1){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -232,11 +234,11 @@ struct RimindSetSundayView: View {
 //                                        deleteindex(index: item.order)
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert2.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert2){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -320,11 +322,11 @@ struct RimindSetSundayView: View {
                                     .onTapGesture {
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert3.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert3){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")

@@ -24,7 +24,8 @@ struct RimindSetNightView: View {
     //アラート用変数
     @State var itemorder = 0
     @State var itemname = ""
-    @State private var showingAlert = false
+    @State private var showingAlert1 = false
+    @State private var showingAlert2 = false
     
     @State private var move = ""
     
@@ -118,11 +119,11 @@ struct RimindSetNightView: View {
                                     .onTapGesture {
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert1.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert1){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -215,11 +216,11 @@ struct RimindSetNightView: View {
                                     .onTapGesture {
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert2.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert2){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")

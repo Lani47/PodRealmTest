@@ -17,6 +17,9 @@ struct RWBYView: View {
     @State private var isDrugView: Bool = false
     @State var drugColors = Color(red: 0.852, green: 0.941, blue: 0.953)
     
+    
+    @FocusState  var isActive:Bool
+    
     var body: some View {
         VStack{
             // 登録画面
@@ -31,16 +34,30 @@ struct RWBYView: View {
             
             TextField("薬の名前", text: $viewModel.drugname).background(Color(red: 0.852, green: 0.941, blue: 0.953)).font(.largeTitle)
                 .frame(width: 305, height: 36)
+                .focused($isActive)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()         // 右寄せにする
+                        Button("閉じる") {
+                            isActive = false  //  フォーカスを外す
+                        }
+                    }
+                }
             Text("使用量")
                 .font(.largeTitle)
             
             TextField("使用量", value:$viewModel.drugcalc, format: .number) .keyboardType(.numberPad).background(Color(red: 0.852, green: 0.941, blue: 0.953)).font(.largeTitle)
                 .frame(width: 305, height: 36)
+                .focused($isActive)
+            
+                
             Text("貯蓄量")
                 .font(.largeTitle)
             
             TextField("貯蓄量", value: $viewModel.stockpile, format: .number) .keyboardType(.numberPad).background(Color(red: 0.852, green: 0.941, blue: 0.953)).font(.largeTitle)
+                .focused($isActive)
                 .frame(width: 305, height: 36)
+                
             HStack{
                 Text("色タグ")
                     .font(.largeTitle)
@@ -99,14 +116,14 @@ struct RWBYView: View {
                 }
                 )
                 //データの一覧を表示
-//                Button(action: {
-//                    let realm = try! Realm()
-//
-//                    let drugTable = realm.objects(DrugDB.self)
-//                    print(drugTable)
-//                }, label: {
-//                    Text("一覧")
-//                })
+                //                Button(action: {
+                //                    let realm = try! Realm()
+                //
+                //                    let drugTable = realm.objects(DrugDB.self)
+                //                    print(drugTable)
+                //                }, label: {
+                //                    Text("一覧")
+                //                })
                 //薬一覧画面を表示
                 Button(action: {
                     isDrugView.toggle()
@@ -123,31 +140,31 @@ struct RWBYView: View {
                     
                 }
                 //データをロードする
-//                Button(action: {
-//                    
-//                    /*
-//                     //                    let realm = try! Realm()
-//                     //                    let drugTable = realm.objects(DrugDB.self)
-//                     //
-//                     //                    if drugTable.count != 0{
-//                     //                        let drugTable = realm.objects(DrugDB.self)
-//                     //                            print(drugTable[0])
-//                     //                    viewModel.drugname = drugTable[0].name
-//                     //                        viewModel.drugcalc = drugTable[0].drugcalc
-//                     //                        viewModel.stockpile = drugTable[0].stockpile
-//                     //                        viewModel.drugColors = Color(red:drugTable[0].drugColorRed, green: drugTable[0].drugColorGreen, blue: drugTable[0].drugColorBrue)
-//                     //                    } else {
-//                     //                        print("登録なし")
-//                     //                    }
-//                     
-//                     */
-//                    viewModel.load()
-//                    drugColors = viewModel.loadColor()
-//                    
-//                    
-//                }, label: {
-//                    Text("読み込み")
-//                })
+                //                Button(action: {
+                //
+                //                    /*
+                //                     //                    let realm = try! Realm()
+                //                     //                    let drugTable = realm.objects(DrugDB.self)
+                //                     //
+                //                     //                    if drugTable.count != 0{
+                //                     //                        let drugTable = realm.objects(DrugDB.self)
+                //                     //                            print(drugTable[0])
+                //                     //                    viewModel.drugname = drugTable[0].name
+                //                     //                        viewModel.drugcalc = drugTable[0].drugcalc
+                //                     //                        viewModel.stockpile = drugTable[0].stockpile
+                //                     //                        viewModel.drugColors = Color(red:drugTable[0].drugColorRed, green: drugTable[0].drugColorGreen, blue: drugTable[0].drugColorBrue)
+                //                     //                    } else {
+                //                     //                        print("登録なし")
+                //                     //                    }
+                //
+                //                     */
+                //                    viewModel.load()
+                //                    drugColors = viewModel.loadColor()
+                //
+                //
+                //                }, label: {
+                //                    Text("読み込み")
+                //                })
             }
         }
         

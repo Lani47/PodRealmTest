@@ -26,7 +26,9 @@ struct RemaindSetMorningView: View {
     //アラート用変数
     @State var itemorder = 0
     @State var itemname = ""
-    @State private var showingAlert = false
+    @State private var showingAlert1 = false
+    @State private var showingAlert2 = false
+    @State private var showingAlert3 = false
     
     @State private var move = ""
     
@@ -142,11 +144,11 @@ struct RemaindSetMorningView: View {
                                     .onTapGesture {
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert1.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert1){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -229,11 +231,11 @@ struct RemaindSetMorningView: View {
                                     .onTapGesture {
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert2.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert2){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -347,11 +349,11 @@ struct RemaindSetMorningView: View {
 //                                        deleteindex(index: item.order)
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert3.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert3){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -562,7 +564,8 @@ extension RemaindSetMorningView {
         
         dateComponentsDay.hour = hourInt
         dateComponentsDay.minute = munuteInt
-        dateComponentsDay.weekday = 2
+        //　曜日によって変える　例: 日曜日　
+        dateComponentsDay.weekday = 3
         
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
@@ -645,6 +648,18 @@ extension RemaindSetMorningView {
         
         
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+            completionHandler([.banner, .list])
+        print("フォアグラウンド")
+        }
+
+        // バックグランドの状態でプッシュ通知を受信した際に呼ばれるメソッド
+        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+            completionHandler()
+            print("バックグラウンド")
+        }
     
     //    private func move(sourceIndexSet: IndexSet, destination: Int) {
     //        store.move(sourceIndexSet: sourceIndexSet, destination: destination)

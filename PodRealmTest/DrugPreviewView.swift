@@ -66,6 +66,9 @@ struct DrugPreviewView: View {
     var body: some View {
         
         ScrollViewReader { reader in List {
+            if groups.count != 0{
+                
+            
             ForEach(groups) { item in
                 
                 
@@ -189,13 +192,9 @@ struct DrugPreviewView: View {
                     
                 }
             }
-            //                .onDelete { offsets in
-            ////                    delete(offsets: offsets)
-            //                    print(offsets)
-            //                }
-            //                    .onMove { source, destination in
-            //                      move(sourceIndexSet: source, destination: destination)
-            //                    }
+            } else {
+                Text("飲む薬を薬登録画面で登録してください！").font(.largeTitle)
+            }
         }}
         
         
