@@ -28,7 +28,13 @@ struct TopMenuView: View {
         
             
         VStack{
-            
+            Image(decorative: "iTunesArtwork")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                
+                .padding(.bottom,height * 0.05)
+                .frame(width: widht * 0.4, height: height * 0.4)
+                
             
             HStack{
                 Image(decorative: "medical_medicine")

@@ -22,7 +22,11 @@ struct RWBYView: View {
     @State var itemname = ""
     @FocusState  var isActive:Bool
     
+    let widht = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
+    
     var body: some View {
+        ScrollView {
         VStack{
             // 登録画面
             Text("登録画面")
@@ -35,7 +39,7 @@ struct RWBYView: View {
                 .font(.largeTitle)
             
             TextField("薬の名前", text: $viewModel.drugname).background(Color(red: 0.852, green: 0.941, blue: 0.953)).font(.largeTitle)
-                .frame(width: 305, height: 36)
+                .frame(width: widht * 0.9, height: height * 0.1)
                 .focused($isActive)
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
@@ -49,7 +53,8 @@ struct RWBYView: View {
                 .font(.largeTitle)
             
             TextField("使用量", value:$viewModel.drugcalc, format: .number) .keyboardType(.numberPad).background(Color(red: 0.852, green: 0.941, blue: 0.953)).font(.largeTitle)
-                .frame(width: 305, height: 36)
+//                .frame(width: 305, height: 36)
+                .frame(width: widht * 0.9, height: height * 0.1)
                 .focused($isActive)
             
                 
@@ -58,7 +63,8 @@ struct RWBYView: View {
             
             TextField("貯蓄量", value: $viewModel.stockpile, format: .number) .keyboardType(.numberPad).background(Color(red: 0.852, green: 0.941, blue: 0.953)).font(.largeTitle)
                 .focused($isActive)
-                .frame(width: 305, height: 36)
+//                .frame(width: 305, height: 36)
+                .frame(width: widht * 0.9, height: height * 0.1)
                 
             HStack{
                 Text("色タグ")
@@ -68,6 +74,7 @@ struct RWBYView: View {
                 Ellipse()
                     .fill($drugColors.wrappedValue)
                     .frame(width: 63, height: 61)
+//                    .frame(width: widht * 0.3, height: height * 0.2)
                     .onTapGesture {
                         isColorView.toggle()
                         
@@ -186,6 +193,7 @@ struct RWBYView: View {
                 //                    Text("読み込み")
                 //                })
             }
+        }
         }
         
     }

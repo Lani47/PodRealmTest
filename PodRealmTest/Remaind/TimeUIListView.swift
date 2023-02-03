@@ -169,6 +169,7 @@ struct TimeUIListView: View {
                                             .sheet(isPresented: $sleepRimaindView1, onDismiss : {
                                                 //処理
                                                 kousinyou = Int.random(in: 1..<9999)
+                                                print("\(kousinyou)")
                                             }) {
                                                 RimindSetSleepView().environmentObject(RimaindStore(realm: realm))
                                             }
