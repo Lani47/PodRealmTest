@@ -26,7 +26,9 @@ struct RemaindSetMorningView2: View {
     //アラート用変数
     @State var itemorder = 0
     @State var itemname = ""
-    @State private var showingAlert = false
+    @State private var showingAlert1 = false
+    @State private var showingAlert2 = false
+    @State private var showingAlert3 = false
     
     @State private var move = ""
     
@@ -51,9 +53,9 @@ struct RemaindSetMorningView2: View {
     @EnvironmentObject private var rimaindStore: RimaindStore
     
     //　フィルター
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "起床時"}) var rimaindGroups1
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食前"}) var rimaindGroups2
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食後"}) var rimaindGroups3
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "起床時" && $0.rimindDay == "火曜日"}) var rimaindGroups1
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食前" && $0.rimindDay == "火曜日"}) var rimaindGroups2
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食後" && $0.rimindDay == "火曜日"}) var rimaindGroups3
     
     
     
@@ -135,18 +137,18 @@ struct RemaindSetMorningView2: View {
                         
                         ForEach(rimaindGroups1) { item in
                             
-                            if item.rimindTime == "起床時"{
+                            if item.rimindTime == "起床時" && item.rimindDay == "火曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                     .onTapGesture {
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert1.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert1){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -222,18 +224,18 @@ struct RemaindSetMorningView2: View {
                         
                         ForEach(rimaindGroups2) { item in
                             
-                            if item.rimindTime == "朝食前"{
+                            if item.rimindTime == "朝食前" && item.rimindDay == "火曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                     .onTapGesture {
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert2.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert2){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -270,9 +272,9 @@ struct RemaindSetMorningView2: View {
                         .foregroundColor(Color.white)
                     // テスト用
 //                        .onTapGesture {
-//
-//                            //データの一覧を表示
-//
+////
+////                            //データの一覧を表示
+////
 //                            let realm = try! Realm()
 //
 //                            let drugTable = realm.objects(RimindDrugDB.self)
@@ -286,7 +288,7 @@ struct RemaindSetMorningView2: View {
 //
 //                            //                            bom(charArray: Array(rimaindGroups22[0].kisyou))
 //
-//                            print(rimindResult)
+//                            print(drugTable)
 //
 //                        }
                     
@@ -295,7 +297,7 @@ struct RemaindSetMorningView2: View {
                                                 self.drugTime = "朝食前"
                                                 self.drugDay = "火曜日"
                                                 print($drugTime)
-                    
+
                                                 isDrugView2.toggle()
                                             }
                                             .sheet(isPresented: $isDrugView2,onDismiss: {
@@ -315,8 +317,7 @@ struct RemaindSetMorningView2: View {
                 
                 HStack{
                     //                Text("朝食後")
-                    //                    .font(.largeTitle)
-                    //                Text("@@:@@")
+                    //                    .font(.largeTitle)                    //                Text("@@:@@")
                     //                    .font(.largeTitle)
                     Text("朝食後:").font(.largeTitle)
                     
@@ -339,7 +340,7 @@ struct RemaindSetMorningView2: View {
                         
                         ForEach(rimaindGroups3) { item in
                             
-                            if item.rimindTime == "朝食後"{
+                            if item.rimindTime == "朝食後" && item.rimindDay == "火曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -347,11 +348,11 @@ struct RemaindSetMorningView2: View {
 //                                        deleteindex(index: item.order)
                                         itemorder = item.order
                                         itemname = item.name
-                                        self.showingAlert.toggle()
+                                        self.showingAlert3.toggle()
                                         
                                         
                                     }
-                                    .alert("警告",isPresented: $showingAlert){
+                                    .alert("警告",isPresented: $showingAlert3){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
 //                                            print("order:\(itemorder)")
@@ -562,7 +563,8 @@ extension RemaindSetMorningView2 {
         
         dateComponentsDay.hour = hourInt
         dateComponentsDay.minute = munuteInt
-        dateComponentsDay.weekday = 2
+        //　曜日によって変える　例: 日曜日
+        dateComponentsDay.weekday = 3
         
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
@@ -645,6 +647,18 @@ extension RemaindSetMorningView2 {
         
         
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+            completionHandler([.banner, .list])
+        print("フォアグラウンド")
+        }
+
+        // バックグランドの状態でプッシュ通知を受信した際に呼ばれるメソッド
+        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+            completionHandler()
+            print("バックグラウンド")
+        }
     
     //    private func move(sourceIndexSet: IndexSet, destination: Int) {
     //        store.move(sourceIndexSet: sourceIndexSet, destination: destination)

@@ -45,7 +45,7 @@ struct RimindSetSleepView: View {
     @EnvironmentObject private var rimaindStore: RimaindStore
     
     //　フィルター
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "就寝前"}) var rimaindGroups1
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "就寝前" && $0.rimindDay == "月曜日"}) var rimaindGroups1
     
     
     // RimindTestDB
@@ -104,7 +104,7 @@ struct RimindSetSleepView: View {
                         
                         ForEach(rimaindGroups1) { item in
                             
-                            if item.rimindTime == "就寝前"{
+                            if item.rimindTime == "就寝前" && item.rimindDay == "月曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))

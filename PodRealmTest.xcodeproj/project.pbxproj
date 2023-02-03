@@ -31,6 +31,25 @@
 		7F7399D72952CB5E00C87711 /* DateFomatterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7399D62952CB5D00C87711 /* DateFomatterModel.swift */; };
 		7F7399D92952CE8F00C87711 /* RWBYViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7399D82952CE8F00C87711 /* RWBYViewModel.swift */; };
 		7F744887294BFBBE002B50E7 /* DBCreateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F744886294BFBBE002B50E7 /* DBCreateTest.swift */; };
+		7F78D2A4298B8DCB00633EAE /* RimindSetNightView6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F78D2A3298B8DCB00633EAE /* RimindSetNightView6.swift */; };
+		7F78D2A6298B8E4400633EAE /* RimindSetSleepView6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F78D2A5298B8E4400633EAE /* RimindSetSleepView6.swift */; };
+		7F78D2A8298B8EA700633EAE /* RimindSetSleepView7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F78D2A7298B8EA700633EAE /* RimindSetSleepView7.swift */; };
+		7F78D2AA298B8F2600633EAE /* RimindSetNightView7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F78D2A9298B8F2600633EAE /* RimindSetNightView7.swift */; };
+		7F78D2AC298B8FA400633EAE /* RimindSetSundayView7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F78D2AB298B8FA400633EAE /* RimindSetSundayView7.swift */; };
+		7F78D2AE298B902F00633EAE /* RemaindSetMorningView7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F78D2AD298B902F00633EAE /* RemaindSetMorningView7.swift */; };
+		7F859410298B4E3200B2500E /* RemaindSetMorningView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F85940F298B4E3200B2500E /* RemaindSetMorningView4.swift */; };
+		7F859412298B52D800B2500E /* RimindSetSundayView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859411298B52D800B2500E /* RimindSetSundayView3.swift */; };
+		7F859414298B538100B2500E /* RimindSetNightView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859413298B538100B2500E /* RimindSetNightView3.swift */; };
+		7F859416298B53ED00B2500E /* RimindSetSleepView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859415298B53ED00B2500E /* RimindSetSleepView3.swift */; };
+		7F859418298B57BA00B2500E /* RimindSetSundayView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859417298B57BA00B2500E /* RimindSetSundayView4.swift */; };
+		7F85941A298B584F00B2500E /* RimindSetNightView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859419298B584F00B2500E /* RimindSetNightView4.swift */; };
+		7F85941C298B58C700B2500E /* RimindSetSleepView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F85941B298B58C700B2500E /* RimindSetSleepView4.swift */; };
+		7F85941E298B5BDF00B2500E /* RemaindSetMorningView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F85941D298B5BDF00B2500E /* RemaindSetMorningView5.swift */; };
+		7F859420298B5C5F00B2500E /* RimindSetSundayView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F85941F298B5C5F00B2500E /* RimindSetSundayView5.swift */; };
+		7F859422298B5D8F00B2500E /* RimindSetNightView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859421298B5D8F00B2500E /* RimindSetNightView5.swift */; };
+		7F859424298B5E3C00B2500E /* RimindSetSleepView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859423298B5E3C00B2500E /* RimindSetSleepView5.swift */; };
+		7F859426298B629E00B2500E /* RemaindSetMorningView6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859425298B629E00B2500E /* RemaindSetMorningView6.swift */; };
+		7F859428298B64F500B2500E /* RimindSetSundayView6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F859427298B64F500B2500E /* RimindSetSundayView6.swift */; };
 		7F864DF729513B79001A84CB /* RimindTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F864DF629513B79001A84CB /* RimindTest.swift */; };
 		7F864DFC29513C2B001A84CB /* RimindTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F864DFB29513C2B001A84CB /* RimindTime.swift */; };
 		7F864DFE29513D49001A84CB /* RimindTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F864DFD29513D49001A84CB /* RimindTimeStore.swift */; };
@@ -43,6 +62,10 @@
 		7FB44C992923329C00F05EF4 /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C982923329C00F05EF4 /* TopMenuView.swift */; };
 		7FB44C9B2923365700F05EF4 /* SystemColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44C9A2923365700F05EF4 /* SystemColor.swift */; };
 		7FB44CA129233A5400F05EF4 /* DrugStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB44CA029233A5400F05EF4 /* DrugStore.swift */; };
+		7FBDE231298A108B00E5EE91 /* RimindSetSundayView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBDE230298A108B00E5EE91 /* RimindSetSundayView2.swift */; };
+		7FBDE233298A119B00E5EE91 /* RimindSetNightView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBDE232298A119B00E5EE91 /* RimindSetNightView2.swift */; };
+		7FBDE235298A13B100E5EE91 /* RimindSetSleepView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBDE234298A13B100E5EE91 /* RimindSetSleepView2.swift */; };
+		7FBDE23C298A252D00E5EE91 /* RemaindSetMorningView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBDE23B298A252D00E5EE91 /* RemaindSetMorningView3.swift */; };
 		7FC715CA2978E833006D2A41 /* UserNotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC715C92978E833006D2A41 /* UserNotificationUtil.swift */; };
 		EA39410D2EFED2ACAA8272F2 /* Pods_PodRealmTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52542312CDB292BF1CE6363F /* Pods_PodRealmTest.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +97,25 @@
 		7F7399D62952CB5D00C87711 /* DateFomatterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFomatterModel.swift; sourceTree = "<group>"; };
 		7F7399D82952CE8F00C87711 /* RWBYViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWBYViewModel.swift; sourceTree = "<group>"; };
 		7F744886294BFBBE002B50E7 /* DBCreateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCreateTest.swift; sourceTree = "<group>"; };
+		7F78D2A3298B8DCB00633EAE /* RimindSetNightView6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetNightView6.swift; sourceTree = "<group>"; };
+		7F78D2A5298B8E4400633EAE /* RimindSetSleepView6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSleepView6.swift; sourceTree = "<group>"; };
+		7F78D2A7298B8EA700633EAE /* RimindSetSleepView7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSleepView7.swift; sourceTree = "<group>"; };
+		7F78D2A9298B8F2600633EAE /* RimindSetNightView7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetNightView7.swift; sourceTree = "<group>"; };
+		7F78D2AB298B8FA400633EAE /* RimindSetSundayView7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSundayView7.swift; sourceTree = "<group>"; };
+		7F78D2AD298B902F00633EAE /* RemaindSetMorningView7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemaindSetMorningView7.swift; sourceTree = "<group>"; };
+		7F85940F298B4E3200B2500E /* RemaindSetMorningView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemaindSetMorningView4.swift; sourceTree = "<group>"; };
+		7F859411298B52D800B2500E /* RimindSetSundayView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSundayView3.swift; sourceTree = "<group>"; };
+		7F859413298B538100B2500E /* RimindSetNightView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetNightView3.swift; sourceTree = "<group>"; };
+		7F859415298B53ED00B2500E /* RimindSetSleepView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSleepView3.swift; sourceTree = "<group>"; };
+		7F859417298B57BA00B2500E /* RimindSetSundayView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSundayView4.swift; sourceTree = "<group>"; };
+		7F859419298B584F00B2500E /* RimindSetNightView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetNightView4.swift; sourceTree = "<group>"; };
+		7F85941B298B58C700B2500E /* RimindSetSleepView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSleepView4.swift; sourceTree = "<group>"; };
+		7F85941D298B5BDF00B2500E /* RemaindSetMorningView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemaindSetMorningView5.swift; sourceTree = "<group>"; };
+		7F85941F298B5C5F00B2500E /* RimindSetSundayView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSundayView5.swift; sourceTree = "<group>"; };
+		7F859421298B5D8F00B2500E /* RimindSetNightView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetNightView5.swift; sourceTree = "<group>"; };
+		7F859423298B5E3C00B2500E /* RimindSetSleepView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSleepView5.swift; sourceTree = "<group>"; };
+		7F859425298B629E00B2500E /* RemaindSetMorningView6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemaindSetMorningView6.swift; sourceTree = "<group>"; };
+		7F859427298B64F500B2500E /* RimindSetSundayView6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSundayView6.swift; sourceTree = "<group>"; };
 		7F864DF629513B79001A84CB /* RimindTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindTest.swift; sourceTree = "<group>"; };
 		7F864DFB29513C2B001A84CB /* RimindTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindTime.swift; sourceTree = "<group>"; };
 		7F864DFD29513D49001A84CB /* RimindTimeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindTimeStore.swift; sourceTree = "<group>"; };
@@ -87,6 +129,10 @@
 		7FB44C982923329C00F05EF4 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
 		7FB44C9A2923365700F05EF4 /* SystemColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemColor.swift; sourceTree = "<group>"; };
 		7FB44CA029233A5400F05EF4 /* DrugStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugStore.swift; sourceTree = "<group>"; };
+		7FBDE230298A108B00E5EE91 /* RimindSetSundayView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSundayView2.swift; sourceTree = "<group>"; };
+		7FBDE232298A119B00E5EE91 /* RimindSetNightView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetNightView2.swift; sourceTree = "<group>"; };
+		7FBDE234298A13B100E5EE91 /* RimindSetSleepView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSleepView2.swift; sourceTree = "<group>"; };
+		7FBDE23B298A252D00E5EE91 /* RemaindSetMorningView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemaindSetMorningView3.swift; sourceTree = "<group>"; };
 		7FC715C92978E833006D2A41 /* UserNotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationUtil.swift; sourceTree = "<group>"; };
 		913B588B7B871D570557630C /* Pods-PodRealmTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodRealmTest.debug.xcconfig"; path = "Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest.debug.xcconfig"; sourceTree = "<group>"; };
 		B884A852C10D0DCF5B9E45D8 /* Pods-PodRealmTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodRealmTest.release.xcconfig"; path = "Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,8 +212,13 @@
 		7F5A7D602977BF1200D072E9 /* RemindSet1-7 */ = {
 			isa = PBXGroup;
 			children = (
-				7F5A7D612977C04400D072E9 /* RimindSet1 */,
 				7F5A7D622977C1D100D072E9 /* RimindSet2 */,
+				7FBDE23A298A24C100E5EE91 /* RimindSet7 */,
+				7FBDE239298A24BA00E5EE91 /* RimindSet6 */,
+				7FBDE238298A24B100E5EE91 /* RimindSet5 */,
+				7FBDE237298A24A900E5EE91 /* RimindSet4 */,
+				7FBDE236298A249E00E5EE91 /* RimindSet3 */,
+				7F5A7D612977C04400D072E9 /* RimindSet1 */,
 			);
 			path = "RemindSet1-7";
 			sourceTree = "<group>";
@@ -187,6 +238,9 @@
 			isa = PBXGroup;
 			children = (
 				7F5A7D632977C1F000D072E9 /* RemaindSetMorningView2.swift */,
+				7FBDE230298A108B00E5EE91 /* RimindSetSundayView2.swift */,
+				7FBDE232298A119B00E5EE91 /* RimindSetNightView2.swift */,
+				7FBDE234298A13B100E5EE91 /* RimindSetSleepView2.swift */,
 			);
 			path = RimindSet2;
 			sourceTree = "<group>";
@@ -286,6 +340,61 @@
 				7FA3D2DD29403E8B00E29CEC /* Rimaind */,
 			);
 			path = DataBase;
+			sourceTree = "<group>";
+		};
+		7FBDE236298A249E00E5EE91 /* RimindSet3 */ = {
+			isa = PBXGroup;
+			children = (
+				7FBDE23B298A252D00E5EE91 /* RemaindSetMorningView3.swift */,
+				7F859411298B52D800B2500E /* RimindSetSundayView3.swift */,
+				7F859413298B538100B2500E /* RimindSetNightView3.swift */,
+				7F859415298B53ED00B2500E /* RimindSetSleepView3.swift */,
+			);
+			path = RimindSet3;
+			sourceTree = "<group>";
+		};
+		7FBDE237298A24A900E5EE91 /* RimindSet4 */ = {
+			isa = PBXGroup;
+			children = (
+				7F85940F298B4E3200B2500E /* RemaindSetMorningView4.swift */,
+				7F859417298B57BA00B2500E /* RimindSetSundayView4.swift */,
+				7F859419298B584F00B2500E /* RimindSetNightView4.swift */,
+				7F85941B298B58C700B2500E /* RimindSetSleepView4.swift */,
+			);
+			path = RimindSet4;
+			sourceTree = "<group>";
+		};
+		7FBDE238298A24B100E5EE91 /* RimindSet5 */ = {
+			isa = PBXGroup;
+			children = (
+				7F85941D298B5BDF00B2500E /* RemaindSetMorningView5.swift */,
+				7F85941F298B5C5F00B2500E /* RimindSetSundayView5.swift */,
+				7F859421298B5D8F00B2500E /* RimindSetNightView5.swift */,
+				7F859423298B5E3C00B2500E /* RimindSetSleepView5.swift */,
+			);
+			path = RimindSet5;
+			sourceTree = "<group>";
+		};
+		7FBDE239298A24BA00E5EE91 /* RimindSet6 */ = {
+			isa = PBXGroup;
+			children = (
+				7F859425298B629E00B2500E /* RemaindSetMorningView6.swift */,
+				7F859427298B64F500B2500E /* RimindSetSundayView6.swift */,
+				7F78D2A3298B8DCB00633EAE /* RimindSetNightView6.swift */,
+				7F78D2A5298B8E4400633EAE /* RimindSetSleepView6.swift */,
+			);
+			path = RimindSet6;
+			sourceTree = "<group>";
+		};
+		7FBDE23A298A24C100E5EE91 /* RimindSet7 */ = {
+			isa = PBXGroup;
+			children = (
+				7F78D2AD298B902F00633EAE /* RemaindSetMorningView7.swift */,
+				7F78D2AB298B8FA400633EAE /* RimindSetSundayView7.swift */,
+				7F78D2A9298B8F2600633EAE /* RimindSetNightView7.swift */,
+				7F78D2A7298B8EA700633EAE /* RimindSetSleepView7.swift */,
+			);
+			path = RimindSet7;
 			sourceTree = "<group>";
 		};
 		7FC715C82978E81D006D2A41 /* Pushhon */ = {
@@ -422,35 +531,58 @@
 				7FB44C9B2923365700F05EF4 /* SystemColor.swift in Sources */,
 				7F6B0CC2292713C00020EA57 /* SceneDelemodoki.swift in Sources */,
 				7F5A7D5F2977BEE900D072E9 /* RimindSetSleepView.swift in Sources */,
+				7F78D2A8298B8EA700633EAE /* RimindSetSleepView7.swift in Sources */,
+				7F85941E298B5BDF00B2500E /* RemaindSetMorningView5.swift in Sources */,
+				7F85941A298B584F00B2500E /* RimindSetNightView4.swift in Sources */,
+				7F859424298B5E3C00B2500E /* RimindSetSleepView5.swift in Sources */,
 				7FB44C992923329C00F05EF4 /* TopMenuView.swift in Sources */,
 				7F54E3E9291DDF4900FAE487 /* EntryNotificationView.swift in Sources */,
+				7F859420298B5C5F00B2500E /* RimindSetSundayView5.swift in Sources */,
 				7F744887294BFBBE002B50E7 /* DBCreateTest.swift in Sources */,
+				7FBDE233298A119B00E5EE91 /* RimindSetNightView2.swift in Sources */,
+				7F85941C298B58C700B2500E /* RimindSetSleepView4.swift in Sources */,
 				7F6A6746297A3280000FEA7D /* RimindResultStore.swift in Sources */,
+				7F78D2AA298B8F2600633EAE /* RimindSetNightView7.swift in Sources */,
 				7F729C9B293067190001EA8E /* TimeUIListView.swift in Sources */,
 				7F864E0029514374001A84CB /* RimindTestStore.swift in Sources */,
 				7FC715CA2978E833006D2A41 /* UserNotificationUtil.swift in Sources */,
 				7F54E3D7291DDD6E00FAE487 /* ContentView.swift in Sources */,
 				7F5A7D642977C1F000D072E9 /* RemaindSetMorningView2.swift in Sources */,
 				7FB44CA129233A5400F05EF4 /* DrugStore.swift in Sources */,
+				7FBDE235298A13B100E5EE91 /* RimindSetSleepView2.swift in Sources */,
+				7F78D2AC298B8FA400633EAE /* RimindSetSundayView7.swift in Sources */,
+				7F78D2A6298B8E4400633EAE /* RimindSetSleepView6.swift in Sources */,
 				7F9034D4292483CA00185DEB /* DrugListView.swift in Sources */,
+				7FBDE23C298A252D00E5EE91 /* RemaindSetMorningView3.swift in Sources */,
+				7F859426298B629E00B2500E /* RemaindSetMorningView6.swift in Sources */,
 				7F375A49293EEC3200EEAD0C /* RimindDrugItem.swift in Sources */,
 				7F221C2A296E40DD0051B060 /* RimindSetSundayView.swift in Sources */,
+				7F859410298B4E3200B2500E /* RemaindSetMorningView4.swift in Sources */,
+				7F859414298B538100B2500E /* RimindSetNightView3.swift in Sources */,
+				7FBDE231298A108B00E5EE91 /* RimindSetSundayView2.swift in Sources */,
 				7F54E3ED291DECB700FAE487 /* ColorView.swift in Sources */,
 				7F864DFE29513D49001A84CB /* RimindTimeStore.swift in Sources */,
 				7F375A47293EE46000EEAD0C /* RemaindSetMorningView.swift in Sources */,
 				7FA1A73529398E2C008E058A /* alert.swift in Sources */,
 				7F54E3E5291DDE4400FAE487 /* RWBYTest.swift in Sources */,
+				7F859422298B5D8F00B2500E /* RimindSetNightView5.swift in Sources */,
 				7F864DF729513B79001A84CB /* RimindTest.swift in Sources */,
 				7FA3D2DF29403E9F00E29CEC /* RimaindStore.swift in Sources */,
 				7F6A6744297A3166000FEA7D /* RimindResultDB.swift in Sources */,
+				7F859418298B57BA00B2500E /* RimindSetSundayView4.swift in Sources */,
 				7F7399D92952CE8F00C87711 /* RWBYViewModel.swift in Sources */,
 				7F54E3E7291DDEA200FAE487 /* NotificationRequestManager.swift in Sources */,
 				7FB44C9729231F9400F05EF4 /* DrugDB.swift in Sources */,
+				7F859416298B53ED00B2500E /* RimindSetSleepView3.swift in Sources */,
+				7F78D2A4298B8DCB00633EAE /* RimindSetNightView6.swift in Sources */,
+				7F859412298B52D800B2500E /* RimindSetSundayView3.swift in Sources */,
 				7F864E0229515FED001A84CB /* TopMenuViewModel.swift in Sources */,
 				7F54E3D5291DDD6E00FAE487 /* PodRealmTestApp.swift in Sources */,
+				7F78D2AE298B902F00633EAE /* RemaindSetMorningView7.swift in Sources */,
 				7F7399D72952CB5E00C87711 /* DateFomatterModel.swift in Sources */,
 				7F54E3E3291DDE3500FAE487 /* RWBYView.swift in Sources */,
 				7F221C2C296E522B0051B060 /* RimindSetNightView.swift in Sources */,
+				7F859428298B64F500B2500E /* RimindSetSundayView6.swift in Sources */,
 				7F6B0CC4292715B30020EA57 /* MySceneDelegate.swift in Sources */,
 				7F6B996D2980D67000002978 /* DrugPreviewView.swift in Sources */,
 			);

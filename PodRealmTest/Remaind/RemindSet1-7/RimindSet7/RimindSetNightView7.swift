@@ -1,16 +1,14 @@
 //
-//  RimindSetNightView.swift
+//  RimindSetNightView7.swift
 //  PodRealmTest
 //
-//  Created by cmStudent on 2023/01/11.
+//  Created by cmStudent on 2023/02/02.
 //
-
-import SwiftUI
 
 import SwiftUI
 import RealmSwift
 
-struct RimindSetNightView: View {
+struct RimindSetNightView7: View {
     
     @State var dateModel = DateFormatterModel()
     
@@ -29,7 +27,7 @@ struct RimindSetNightView: View {
     
     @State private var move = ""
     
-    @State var drugDay = "月曜日"
+    @State var drugDay = "日曜日"
     @State var drugTime = "夜"
     
     @State private var isDrugView1: Bool = false
@@ -47,8 +45,8 @@ struct RimindSetNightView: View {
     @EnvironmentObject private var rimaindStore: RimaindStore
     
     //　フィルター
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食前" && $0.rimindDay == "月曜日"}) var rimaindGroups1
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食後" && $0.rimindDay == "月曜日"}) var rimaindGroups2
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食前" && $0.rimindDay == "日曜日"}) var rimaindGroups1
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "夜食後" && $0.rimindDay == "日曜日"}) var rimaindGroups2
     
     
     // DrugStoreテンプレ
@@ -65,7 +63,7 @@ struct RimindSetNightView: View {
     
     @EnvironmentObject private var rimindTimeStore: RimindTimeStore
     // MARK: 曜日を設定
-    @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
+    @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "日曜日"}) var rimaindGroups22
     @State var date1:Date = Date()
     
     @State var date2:Date = Date()
@@ -112,7 +110,7 @@ struct RimindSetNightView: View {
                         
                         ForEach(rimaindGroups1) { item in
                             
-                            if item.rimindTime == "夜食前" && item.rimindDay == "月曜日"{
+                            if item.rimindTime == "夜食前" && item.rimindDay == "日曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -161,7 +159,7 @@ struct RimindSetNightView: View {
                         .foregroundColor(Color.white)
                         .onTapGesture {
                             self.drugTime = "夜食前"
-                            self.drugDay = "月曜日"
+                            self.drugDay = "日曜日"
                             print($drugTime)
                             
                             isDrugView1.toggle()
@@ -209,7 +207,7 @@ struct RimindSetNightView: View {
                         
                         ForEach(rimaindGroups2) { item in
                             
-                            if item.rimindTime == "夜食後" && item.rimindDay == "月曜日"{
+                            if item.rimindTime == "夜食後" && item.rimindDay == "日曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -256,7 +254,7 @@ struct RimindSetNightView: View {
                         .onTapGesture {
                             
                             self.drugTime = "夜食後"
-                            self.drugDay = "月曜日"
+                            self.drugDay = "日曜日"
                             print($drugTime)
                             
                             isDrugView2.toggle()
@@ -299,14 +297,14 @@ struct RimindSetNightView: View {
 
 
 
-struct RimindSetNightView_Previews: PreviewProvider {
+struct RimindSetNightView7_Previews: PreviewProvider {
     static var previews: some View {
-        RimindSetNightView()
+        RimindSetNightView7()
     }
 }
 
 
-extension RimindSetNightView {
+extension RimindSetNightView7 {
     
     private func rimindbanmaeUpdate(time: String){
         
@@ -324,8 +322,8 @@ extension RimindSetNightView {
         //        }
         
         // MARK: 曜日を変更
-        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
-        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "日曜日"}) var rimaindGroups22
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "日曜日"}) var rimaindGroups23
         
         do{
             try realm.write{
@@ -366,8 +364,8 @@ extension RimindSetNightView {
         //            print("Error \(error)")
         //        }
         // MARK: 曜日を変更
-        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups22
-        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+        @ObservedResults(RimindTimeDB.self,where: {$0.rimindDay == "日曜日"}) var rimaindGroups22
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "日曜日"}) var rimaindGroups23
         
         do{
             try realm.write{
@@ -429,7 +427,8 @@ extension RimindSetNightView {
         
         dateComponentsDay.hour = hourInt
         dateComponentsDay.minute = munuteInt
-        dateComponentsDay.weekday = 2
+        //　曜日を変える
+        dateComponentsDay.weekday = 1
         
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)
@@ -479,7 +478,7 @@ extension RimindSetNightView {
         rimaindStore.delete(id: deleteId)
         
         let realm = try! Realm()
-        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimaindGroups23
+        @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "日曜日"}) var rimaindGroups23
         
         do{
             try realm.write{
@@ -513,4 +512,8 @@ extension RimindSetNightView {
     //        store.move(sourceIndexSet: sourceIndexSet, destination: destination)
     //    }
 }
+
+
+
+
 

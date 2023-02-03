@@ -18,6 +18,8 @@ struct RWBYView: View {
     @State var drugColors = Color(red: 0.852, green: 0.941, blue: 0.953)
     
     
+    @State private var showingAlert = false
+    @State var itemname = ""
     @FocusState  var isActive:Bool
     
     var body: some View {
@@ -109,12 +111,30 @@ struct RWBYView: View {
                     
                     viewModel.Create(drugColorRed: drugColors.rgbValues.red, drugColorGreen: drugColors.rgbValues.green
                                      ,drugColorBlur: drugColors.rgbValues.blue)
+                    itemname = viewModel.drugname
+                    self.showingAlert.toggle()
                 }, label: {
                     Text("登録")
                         .font(.largeTitle)
                     
                 }
                 )
+                .alert("登録完了！",isPresented: $showingAlert){
+//                    Button("削除", role: .destructive){
+//                        // 正常に取れない
+//                        print("order:\(itemname)")
+////                        deleteindex(index: itemorder)
+//                    }
+                    
+                } message:{
+                    if itemname != ""{
+                        Text("\(itemname)が登録されました")
+                    } else {
+                        Text("メイショウフメイが登録されました")
+                    }
+                    
+                }
+
                 //データの一覧を表示
                 //                Button(action: {
                 //                    let realm = try! Realm()
@@ -138,7 +158,7 @@ struct RWBYView: View {
                     DrugPreviewView(drugDay: $viewModel.drugname, drugTime: $viewModel.drugname)
                         .environmentObject(DrugStore(realm: realm))
                     
-                }
+                } 
                 //データをロードする
                 //                Button(action: {
                 //

@@ -53,9 +53,9 @@ struct RemaindSetMorningView: View {
     @EnvironmentObject private var rimaindStore: RimaindStore
     
     //　フィルター
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "起床時"}) var rimaindGroups1
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食前"}) var rimaindGroups2
-    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食後"}) var rimaindGroups3
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "起床時" && $0.rimindDay == "月曜日"}) var rimaindGroups1
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食前" && $0.rimindDay == "月曜日"}) var rimaindGroups2
+    @ObservedResults(RimindDrugDB.self,where: {$0.rimindTime == "朝食後" && $0.rimindDay == "月曜日"}) var rimaindGroups3
     
     
     
@@ -137,7 +137,7 @@ struct RemaindSetMorningView: View {
                         
                         ForEach(rimaindGroups1) { item in
                             
-                            if item.rimindTime == "起床時"{
+                            if item.rimindTime == "起床時" && item.rimindDay == "月曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -224,7 +224,7 @@ struct RemaindSetMorningView: View {
                         
                         ForEach(rimaindGroups2) { item in
                             
-                            if item.rimindTime == "朝食前"{
+                            if item.rimindTime == "朝食前" {
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -341,7 +341,7 @@ struct RemaindSetMorningView: View {
                         
                         ForEach(rimaindGroups3) { item in
                             
-                            if item.rimindTime == "朝食後"{
+                            if item.rimindTime == "朝食後" && item.rimindDay == "月曜日"{
                                 Text(item.name)
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
@@ -565,7 +565,7 @@ extension RemaindSetMorningView {
         dateComponentsDay.hour = hourInt
         dateComponentsDay.minute = munuteInt
         //　曜日によって変える　例: 日曜日　
-        dateComponentsDay.weekday = 3
+        dateComponentsDay.weekday = 2
         
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsDay, repeats: true)

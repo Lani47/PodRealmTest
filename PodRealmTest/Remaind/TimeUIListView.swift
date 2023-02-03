@@ -21,8 +21,14 @@ struct TimeUIListView: View {
     @State private var RimindResultset: RimindResultItem?
     
     @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "月曜日"}) var rimindResult1
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "火曜日"}) var rimindResult2
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "水曜日"}) var rimindResult3
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "木曜日"}) var rimindResult4
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "金曜日"}) var rimindResult5
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "土曜日"}) var rimindResult6
+    @ObservedResults(RimindResultDB.self,where: {$0.rimindDay == "日曜日"}) var rimindResult7
     
-    @State var drugState = "◎";
+    @State var drugState = "△";
     
     @State var kousinyou = 0
     //    @State var drugday = "月曜日"
@@ -33,11 +39,36 @@ struct TimeUIListView: View {
     // 表示フラグ
     @State private var morningRimaindView1: Bool = false
     
+    @State private var morningRimaindView2: Bool = false
+    @State private var morningRimaindView3: Bool = false
+    @State private var morningRimaindView4: Bool = false
+    @State private var morningRimaindView5: Bool = false
+    @State private var morningRimaindView6: Bool = false
+    @State private var morningRimaindView7: Bool = false
+    
     @State private var sundayRimaindView1: Bool = false
+    @State private var sundayRimaindView2: Bool = false
+    @State private var sundayRimaindView3: Bool = false
+    @State private var sundayRimaindView4: Bool = false
+    @State private var sundayRimaindView5: Bool = false
+    @State private var sundayRimaindView6: Bool = false
+    @State private var sundayRimaindView7: Bool = false
     
     @State private var nightRimaindView1: Bool = false
+    @State private var nightRimaindView2: Bool = false
+    @State private var nightRimaindView3: Bool = false
+    @State private var nightRimaindView4: Bool = false
+    @State private var nightRimaindView5: Bool = false
+    @State private var nightRimaindView6: Bool = false
+    @State private var nightRimaindView7: Bool = false
     
     @State private var sleepRimaindView1: Bool = false
+    @State private var sleepRimaindView2: Bool = false
+    @State private var sleepRimaindView3: Bool = false
+    @State private var sleepRimaindView4: Bool = false
+    @State private var sleepRimaindView5: Bool = false
+    @State private var sleepRimaindView6: Bool = false
+    @State private var sleepRimaindView7: Bool = false
     
     
     var isHidden = true
@@ -77,12 +108,10 @@ struct TimeUIListView: View {
                                             .onTapGesture {
                                                 morningRimaindView1.toggle()
                                             }
-                                        //                                            .sheet(isPresented: $morningRimaindView1) {
-                                        //                                                RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
-                                        //                                            }
+                                       
                                             .sheet(isPresented : $morningRimaindView1 , onDismiss : {
                                                 //処理
-                                                kousinyou = 1
+                                                kousinyou = Int.random(in: 1..<9999)
                                             }) {
                                                 //ビュー
                                                 RemaindSetMorningView().environmentObject(RimaindStore(realm: realm))
@@ -102,7 +131,7 @@ struct TimeUIListView: View {
                                             }
                                             .sheet(isPresented: $sundayRimaindView1, onDismiss : {
                                                 //処理
-                                                kousinyou = 2
+                                                kousinyou = Int.random(in: 1..<9999)
                                             }) {
                                                 RimindSetSundayView().environmentObject(RimaindStore(realm: realm))
                                             }
@@ -120,7 +149,7 @@ struct TimeUIListView: View {
                                             }
                                             .sheet(isPresented: $nightRimaindView1, onDismiss : {
                                                 //処理
-                                                kousinyou = 3
+                                                kousinyou = Int.random(in: 1..<9999)
                                             }) {
                                                 RimindSetNightView().environmentObject(RimaindStore(realm: realm))
                                             }
@@ -139,7 +168,7 @@ struct TimeUIListView: View {
                                             }
                                             .sheet(isPresented: $sleepRimaindView1, onDismiss : {
                                                 //処理
-                                                kousinyou = 4
+                                                kousinyou = Int.random(in: 1..<9999)
                                             }) {
                                                 RimindSetSleepView().environmentObject(RimaindStore(realm: realm))
                                             }
@@ -173,10 +202,21 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(drugState)
+                                        Text(rimindResult2[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                morningRimaindView2.toggle()
+                                            }
+
+                                            .sheet(isPresented : $morningRimaindView2 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RemaindSetMorningView2().environmentObject(RimaindStore(realm: realm))
+                                            }
                                         //設定呼び出し
                                         
                                     }
@@ -185,9 +225,21 @@ struct TimeUIListView: View {
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult2[0].hirumae)
+                                        
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                sundayRimaindView2.toggle()
+                                            }
+
+                                            .sheet(isPresented : $sundayRimaindView2 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RimindSetSundayView2().environmentObject(RimaindStore(realm: realm))
+                                            }
                                         
                                         //設定呼び出し
                                         
@@ -197,9 +249,18 @@ struct TimeUIListView: View {
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult2[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                nightRimaindView2.toggle()
+                                            }
+                                            .sheet(isPresented: $nightRimaindView2, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetNightView2().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }.padding(.leading, 10.0)
                                     //                                .offset(x:20, y: 0)
                                     
@@ -207,9 +268,18 @@ struct TimeUIListView: View {
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult2[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                sleepRimaindView2.toggle()
+                                            }
+                                            .sheet(isPresented: $sleepRimaindView2, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetSleepView2().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
@@ -242,38 +312,78 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(drugState)
+                                        Text(rimindResult3[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                morningRimaindView3.toggle()
+                                            }
+
+                                            .sheet(isPresented : $morningRimaindView3 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RemaindSetMorningView3().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult3[0].hirumae)
+                                        
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                sundayRimaindView3.toggle()
+                                            }
+
+                                            .sheet(isPresented : $sundayRimaindView3 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RimindSetSundayView3().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult3[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                nightRimaindView3.toggle()
+                                            }
+                                            .sheet(isPresented: $nightRimaindView3, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetNightView3().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }.padding(.leading, 10.0)
                                     //                                .offset(x:20, y: 0)
                                     
                                     VStack{
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
-                                        
-                                        Text(drugState)
+                                        Text(rimindResult3[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                sleepRimaindView3.toggle()
+                                            }
+                                            .sheet(isPresented: $sleepRimaindView3, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetSleepView3().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
@@ -306,28 +416,61 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(drugState)
+                                        Text(rimindResult4[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                morningRimaindView4.toggle()
+                                            }
+
+                                            .sheet(isPresented : $morningRimaindView4 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RemaindSetMorningView4().environmentObject(RimaindStore(realm: realm))
+                                            }
+
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult4[0].hirumae)
+                                        
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                sundayRimaindView4.toggle()
+                                            }
+
+                                            .sheet(isPresented : $sundayRimaindView4 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RimindSetSundayView4().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult4[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                nightRimaindView4.toggle()
+                                            }
+                                            .sheet(isPresented: $nightRimaindView4, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetNightView4().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }.padding(.leading, 10.0)
                                     //                                .offset(x:20, y: 0)
                                     
@@ -335,9 +478,18 @@ struct TimeUIListView: View {
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult4[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                sleepRimaindView4.toggle()
+                                            }
+                                            .sheet(isPresented: $sleepRimaindView4, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetSleepView4().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
@@ -370,28 +522,60 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(drugState)
+                                        Text(rimindResult5[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                morningRimaindView5.toggle()
+                                            }
+
+                                            .sheet(isPresented : $morningRimaindView5 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RemaindSetMorningView5().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult5[0].hirumae)
+                                        
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                sundayRimaindView5.toggle()
+                                            }
+
+                                            .sheet(isPresented : $sundayRimaindView5 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RimindSetSundayView5().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult5[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                nightRimaindView5.toggle()
+                                            }
+                                            .sheet(isPresented: $nightRimaindView5, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetNightView5().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }.padding(.leading, 10.0)
                                     //                                .offset(x:20, y: 0)
                                     
@@ -399,9 +583,18 @@ struct TimeUIListView: View {
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult5[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                sleepRimaindView5.toggle()
+                                            }
+                                            .sheet(isPresented: $sleepRimaindView5, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetSleepView5().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
@@ -434,28 +627,62 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(drugState)
+                                        Text(rimindResult6[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                morningRimaindView6.toggle()
+                                            }
+
+                                            .sheet(isPresented : $morningRimaindView6 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RemaindSetMorningView6().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult6[0].hirumae)
+                                        
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                sundayRimaindView6.toggle()
+                                            }
+
+                                            .sheet(isPresented : $sundayRimaindView6 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RimindSetSundayView6().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                       
+                                        
+                                        Text(rimindResult6[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                nightRimaindView6.toggle()
+                                            }
+                                            .sheet(isPresented: $nightRimaindView6, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetNightView6().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }.padding(.leading, 10.0)
                                     //                                .offset(x:20, y: 0)
                                     
@@ -463,9 +690,18 @@ struct TimeUIListView: View {
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult6[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                sleepRimaindView6.toggle()
+                                            }
+                                            .sheet(isPresented: $sleepRimaindView6, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetSleepView6().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
@@ -498,28 +734,60 @@ struct TimeUIListView: View {
                                             .font(.system(size: 40,design: .rounded))
                                         
                                         
-                                        Text(drugState)
+                                        Text(rimindResult7[0].kisyou)
                                         
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                morningRimaindView7.toggle()
+                                            }
+
+                                            .sheet(isPresented : $morningRimaindView7 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RemaindSetMorningView7().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }
                                     .padding(.leading, 10.0)
                                     VStack{
                                         Text("昼")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult7[0].hirumae)
+                                        
                                             .background(Color.white)
                                             .font(.system(size: 40,design: .rounded))
+                                            .onTapGesture {
+                                                sundayRimaindView7.toggle()
+                                            }
+
+                                            .sheet(isPresented : $sundayRimaindView7 , onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                //ビュー
+                                                RimindSetSundayView7().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     } .padding(.leading, 10.0)
                                     //                                    .offset(x:-0, y: 0)
                                     VStack{
                                         Text("夜")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult7[0].banmae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
+                                            .onTapGesture {
+                                                nightRimaindView7.toggle()
+                                            }
+                                            .sheet(isPresented: $nightRimaindView7, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetNightView7().environmentObject(RimaindStore(realm: realm))
+                                            }
                                     }.padding(.leading, 10.0)
                                     //                                .offset(x:20, y: 0)
                                     
@@ -527,10 +795,18 @@ struct TimeUIListView: View {
                                         Text("寝")
                                             .font(.system(size: 40,design: .rounded))
                                         
-                                        Text(drugState)
+                                        Text(rimindResult7[0].nerumae)
                                             .font(.system(size: 40,design: .rounded))
                                             .background(Color.white)
-                                    }
+                                            .onTapGesture {
+                                                sleepRimaindView7.toggle()
+                                            }
+                                            .sheet(isPresented: $sleepRimaindView7, onDismiss : {
+                                                //処理
+                                                kousinyou = Int.random(in: 1..<9999)
+                                            }) {
+                                                RimindSetSleepView7().environmentObject(RimaindStore(realm: realm))
+                                            }                                    }
                                     .padding(.horizontal, 10.0)
                                     //                                .offset(x:40, y: 0)
                                     

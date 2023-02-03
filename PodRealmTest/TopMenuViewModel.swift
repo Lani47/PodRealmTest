@@ -115,7 +115,7 @@ class TopMenuViewModel: ObservableObject{
         } catch let error {
             print(error.localizedDescription)
         }
-        print("test")
+        
     }
     
     func rimindResultcreate(rimindDay: String, kisyou:String, asamae:String, asaato: String, hirumae: String, hiruato:String, oyatu:String,banmae:String,banato:String,nerumae:String){

@@ -184,6 +184,7 @@ struct DrugPreviewView: View {
                             // 正常に取れない
                             print("order:\(itemorder)")
                             deleteindex(index: itemorder)
+                            
                         }
                         
                     } message:{
