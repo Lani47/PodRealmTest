@@ -447,7 +447,7 @@ extension RimindSetSundayView7 {
                 rimaindGroups22[0].hiruato = time
                 if rimaindGroups2.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
-                    bom(charArray: Array(rimaindGroups22[0].hiruato),timeStr: "昼食後", drugCount: rimaindGroups1.count)
+                    bom(charArray: Array(rimaindGroups22[0].hiruato),timeStr: "昼食後", drugCount: rimaindGroups2.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"
@@ -474,7 +474,7 @@ extension RimindSetSundayView7 {
                 rimaindGroups22[0].oyatu = time
                 if rimaindGroups3.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
-                    bom(charArray: Array(rimaindGroups22[0].oyatu),timeStr: "間食", drugCount: rimaindGroups1.count)
+                    bom(charArray: Array(rimaindGroups22[0].oyatu),timeStr: "間食", drugCount: rimaindGroups3.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"

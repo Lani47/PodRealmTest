@@ -9,7 +9,7 @@ import SwiftUI
 
 
 @main
-struct PodRealmTestApp: App {
+struct simple_medicine_calendar: App {
     
     @UIApplicationDelegateAdaptor(MyAppDelegate.self) var appDelegate
     

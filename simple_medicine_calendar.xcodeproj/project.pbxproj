@@ -67,16 +67,16 @@
 		7FBDE235298A13B100E5EE91 /* RimindSetSleepView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBDE234298A13B100E5EE91 /* RimindSetSleepView2.swift */; };
 		7FBDE23C298A252D00E5EE91 /* RemaindSetMorningView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBDE23B298A252D00E5EE91 /* RemaindSetMorningView3.swift */; };
 		7FC715CA2978E833006D2A41 /* UserNotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC715C92978E833006D2A41 /* UserNotificationUtil.swift */; };
-		EA39410D2EFED2ACAA8272F2 /* Pods_PodRealmTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52542312CDB292BF1CE6363F /* Pods_PodRealmTest.framework */; };
+		A6F37D8C1AA7A706DB36E410 /* Pods_simple_medicine_calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8D95C76C02D117E10255DFF /* Pods_simple_medicine_calendar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		52542312CDB292BF1CE6363F /* Pods_PodRealmTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodRealmTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0350BC27D7398D21CCF70BF6 /* Pods-simple_medicine_calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple_medicine_calendar.debug.xcconfig"; path = "Target Support Files/Pods-simple_medicine_calendar/Pods-simple_medicine_calendar.debug.xcconfig"; sourceTree = "<group>"; };
 		7F221C29296E40DD0051B060 /* RimindSetSundayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetSundayView.swift; sourceTree = "<group>"; };
 		7F221C2B296E522B0051B060 /* RimindSetNightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindSetNightView.swift; sourceTree = "<group>"; };
 		7F375A46293EE45F00EEAD0C /* RemaindSetMorningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemaindSetMorningView.swift; sourceTree = "<group>"; };
 		7F375A48293EEC3200EEAD0C /* RimindDrugItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RimindDrugItem.swift; sourceTree = "<group>"; };
-		7F54E3D1291DDD6E00FAE487 /* PodRealmTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodRealmTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F54E3D1291DDD6E00FAE487 /* simple_medicine_calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simple_medicine_calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F54E3D4291DDD6E00FAE487 /* PodRealmTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodRealmTestApp.swift; sourceTree = "<group>"; };
 		7F54E3D6291DDD6E00FAE487 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7F54E3D8291DDD7100FAE487 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -136,6 +136,8 @@
 		7FC715C92978E833006D2A41 /* UserNotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationUtil.swift; sourceTree = "<group>"; };
 		913B588B7B871D570557630C /* Pods-PodRealmTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodRealmTest.debug.xcconfig"; path = "Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest.debug.xcconfig"; sourceTree = "<group>"; };
 		B884A852C10D0DCF5B9E45D8 /* Pods-PodRealmTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodRealmTest.release.xcconfig"; path = "Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest.release.xcconfig"; sourceTree = "<group>"; };
+		C42D96690EAD7671F86E20E0 /* Pods-simple_medicine_calendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple_medicine_calendar.release.xcconfig"; path = "Target Support Files/Pods-simple_medicine_calendar/Pods-simple_medicine_calendar.release.xcconfig"; sourceTree = "<group>"; };
+		C8D95C76C02D117E10255DFF /* Pods_simple_medicine_calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_medicine_calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA39410D2EFED2ACAA8272F2 /* Pods_PodRealmTest.framework in Frameworks */,
+				A6F37D8C1AA7A706DB36E410 /* Pods_simple_medicine_calendar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +157,8 @@
 			children = (
 				913B588B7B871D570557630C /* Pods-PodRealmTest.debug.xcconfig */,
 				B884A852C10D0DCF5B9E45D8 /* Pods-PodRealmTest.release.xcconfig */,
+				0350BC27D7398D21CCF70BF6 /* Pods-simple_medicine_calendar.debug.xcconfig */,
+				C42D96690EAD7671F86E20E0 /* Pods-simple_medicine_calendar.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -172,7 +176,7 @@
 		7F54E3D2291DDD6E00FAE487 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F54E3D1291DDD6E00FAE487 /* PodRealmTest.app */,
+				7F54E3D1291DDD6E00FAE487 /* simple_medicine_calendar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,7 +412,7 @@
 		BFAE10312175922B1BD9DC30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				52542312CDB292BF1CE6363F /* Pods_PodRealmTest.framework */,
+				C8D95C76C02D117E10255DFF /* Pods_simple_medicine_calendar.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -416,9 +420,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F54E3D0291DDD6E00FAE487 /* PodRealmTest */ = {
+		7F54E3D0291DDD6E00FAE487 /* simple_medicine_calendar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F54E3DF291DDD7100FAE487 /* Build configuration list for PBXNativeTarget "PodRealmTest" */;
+			buildConfigurationList = 7F54E3DF291DDD7100FAE487 /* Build configuration list for PBXNativeTarget "simple_medicine_calendar" */;
 			buildPhases = (
 				1E4F0EEF0AFDE4CE080178E6 /* [CP] Check Pods Manifest.lock */,
 				7F54E3CD291DDD6E00FAE487 /* Sources */,
@@ -430,9 +434,9 @@
 			);
 			dependencies = (
 			);
-			name = PodRealmTest;
+			name = simple_medicine_calendar;
 			productName = PodRealmTest;
-			productReference = 7F54E3D1291DDD6E00FAE487 /* PodRealmTest.app */;
+			productReference = 7F54E3D1291DDD6E00FAE487 /* simple_medicine_calendar.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -450,7 +454,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7F54E3CC291DDD6E00FAE487 /* Build configuration list for PBXProject "PodRealmTest" */;
+			buildConfigurationList = 7F54E3CC291DDD6E00FAE487 /* Build configuration list for PBXProject "simple_medicine_calendar" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -463,7 +467,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F54E3D0291DDD6E00FAE487 /* PodRealmTest */,
+				7F54E3D0291DDD6E00FAE487 /* simple_medicine_calendar */,
 			);
 		};
 /* End PBXProject section */
@@ -496,7 +500,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PodRealmTest-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-simple_medicine_calendar-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -509,15 +513,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-simple_medicine_calendar/Pods-simple_medicine_calendar-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-simple_medicine_calendar/Pods-simple_medicine_calendar-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PodRealmTest/Pods-PodRealmTest-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-simple_medicine_calendar/Pods-simple_medicine_calendar-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -707,7 +711,7 @@
 		};
 		7F54E3E0291DDD7100FAE487 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 913B588B7B871D570557630C /* Pods-PodRealmTest.debug.xcconfig */;
+			baseConfigurationReference = 0350BC27D7398D21CCF70BF6 /* Pods-simple_medicine_calendar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -738,7 +742,7 @@
 		};
 		7F54E3E1291DDD7100FAE487 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B884A852C10D0DCF5B9E45D8 /* Pods-PodRealmTest.release.xcconfig */;
+			baseConfigurationReference = C42D96690EAD7671F86E20E0 /* Pods-simple_medicine_calendar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -770,7 +774,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7F54E3CC291DDD6E00FAE487 /* Build configuration list for PBXProject "PodRealmTest" */ = {
+		7F54E3CC291DDD6E00FAE487 /* Build configuration list for PBXProject "simple_medicine_calendar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F54E3DD291DDD7100FAE487 /* Debug */,
@@ -779,7 +783,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F54E3DF291DDD7100FAE487 /* Build configuration list for PBXNativeTarget "PodRealmTest" */ = {
+		7F54E3DF291DDD7100FAE487 /* Build configuration list for PBXNativeTarget "simple_medicine_calendar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F54E3E0291DDD7100FAE487 /* Debug */,

@@ -373,7 +373,7 @@ extension RimindSetNightView4 {
                 rimaindGroups22[0].banato = time
                 if rimaindGroups2.count != 0 {
                     rimaindGroups23[0].banmae = "◎"
-                    bom(charArray: Array(rimaindGroups22[0].banato),timeStr: "夜食後", drugCount: rimaindGroups1.count)
+                    bom(charArray: Array(rimaindGroups22[0].banato),timeStr: "夜食後", drugCount: rimaindGroups2.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].banmae = "ー"
