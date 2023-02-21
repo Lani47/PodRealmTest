@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RimindSetSleepView: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var dateModel = DateFormatterModel()
     
@@ -118,7 +120,7 @@ struct RimindSetSleepView: View {
                                     .alert("警告",isPresented: $showingAlert){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -171,7 +173,7 @@ struct RimindSetSleepView: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                        
+                    
                 }
                 
                 //夜食前ここまで
@@ -223,6 +225,7 @@ extension RimindSetSleepView {
                 if rimaindGroups1.count != 0 {
                     rimaindGroups23[0].nerumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].nerumae),timeStr: "就寝前", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].nerumae, timeStr: "就寝前", drugCount: rimaindGroups1.count)
                 }
                 else {
                     rimaindGroups23[0].nerumae = "ー"
@@ -309,7 +312,18 @@ extension RimindSetSleepView {
     }
     
     
-    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
+    }
     
     
     

@@ -7,12 +7,16 @@
 
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RemaindSetMorningView3: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var choice1: Bool = true
     
-    @State var push = UserNotificationUtil()
+    @State var push = UserAndNotificationClass()
     
     @State var dateModel = DateFormatterModel()
     
@@ -449,6 +453,7 @@ extension RemaindSetMorningView3 {
                     rimaindGroups23[0].kisyou = "◎"
                     
                     bom(charArray: Array(rimaindGroups22[0].asamae),timeStr: "朝食前", drugCount: rimaindGroups2.count)
+                    sendMessage(charArray: rimaindGroups22[0].asamae, timeStr: "朝食前", drugCount: rimaindGroups2.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].kisyou = "ー"
@@ -477,6 +482,7 @@ extension RemaindSetMorningView3 {
                     rimaindGroups23[0].kisyou = "◎"
                     print("test1")
                     bom(charArray: Array(rimaindGroups22[0].kisyou),timeStr: "起床時", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].kisyou, timeStr: "起床時", drugCount: rimaindGroups1.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].kisyou = "ー"
@@ -507,6 +513,7 @@ extension RemaindSetMorningView3 {
                     rimaindGroups23[0].kisyou = "◎"
                     
                     bom(charArray: Array(rimaindGroups22[0].asaato),timeStr: "朝食後", drugCount: rimaindGroups3.count)
+                    sendMessage(charArray: rimaindGroups22[0].asaato, timeStr: "朝食後", drugCount: rimaindGroups3.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].kisyou = "ー"
@@ -518,7 +525,18 @@ extension RemaindSetMorningView3 {
         
     }
     
-    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
+    }
     
     private func bom(charArray: Array<Character>, timeStr: String, drugCount: Int){
         //　通知を設定した時間に毎週設定

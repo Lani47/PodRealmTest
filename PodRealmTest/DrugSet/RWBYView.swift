@@ -85,36 +85,6 @@ struct RWBYView: View {
             }
             HStack{
                 Button(action: {
-                    /*
-                     //                //データの登録
-                     //                let drug = DrugDB()
-                     //                drug.id = UUID().uuidString
-                     //                if viewModel.drugname == ""{
-                     //                    drug.name = "メイショウフメイ"
-                     //                } else {
-                     //                    drug.name = viewModel.drugname
-                     //                }
-                     //                drug.drugcalc = viewModel.drugcalc
-                     //                drug.stockpile = viewModel.stockpile
-                     //                drug.drugColorRed = viewModel.drugColors.rgbValues.red
-                     //                drug.drugColorGreen =
-                     //                viewModel.drugColors.rgbValues.green
-                     //                drug.drugColorBrue = viewModel.drugColors.rgbValues.blue
-                     //
-                     //
-                     //
-                     //                // 保存
-                     //                let realm = try! Realm()
-                     //
-                     //                //の前に並び替えのためのデータの要素数を数える
-                     //                let drugTable = realm.objects(DrugDB.self)
-                     //                drug.order = drugTable.count
-                     //                //今度こそ保存？
-                     //                try! realm.write {
-                     //                    realm.add(drug)
-                     //                }
-                     //                print("\($viewModel.drugname)を登録しました。")
-                     */
                     
                     viewModel.Create(drugColorRed: drugColors.rgbValues.red, drugColorGreen: drugColors.rgbValues.green
                                      ,drugColorBlur: drugColors.rgbValues.blue)
@@ -127,11 +97,8 @@ struct RWBYView: View {
                 }
                 )
                 .alert("登録完了！",isPresented: $showingAlert){
-//                    Button("削除", role: .destructive){
-//                        // 正常に取れない
-//                        print("order:\(itemname)")
-////                        deleteindex(index: itemorder)
-//                    }
+
+
                     
                 } message:{
                     if itemname != ""{
@@ -142,15 +109,6 @@ struct RWBYView: View {
                     
                 }
 
-                //データの一覧を表示
-                //                Button(action: {
-                //                    let realm = try! Realm()
-                //
-                //                    let drugTable = realm.objects(DrugDB.self)
-                //                    print(drugTable)
-                //                }, label: {
-                //                    Text("一覧")
-                //                })
                 //薬一覧画面を表示
                 Button(action: {
                     isDrugView.toggle()
@@ -166,32 +124,6 @@ struct RWBYView: View {
                         .environmentObject(DrugStore(realm: realm))
                     
                 } 
-                //データをロードする
-                //                Button(action: {
-                //
-                //                    /*
-                //                     //                    let realm = try! Realm()
-                //                     //                    let drugTable = realm.objects(DrugDB.self)
-                //                     //
-                //                     //                    if drugTable.count != 0{
-                //                     //                        let drugTable = realm.objects(DrugDB.self)
-                //                     //                            print(drugTable[0])
-                //                     //                    viewModel.drugname = drugTable[0].name
-                //                     //                        viewModel.drugcalc = drugTable[0].drugcalc
-                //                     //                        viewModel.stockpile = drugTable[0].stockpile
-                //                     //                        viewModel.drugColors = Color(red:drugTable[0].drugColorRed, green: drugTable[0].drugColorGreen, blue: drugTable[0].drugColorBrue)
-                //                     //                    } else {
-                //                     //                        print("登録なし")
-                //                     //                    }
-                //
-                //                     */
-                //                    viewModel.load()
-                //                    drugColors = viewModel.loadColor()
-                //
-                //
-                //                }, label: {
-                //                    Text("読み込み")
-                //                })
             }
         }
         }

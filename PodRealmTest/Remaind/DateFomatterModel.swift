@@ -8,14 +8,7 @@
 import Foundation
 
 class DateFormatterModel: ObservableObject{
-//    enum Pet:String { // ケースは犬か猫か
-//           case "月曜日"
-//           case "火曜日"
-//        case "火曜日"
-//        case "火曜日"
-//        case "火曜日"
-//        case "火曜日"
-//       }
+
     
     func dateTest(){
         //現在の日付を取得

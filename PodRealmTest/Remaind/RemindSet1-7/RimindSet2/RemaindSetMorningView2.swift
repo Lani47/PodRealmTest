@@ -7,12 +7,17 @@
 
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RemaindSetMorningView2: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
+    
     
     @State var choice1: Bool = true
     
-    @State var push = UserNotificationUtil()
+    @State var push = UserAndNotificationClass()
     
     @State var dateModel = DateFormatterModel()
     
@@ -151,7 +156,7 @@ struct RemaindSetMorningView2: View {
                                     .alert("警告",isPresented: $showingAlert1){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -174,9 +179,9 @@ struct RemaindSetMorningView2: View {
                 ZStack{
                     
                     Ellipse()
-//                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
+                    //                        .fill(Color(red: 0.99, green: 0.46, blue: 0.58))
                         .fill(Color.blue)
-                        
+                    
                         .frame(width: 50, height: 50)
                     Text("+")
                         .font(.largeTitle)
@@ -199,7 +204,7 @@ struct RemaindSetMorningView2: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                        
+                    
                     
                 }
                 //朝食前 ここから
@@ -238,7 +243,7 @@ struct RemaindSetMorningView2: View {
                                     .alert("警告",isPresented: $showingAlert2){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -263,7 +268,7 @@ struct RemaindSetMorningView2: View {
                     
                     Ellipse()
                         .fill(Color.blue)
-                        
+                    
                     
                         .frame(width: 50, height: 50)
                     
@@ -271,46 +276,46 @@ struct RemaindSetMorningView2: View {
                         .font(.largeTitle)
                         .foregroundColor(Color.white)
                     // テスト用
-//                        .onTapGesture {
-////
-////                            //データの一覧を表示
-////
-//                            let realm = try! Realm()
-//
-//                            let drugTable = realm.objects(RimindDrugDB.self)
-//                            //                        print(drugTable)
-//
-//
-//                            let timeTable = realm.objects(RimindTimeDB.self)
-//
-//                            let rimindResult = realm.objects(RimindResultDB.self)
-//
-//
-//                            //                            bom(charArray: Array(rimaindGroups22[0].kisyou))
-//
-//                            print(drugTable)
-//
-//                        }
+                    //                        .onTapGesture {
+                    ////
+                    ////                            //データの一覧を表示
+                    ////
+                    //                            let realm = try! Realm()
+                    //
+                    //                            let drugTable = realm.objects(RimindDrugDB.self)
+                    //                            //                        print(drugTable)
+                    //
+                    //
+                    //                            let timeTable = realm.objects(RimindTimeDB.self)
+                    //
+                    //                            let rimindResult = realm.objects(RimindResultDB.self)
+                    //
+                    //
+                    //                            //                            bom(charArray: Array(rimaindGroups22[0].kisyou))
+                    //
+                    //                            print(drugTable)
+                    //
+                    //                        }
                     
                     // 実践用
-                                            .onTapGesture {
-                                                self.drugTime = "朝食前"
-                                                self.drugDay = "火曜日"
-                                                print($drugTime)
-
-                                                isDrugView2.toggle()
-                                            }
-                                            .sheet(isPresented: $isDrugView2,onDismiss: {
-                                                let dateset = dateModel.date_string(date: date2)
-                                                rimindasamaeUpdate(time: dateset)
-                                            }) {
-                                                let realm = try! Realm()
-                                                DrugListView(drugDay: $drugDay, drugTime: $drugTime)
-                                                    .environmentObject(DrugStore(realm: realm))
-                                                    .environmentObject(RimaindStore(realm: realm))
-                                                    .environmentObject(RimindTestStore(realm: realm))
-                                            }
-                                            
+                        .onTapGesture {
+                            self.drugTime = "朝食前"
+                            self.drugDay = "火曜日"
+                            print($drugTime)
+                            
+                            isDrugView2.toggle()
+                        }
+                        .sheet(isPresented: $isDrugView2,onDismiss: {
+                            let dateset = dateModel.date_string(date: date2)
+                            rimindasamaeUpdate(time: dateset)
+                        }) {
+                            let realm = try! Realm()
+                            DrugListView(drugDay: $drugDay, drugTime: $drugTime)
+                                .environmentObject(DrugStore(realm: realm))
+                                .environmentObject(RimaindStore(realm: realm))
+                                .environmentObject(RimindTestStore(realm: realm))
+                        }
+                    
                     
                 }
                 //朝食前　ここまで
@@ -345,7 +350,7 @@ struct RemaindSetMorningView2: View {
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                     .onTapGesture {
-//                                        deleteindex(index: item.order)
+                                        //                                        deleteindex(index: item.order)
                                         itemorder = item.order
                                         itemname = item.name
                                         self.showingAlert3.toggle()
@@ -355,7 +360,7 @@ struct RemaindSetMorningView2: View {
                                     .alert("警告",isPresented: $showingAlert3){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -373,7 +378,7 @@ struct RemaindSetMorningView2: View {
                     
                     Ellipse()
                         .fill(Color.blue)
-                        
+                    
                     
                         .frame(width: 50, height: 50)
                     
@@ -386,7 +391,7 @@ struct RemaindSetMorningView2: View {
                             print($drugTime)
                             isDrugView3.toggle()
                         }
-                        
+                    
                         .sheet(isPresented: $isDrugView3, onDismiss: {
                             print("dismis3")
                             let dateset = dateModel.date_string(date: date3)
@@ -399,7 +404,7 @@ struct RemaindSetMorningView2: View {
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
                     
-                       
+                    
                     
                 }
                 
@@ -449,6 +454,7 @@ extension RemaindSetMorningView2 {
                     rimaindGroups23[0].kisyou = "◎"
                     
                     bom(charArray: Array(rimaindGroups22[0].asamae),timeStr: "朝食前", drugCount: rimaindGroups2.count)
+                    sendMessage(charArray: rimaindGroups22[0].asamae, timeStr: "朝食前", drugCount: rimaindGroups2.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].kisyou = "ー"
@@ -477,6 +483,7 @@ extension RemaindSetMorningView2 {
                     rimaindGroups23[0].kisyou = "◎"
                     print("test1")
                     bom(charArray: Array(rimaindGroups22[0].kisyou),timeStr: "起床時", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].kisyou, timeStr: "起床時", drugCount: rimaindGroups1.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].kisyou = "ー"
@@ -507,6 +514,7 @@ extension RemaindSetMorningView2 {
                     rimaindGroups23[0].kisyou = "◎"
                     
                     bom(charArray: Array(rimaindGroups22[0].asaato),timeStr: "朝食後", drugCount: rimaindGroups3.count)
+                    sendMessage(charArray: rimaindGroups22[0].asaato, timeStr: "朝食後", drugCount: rimaindGroups3.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].kisyou = "ー"
@@ -519,6 +527,18 @@ extension RemaindSetMorningView2 {
     }
     
     
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
+    }
     
     private func bom(charArray: Array<Character>, timeStr: String, drugCount: Int){
         //　通知を設定した時間に毎週設定
@@ -650,15 +670,15 @@ extension RemaindSetMorningView2 {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-            completionHandler([.banner, .list])
+        completionHandler([.banner, .list])
         print("フォアグラウンド")
-        }
-
-        // バックグランドの状態でプッシュ通知を受信した際に呼ばれるメソッド
-        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-            completionHandler()
-            print("バックグラウンド")
-        }
+    }
+    
+    // バックグランドの状態でプッシュ通知を受信した際に呼ばれるメソッド
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+        print("バックグラウンド")
+    }
     
     //    private func move(sourceIndexSet: IndexSet, destination: Int) {
     //        store.move(sourceIndexSet: sourceIndexSet, destination: destination)

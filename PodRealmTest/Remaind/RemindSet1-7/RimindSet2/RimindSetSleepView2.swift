@@ -7,8 +7,12 @@
 
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RimindSetSleepView2: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var dateModel = DateFormatterModel()
     
@@ -116,7 +120,7 @@ struct RimindSetSleepView2: View {
                                     .alert("警告",isPresented: $showingAlert){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -169,7 +173,7 @@ struct RimindSetSleepView2: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                        
+                    
                 }
                 
                 //夜食前ここまで
@@ -232,6 +236,20 @@ extension RimindSetSleepView2 {
         }
         
     }
+    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
+    }
+    
     private func bom(charArray: Array<Character>, timeStr: String, drugCount: Int){
         //　通知を設定した時間に毎週設定
         

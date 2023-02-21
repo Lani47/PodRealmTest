@@ -9,8 +9,12 @@ import SwiftUI
 
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RimindSetSundayView: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var dateModel = DateFormatterModel()
     
@@ -123,7 +127,7 @@ struct RimindSetSundayView: View {
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                     .onTapGesture {
-//                                        deleteindex(index: item.order)
+                                        //                                        deleteindex(index: item.order)
                                         itemorder = item.order
                                         itemname = item.name
                                         self.showingAlert1.toggle()
@@ -133,7 +137,7 @@ struct RimindSetSundayView: View {
                                     .alert("警告",isPresented: $showingAlert1){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -157,7 +161,7 @@ struct RimindSetSundayView: View {
                     
                     Ellipse()
                         .fill(Color.blue)
-                        
+                    
                     
                         .frame(width: 50, height: 50)
                     
@@ -198,7 +202,7 @@ struct RimindSetSundayView: View {
                             
                         }
                     
-                        
+                    
                     
                     
                 }
@@ -231,7 +235,7 @@ struct RimindSetSundayView: View {
                                     .font(.largeTitle)
                                     .listRowBackground(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                     .onTapGesture {
-//                                        deleteindex(index: item.order)
+                                        //                                        deleteindex(index: item.order)
                                         itemorder = item.order
                                         itemname = item.name
                                         self.showingAlert2.toggle()
@@ -241,7 +245,7 @@ struct RimindSetSundayView: View {
                                     .alert("警告",isPresented: $showingAlert2){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -264,7 +268,7 @@ struct RimindSetSundayView: View {
                     
                     Ellipse()
                         .fill(Color.blue)
-                       
+                    
                     
                         .frame(width: 50, height: 50)
                     
@@ -289,7 +293,7 @@ struct RimindSetSundayView: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                  
+                    
                 }
                 //昼食後ここまで
                 //間食ここから
@@ -329,7 +333,7 @@ struct RimindSetSundayView: View {
                                     .alert("警告",isPresented: $showingAlert3){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -352,7 +356,7 @@ struct RimindSetSundayView: View {
                     
                     Ellipse()
                         .fill(Color.blue)
-                       
+                    
                     
                         .frame(width: 50, height: 50)
                     
@@ -382,7 +386,7 @@ struct RimindSetSundayView: View {
                             
                         }
                     
-                 
+                    
                     
                 }
                 //間食ここまで
@@ -422,6 +426,7 @@ extension RimindSetSundayView {
                 if rimaindGroups1.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].hirumae),timeStr: "昼食前", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].hirumae, timeStr: "昼食前", drugCount: rimaindGroups1.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"
@@ -450,6 +455,7 @@ extension RimindSetSundayView {
                 if rimaindGroups2.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].hiruato),timeStr: "昼食後", drugCount: rimaindGroups2.count)
+                    sendMessage(charArray: rimaindGroups22[0].hiruato, timeStr: "昼食後", drugCount: rimaindGroups2.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"
@@ -477,6 +483,7 @@ extension RimindSetSundayView {
                 if rimaindGroups3.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].oyatu),timeStr: "間食", drugCount: rimaindGroups3.count)
+                    sendMessage(charArray: rimaindGroups22[0].oyatu, timeStr: "間食", drugCount: rimaindGroups3.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"
@@ -486,6 +493,19 @@ extension RimindSetSundayView {
         }catch {
             print("Error \(error)")
         }
+    }
+    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
     }
     
     private func bom(charArray: Array<Character>, timeStr: String, drugCount: Int){

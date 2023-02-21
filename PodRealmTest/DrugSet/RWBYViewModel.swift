@@ -13,10 +13,10 @@ class RWBYViewModel: ObservableObject {
     @Published var drugname = ""
     @Published var drugcalc = 1
     @Published var stockpile = 1
-    //    @Binding var drugColors :Color
+
     @Published var drugColors = Color(red: 0.852, green: 0.941, blue: 0.953)
     
-//    var store: DrugStore
+
     
     
     
@@ -32,10 +32,6 @@ class RWBYViewModel: ObservableObject {
         }
         drug.drugcalc = drugcalc
         drug.stockpile = stockpile
-//        drug.drugColorRed = drugColors.rgbValues.red
-//        drug.drugColorGreen =
-//        drugColors.rgbValues.green
-//        drug.drugColorBrue = drugColors.rgbValues.blue
         drug.drugColorRed = drugColorRed
         drug.drugColorGreen =
         drugColorGreen

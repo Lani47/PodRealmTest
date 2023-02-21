@@ -31,13 +31,11 @@ struct DrugPreviewView: View {
     
     @State private var move = ""
     
-    //    let realm = try Realm()
-    //    @StateObject private var store = DrugStore(realm: realm)
-    
+
     
     
     @State var title = ""
-    //    var items: [DrugItem]
+
     
     @EnvironmentObject private var rimaindStore: RimaindStore
     
@@ -45,11 +43,7 @@ struct DrugPreviewView: View {
     
     @State private var Rimainditemset: RimindDrugItem?
     
-    //    @EnvironmentObject private var rimaindTestStore: RimindTestStore
-    //
-    //    @ObservedResults(RimindTestDB.self) var rimaindTestGroups
-    //
-    //    @State private var RimaindTestitemset: RimindTestItem?
+  
     
     @State private var showingAlerttest = false
     
@@ -79,23 +73,17 @@ struct DrugPreviewView: View {
                             title: "続きから再開する",
                             style: UIAlertAction.Style.default,
                             completionHandler: {
-                                //                                      deleteindex(index: item.order)
+                                
                                 print("order:\(item.order)")
                                 self.showingAlerttest.toggle()
                             }
                         ),
-                        //                                (
-                        //                                  title: "最初から始める",
-                        //                                  style: UIAlertAction.Style.default,
-                        //                                  completionHandler: {
-                        ////                                    viewModel.loadNewSession()
-                        //                                  }
-                        //                                ),
+                   
                         (
                             title: "キャンセル",
                             style: UIAlertAction.Style.cancel,
                             completionHandler: {
-                                //                                    viewModel.closeAction()
+               
                                 self.showingAlerttest.toggle()
                             }
                         ),
@@ -113,8 +101,7 @@ struct DrugPreviewView: View {
                             Ellipse()
                                 .fill(Color(red: item.drugColorRed, green: item.drugColorGreen, blue: item.drugColorBrue))
                                 .frame(width: 54, height: 54)
-                            //                                .offset(x: widht * -0.1)
-                            //                                .padding(.leading, 10.0)
+               
                             
                             
                             Text(item.name)
@@ -123,56 +110,12 @@ struct DrugPreviewView: View {
                                 .padding(.leading, 10.0)
                                 .frame(width: 150, height: 54)
                             
-                            
-                            //                            Button(action: {
-                            //                                self.showingAlert.toggle()
-                            //                            }, label: {
-                            //                                Image(systemName: "trash")
-                            //                            })
-                            //　通知シリーズ１
-                            //                            .alert("警告", isPresented: self.$showingAlert){
-                            //
-                            //                                                                    Button("削除", role: .destructive){
-                            //                                                                         // 正常に取れない
-                            //                                                                        print("order:\(item.order)")
-                            //                                                                     }
-                            //
-                            //                            } message:{
-                            //                                                                    Text("データが削除されますが、よろしいですか？")
-                            //                                                                }
-                            
-                            
-                            //　通知シリーズ２
-                            //                        Text("order:\(item.order)")
-                            //                            Image(systemName: "trash")
-                            //                                .onTapGesture {
-                            //                                    self.showingAlert.toggle()
-                            //                                    print("alert:\(showingAlert)")
-                            //正常に取れる
-                            //                                    print("order:\(item.order)")
-                            //                                    deleteindex(index: item.order)
-                            //                                }
-                            //                                .alert("警告",isPresented: $showingAlert){
-                            //                                    Button("削除", role: .destructive){
-                            //                                         // 正常に取れない
-                            //                                        print("order:\(item.order)")
-                            //                                     }
-                            //
-                            //                                } message:{
-                            //                                    Text("データが削除されますが、よろしいですか？")
-                            //                                }
-                            
-                            
-                            
-                            
-                            
                         }
                         
                         
                         
                     }.onTapGesture {
-                        //                        create(index: item.order)
-                        //                        dismiss()
+           
                         itemorder = item.order
                         itemname = item.name
                         self.showingAlert.toggle()

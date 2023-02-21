@@ -7,8 +7,12 @@
 
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RimindSetSleepView7: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var dateModel = DateFormatterModel()
     
@@ -116,7 +120,7 @@ struct RimindSetSleepView7: View {
                                     .alert("警告",isPresented: $showingAlert){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -169,7 +173,7 @@ struct RimindSetSleepView7: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                        
+                    
                 }
                 
                 //夜食前ここまで
@@ -221,6 +225,7 @@ extension RimindSetSleepView7 {
                 if rimaindGroups1.count != 0 {
                     rimaindGroups23[0].nerumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].nerumae),timeStr: "就寝前", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].nerumae, timeStr: "就寝前", drugCount: rimaindGroups1.count)
                 }
                 else {
                     rimaindGroups23[0].nerumae = "ー"
@@ -307,7 +312,18 @@ extension RimindSetSleepView7 {
         center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
     }
     
-    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
+    }
     
     
     
@@ -356,6 +372,29 @@ extension RimindSetSleepView7 {
         //        print("id:\(deleteId)name:\(groups[index].name)")
         //        print("index:\(index)")
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler([.banner, .list])
+        print("フォアグラウンド")
+    }
+    
+    // バックグランドの状態でプッシュ通知を受信した際に呼ばれるメソッド
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+        print("バックグラウンド")
+    }
+    
+    //        private func sendMessage(index: Int) {
+    //                let messages: [String: Any] =
+    //                    ["animal": animals[index],
+    //                     "emoji": emojiAnimals[index]]
+    //                // 動物名と絵文字を突っ込んだ配列を送信する
+    //                self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+    //                    print(error.localizedDescription)
+    //                }
+    //            print(messages)
+    //            }
     
     //    private func move(sourceIndexSet: IndexSet, destination: Int) {
     //        store.move(sourceIndexSet: sourceIndexSet, destination: destination)

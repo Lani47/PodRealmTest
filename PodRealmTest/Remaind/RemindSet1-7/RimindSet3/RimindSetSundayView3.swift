@@ -7,8 +7,12 @@
 
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RimindSetSundayView3: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var dateModel = DateFormatterModel()
     
@@ -420,6 +424,7 @@ extension RimindSetSundayView3 {
                 if rimaindGroups1.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].hirumae),timeStr: "昼食前", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].hirumae, timeStr: "昼食前", drugCount: rimaindGroups1.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"
@@ -448,6 +453,7 @@ extension RimindSetSundayView3 {
                 if rimaindGroups2.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].hiruato),timeStr: "昼食後", drugCount: rimaindGroups2.count)
+                    sendMessage(charArray: rimaindGroups22[0].hiruato, timeStr: "昼食後", drugCount: rimaindGroups2.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"
@@ -475,6 +481,7 @@ extension RimindSetSundayView3 {
                 if rimaindGroups3.count != 0 {
                     rimaindGroups23[0].hirumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].oyatu),timeStr: "間食", drugCount: rimaindGroups3.count)
+                    sendMessage(charArray: rimaindGroups22[0].oyatu, timeStr: "間食", drugCount: rimaindGroups3.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].hirumae = "ー"
@@ -484,6 +491,19 @@ extension RimindSetSundayView3 {
         }catch {
             print("Error \(error)")
         }
+    }
+    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
     }
     
     private func bom(charArray: Array<Character>, timeStr: String, drugCount: Int){

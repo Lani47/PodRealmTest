@@ -7,8 +7,12 @@
 
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RimindSetNightView6: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var dateModel = DateFormatterModel()
     
@@ -124,7 +128,7 @@ struct RimindSetNightView6: View {
                                     .alert("警告",isPresented: $showingAlert1){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -150,7 +154,7 @@ struct RimindSetNightView6: View {
                     
                     Ellipse()
                         .fill(Color.blue)
-                        
+                    
                     
                         .frame(width: 50, height: 50)
                     
@@ -178,7 +182,7 @@ struct RimindSetNightView6: View {
                                 .environmentObject(RimaindStore(realm: realm))
                                 .environmentObject(RimindTestStore(realm: realm))
                         }
-                      
+                    
                 }
                 
                 //夜食前ここまで
@@ -221,7 +225,7 @@ struct RimindSetNightView6: View {
                                     .alert("警告",isPresented: $showingAlert2){
                                         Button("削除", role: .destructive){
                                             // 正常に取れない
-//                                            print("order:\(itemorder)")
+                                            //                                            print("order:\(itemorder)")
                                             deleteindex(index: itemorder)
                                         }
                                         
@@ -244,7 +248,7 @@ struct RimindSetNightView6: View {
                     
                     Ellipse()
                         .fill(Color.blue)
-                        
+                    
                     
                         .frame(width: 50, height: 50)
                     
@@ -275,7 +279,7 @@ struct RimindSetNightView6: View {
                             
                             
                         }
-                       
+                    
                     
                     
                 }
@@ -332,6 +336,7 @@ extension RimindSetNightView6 {
                 if rimaindGroups1.count != 0 {
                     rimaindGroups23[0].banmae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].banmae),timeStr: "夜食前", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].banmae, timeStr: "夜食前", drugCount: rimaindGroups1.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].banmae = "ー"
@@ -374,6 +379,7 @@ extension RimindSetNightView6 {
                 if rimaindGroups2.count != 0 {
                     rimaindGroups23[0].banmae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].banato),timeStr: "夜食後", drugCount: rimaindGroups2.count)
+                    sendMessage(charArray: rimaindGroups22[0].banato, timeStr: "夜食後", drugCount: rimaindGroups2.count)
                 }
                 //                else {
                 //                    rimaindGroups23[0].banmae = "ー"
@@ -459,7 +465,18 @@ extension RimindSetNightView6 {
         center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
     }
     
-    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+        let messages: [String: Any] =
+        ["charArray": charArray,
+         "timeStr": timeStr,
+         "drugCount": drugCount,
+         "drugDay": drugDay]
+        // 動物名と絵文字を突っ込んだ配列を送信する
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            print(error.localizedDescription)
+        }
+        print(messages)
+    }
     
     private func deleteindex(index: Int) {
         // 削除する行のIDを取得

@@ -8,13 +8,13 @@
 import UIKit
 import UserNotifications
 
-final class UserNotificationUtil: NSObject {
+final class UserAndNotificationClass: NSObject {
     
-    static var shared = UserNotificationUtil()
+    static var shared = UserAndNotificationClass()
     private var center = UNUserNotificationCenter.current()
     
     func initialize() {
-        center.delegate = UserNotificationUtil.shared
+        center.delegate = UserAndNotificationClass.shared
     }
     func scene(
         _ scene: UIScene,
@@ -25,7 +25,7 @@ final class UserNotificationUtil: NSObject {
         
         
         
-        UserNotificationUtil.shared.initialize()
+        UserAndNotificationClass.shared.initialize()
     }
     func showPushPermit(completion: @escaping (Result<Bool, Error>) -> Void) {
         center.requestAuthorization(options: [.alert, .badge, .sound]) { isGranted, error in
@@ -66,7 +66,7 @@ final class UserNotificationUtil: NSObject {
     
 }
 // MARK: UNUserNotificationCenterDelegate
-extension UserNotificationUtil: UNUserNotificationCenterDelegate {
+extension UserAndNotificationClass: UNUserNotificationCenterDelegate {
     // foregroundで通知を受信した時にはしる処理
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,

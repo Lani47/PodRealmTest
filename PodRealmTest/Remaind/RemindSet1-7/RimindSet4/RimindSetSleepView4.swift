@@ -6,8 +6,12 @@
 //
 import SwiftUI
 import RealmSwift
+import UserNotifications
+import NotificationCenter
 
 struct RimindSetSleepView4: View {
+    //　通信
+    var viewModel = WatchListViewModel() // 追加
     
     @State var dateModel = DateFormatterModel()
     
@@ -220,6 +224,7 @@ extension RimindSetSleepView4 {
                 if rimaindGroups1.count != 0 {
                     rimaindGroups23[0].nerumae = "◎"
                     bom(charArray: Array(rimaindGroups22[0].nerumae),timeStr: "就寝前", drugCount: rimaindGroups1.count)
+                    sendMessage(charArray: rimaindGroups22[0].nerumae, timeStr: "就寝前", drugCount: rimaindGroups1.count)
                 }
                 else {
                     rimaindGroups23[0].nerumae = "ー"
@@ -305,6 +310,19 @@ extension RimindSetSleepView4 {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: ["\(drugDay)\(timeStr)"])
     }
+    
+    private func sendMessage(charArray: String, timeStr: String, drugCount: Int) {
+            let messages: [String: Any] =
+                ["charArray": charArray,
+                 "timeStr": timeStr,
+                 "drugCount": drugCount,
+                 "drugDay": drugDay]
+            // 動物名と絵文字を突っ込んだ配列を送信する
+            self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+                print(error.localizedDescription)
+            }
+        print(messages)
+        }
     
     
     
